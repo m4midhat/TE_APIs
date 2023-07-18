@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite">
+    <listeners>
+        <listener class-name="te.application.listener.extentReportListener" />
+    </listeners>
+    <test verbose="10" preserve-order="true" name="B2B API Negative Suite" parallel="classes">
+        <classes>
+            <class name="te.application.api.test.B2B.fnb.negative.SignUpTest" />
+            <class name="te.application.api.test.B2B.fnb.negative.GetMerchantDetailsTest" />
+        </classes>
+    </test>
+    <test name="B2B API Positive Suite" verbose="10" preserve-order="true">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.GetMerchantDetailsTest" />
+        </classes>
+    </test>
+</suite>

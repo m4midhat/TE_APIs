@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Test Suite" parallel="false">
+    <listeners>
+        <listener class-name="te.application.listener.extentReportListener" />
+    </listeners>
+    <test name="B2C API Positive Suite">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.SignInTest" />
+            <class name="te.application.api.test.B2C.positive.GetMerchantDetailsTest" />
+        </classes>
+    </test>
+</suite>
