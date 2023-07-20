@@ -43,8 +43,8 @@ public class generateAPIBody {
                 "\"query\": \""+query+"\", " +
                 "\"offset\": \""+offset+"\", " +
                 "\"device_key\": \""+deviceKey+"\", " +
-                "\"session_token\": \""+sessionToken+"\", " +
-                "\"__t\": \""+sessionToken+"\", " +
+                "\"session_token\": \""+"0203b680-40e2-4e4e-b2c1-52fe4ec65116"+"\", " +
+                "\"__t\": \""+"0203b680-40e2-4e4e-b2c1-52fe4ec65116"+"\", " +
                 "\"redeemability\": \""+redeemability+"\", " +
                 "\"encryption_disable_key\": \""+ AppConstants.ENCRYPTION_DISABLE_KEY +"\", " +
                 "\"app_version\": \""+appVersion+"\"" +

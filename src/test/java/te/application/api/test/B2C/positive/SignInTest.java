@@ -34,9 +34,9 @@ public class SignInTest extends B2CBaseTest {
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName,
                     propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
-                    AppConstants.SessionURL, authToken.B2CAUTH_TOKEN);
+                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN));
             RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", authToken.B2CAUTH_TOKEN)
+                    .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
                     .body(bodyData)
                     .log().all();
