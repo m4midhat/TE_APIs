@@ -59,7 +59,7 @@ public class SignInTest extends B2CBaseTest {
         Assert.assertEquals("success", message, "Message value should be 'success'");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void verifyNewUser(){
         boolean newUserVal = jsonPath.getBoolean("data.user.new_user");
         //log.info(String.valueOf(newUserVal));
