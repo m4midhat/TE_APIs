@@ -3,11 +3,55 @@
 <suite name="API Test Suite" parallel="false">
     <listeners>
         <listener class-name="te.application.listener.extentReportListener" />
+        <listener class-name="te.application.Analyzer.AnnotationTransformer" />
     </listeners>
-    <test name="B2C API Positive Suite">
+
+    <test name="Sign Up Negative Scenarios">
+        <classes>
+            <class name="te.application.api.test.B2C.negative.SignUpTest" />
+        </classes>
+    </test>
+
+    <test name="Sign Up Positive Scenarios">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.SignUpTest" />
+        </classes>
+    </test>
+
+    <test name="Sign In">
         <classes>
             <class name="te.application.api.test.B2C.positive.SignInTest" />
+        </classes>
+    </test>
+
+    <test name="Home">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.HomeTest" />
+        </classes>
+    </test>
+
+    <test name="Settings">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.SettingsTest" />
+        </classes>
+    </test>
+
+    <test name="Get Merchant Details">
+        <classes>
             <class name="te.application.api.test.B2C.positive.GetMerchantDetailsTest" />
         </classes>
     </test>
+
+    <test name="Fetch Locations">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.FetchLocationsTest" />
+        </classes>
+    </test>
+
+    <test name="My Accounts">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.MyAccountTest" />
+        </classes>
+    </test>
+
 </suite>

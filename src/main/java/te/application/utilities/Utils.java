@@ -2,9 +2,11 @@ package te.application.utilities;
 
 
 import lombok.extern.slf4j.Slf4j;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 import java.util.*;
 
 @Slf4j
@@ -118,6 +120,17 @@ public class Utils {
         log.info("Original String : "+input);
         log.info("After replacing placeholder: " +pr + replacement + nx);
         return pr + replacement + nx;
+    }
+
+    public static String countryCode(String countryName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        String countryCode = "";
+        File file = new File("./src/test/java/te/application/data/countryCodes.json");
+        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+        if(!jsonObject.isEmpty()){
+            countryCode = jsonObject.get(countryName).toString();
+        }
+        return countryCode;
     }
 
 }

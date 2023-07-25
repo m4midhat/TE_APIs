@@ -20,14 +20,25 @@ import java.util.Properties;
 
 @Slf4j
 public class SignInTest extends B2CBaseTest {
+    public static String propUserName=null;
+    public static String propPassword=null;
+    public static String firstName=null;
+    public static String lastName=null;
+    public static String profileImage=null;
+    public static String gender=null;
+    public static String nationality=null;
+    public static String currency=null;
+    public static String country=null;
+
+    public static String dob=null;
 
     @BeforeClass
     public void setUp() throws IOException {
         RestAssured.basePath = AppConstants.B2C_LOGIN;
         Properties properties = Utils.initProperties("AppAuthentication");
         if(properties!=null) {
-            String propUserName = Utils.decodeString(properties.getProperty("username"));
-            String propPassword = Utils.decodeString(properties.getProperty("password"));
+             propUserName = Utils.decodeString(properties.getProperty("username"));
+             propPassword = Utils.decodeString(properties.getProperty("password"));
 
             String bodyData = generateAPIBody.signUp(0, "en", true,
                     "25.300579", "entertainer", "iOS", "8.04.01",
@@ -45,6 +56,14 @@ public class SignInTest extends B2CBaseTest {
             jsonPath = response.jsonPath();
             AppConstants.sessionID = jsonPath.getString("data.user.session_token");
             log.info("Session ID : " + AppConstants.sessionID);
+            firstName = jsonPath.getString("data.user.first_name");
+            lastName =jsonPath.getString("data.user.last_name");
+            profileImage = jsonPath.getString("data.user.profile_image");
+            gender = jsonPath.getString("data.user.gender");
+            nationality = jsonPath.getString("data.user.nationality");
+            currency = jsonPath.getString("data.user.currency");
+            country = jsonPath.getString("data.user.country");
+            dob = jsonPath.getString("data.user.date_of_birth");
         }
     }
 
