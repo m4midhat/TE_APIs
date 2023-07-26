@@ -21,7 +21,6 @@ public class B2CBaseTest {
     public void setUpSuite(){
         AppConstants.START_DATE = LocalDateTime.now();
         RestAssured.baseURI = AppConstants.BASE_URI_B2C;
-
     }
 
 
@@ -31,4 +30,5 @@ public class B2CBaseTest {
         long res = MILLIS.between(AppConstants.START_DATE, AppConstants.END_DATE);
         log.info("Total time taken by the suite : "+ Math.round(res/1000) +"seconds " + res%1000 + "ms" );
     }
+
 }

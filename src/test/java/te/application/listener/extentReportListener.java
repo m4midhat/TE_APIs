@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 public class extentReportListener  implements ITestListener {
 
     private static final String OUTPUT_FOLDER = "./TestReport/";
-    private static final String FILE_NAME = "TestExecutionReport.html";
+    private static String FILE_NAME = "TestExecutionReport";
 
     private static final ExtentReports extent = init();
     public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
@@ -44,8 +45,23 @@ public class extentReportListener  implements ITestListener {
             }
         }
 
+        String dateTime = LocalDateTime.now().toString();
+        log.info(dateTime);
+        /*log.info(dateTime.substring(0,4));
+        log.info(dateTime.substring(5,7));
+        log.info(dateTime.substring(8,10));
+        log.info(dateTime.substring(11,13));
+        log.info(dateTime.substring(14,16));
+        log.info(dateTime.substring(17,19));*/
+        FILE_NAME += dateTime.substring(0,4);
+        FILE_NAME += dateTime.substring(5,7);
+        FILE_NAME += dateTime.substring(8,10);
+        FILE_NAME += dateTime.substring(11,13);
+        FILE_NAME += dateTime.substring(14,16);
+        FILE_NAME += dateTime.substring(17,19);
+
         extentReports = new ExtentReports();
-        ExtentSparkReporter reporter = new ExtentSparkReporter(OUTPUT_FOLDER + FILE_NAME);
+        ExtentSparkReporter reporter = new ExtentSparkReporter(OUTPUT_FOLDER + FILE_NAME+ ".html");
         reporter.config().setDocumentTitle("theEntertainer API Suite");
 
         reporter.config().setReportName("theEntertainer API Automation Test Results");
