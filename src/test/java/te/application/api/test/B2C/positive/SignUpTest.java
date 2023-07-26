@@ -54,7 +54,7 @@ public class SignUpTest extends B2CBaseTest {
         response = httpRequest.post();
         System.out.println(response.asString());
         jsonPath = response.jsonPath();
-        AppConstants.sessionID = jsonPath.getString("data.user.session_token");
+        //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
         System.out.println("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
 
@@ -159,8 +159,8 @@ public class SignUpTest extends B2CBaseTest {
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(bearerToken.B2C),
                 "",na, em,"17.0","iPhone 11",
                 "Asia/Karachi",pwd);
 

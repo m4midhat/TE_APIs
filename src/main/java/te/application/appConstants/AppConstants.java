@@ -24,6 +24,7 @@ public class AppConstants {
     public static final String PROFILE_BASE_PATH = "et_rs_prd/web/v801/user/get/profile";
     public static final String BASE_PATH_HOME = "et_rs_prd/web/v801/home";
     public static final String B2C_FILTERS = "pysearch/v2/filter-list";
+    public static final String BASE_PATH_PINGS_SEND_OFFERS = "et_rs_prd/web/v801/sharing/sendoffers";
     public static LocalDateTime START_DATE, END_DATE;
     public static String ENV = System.getProperty("Env");
     public static String SessionURL = "https://rcapi.theentertainerme.com/et_rs_prd/web/v801/sessions";

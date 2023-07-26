@@ -12,13 +12,19 @@
         </classes>
     </test>
 
-    <test name="Sign Up Positive Scenarios">
+    <test name="Sign In Negative Scenarios">
+        <classes>
+            <class name="te.application.api.test.B2C.negative.SignInTest" />
+        </classes>
+    </test>
+
+    <test name="Sign Up">
         <classes>
             <class name="te.application.api.test.B2C.positive.SignUpTest" />
         </classes>
     </test>
 
-    <test name="Sign In">
+    <test name="Sign In ">
         <classes>
             <class name="te.application.api.test.B2C.positive.SignInTest" />
         </classes>
@@ -51,6 +57,12 @@
     <test name="My Accounts">
         <classes>
             <class name="te.application.api.test.B2C.positive.MyAccountTest" />
+        </classes>
+    </test>
+
+    <test name="Send Pings">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.PingSendOffersTest" />
         </classes>
     </test>
 

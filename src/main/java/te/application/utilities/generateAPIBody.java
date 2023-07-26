@@ -256,6 +256,46 @@ public class generateAPIBody {
         return body;
     }
 
+    public static String signIn(int ice, String language, boolean agreementAccepted, String latitude, String company,
+                                String OSPlatform, String appVersion, String deviceKey, String i, String currency,
+                                String userID, String longitude, String deviceID, String locationID, String emailAddress,
+                                String password, String OSVersion, String deviceModel, String timeZone,
+                                String configURL, String configAuthToken, String force_login
+    ){
+        String bodyData = "{\n" +
+                "  \"i_c_e\" : "+ice+",\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"is_user_agreement_accepted\" : "+agreementAccepted+",\n" +
+                "  \"__lat\" : \""+latitude+"\",\n" +
+                "  \"company\" : \""+company+ "\",\n" +
+                "  \"__platform\" : \""+OSPlatform+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"__i\" : \"0\",\n" +
+                "  \"currency\" : \""+currency+"\",\n" +
+                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"lng\" : \""+latitude+"\",\n" +
+                "  \"__device_id\" : \""+deviceID+"\",\n" +
+                "  \"__configuration\" : {\n" +
+                "    \"url\" : \""+configURL+"\",\n" +
+                "    \"Authorization\" : \""+ configAuthToken+"\"\n" +
+                "  },\n" +
+                "  \"session_token\" : \"\",\n" +
+                "  \"location_id\" : \""+locationID+"\",\n" +
+                "  \"email\" : \""+emailAddress+"\",\n" +
+                "  \"os_version\" : \""+OSVersion+"\",\n" +
+                "  \"device_model\" : \""+deviceModel+"\",\n" +
+                "  \"time_zone\" : \""+timeZone+"\",\n" +
+                "  \"__lng\" : \""+longitude+"\",\n" +
+                "  \"device_os\" : \""+OSPlatform+"\",\n" +
+                "  \"lat\" : \""+latitude+"\",\n" +
+                "  \"force_login\" : \""+force_login+"\",\n" +
+                "  \"password\" : \""+password+"\"\n" +
+                "}";
+
+        return bodyData;
+    }
+
 
     public static String Profile(String language, String latitude, String company,
                                  String OSPlatform, String appVersion, String deviceKey, String currency,
@@ -401,5 +441,72 @@ public class generateAPIBody {
         }
     }
 
+
+    public static String pingSendOffers( String language, String longitude,  String latitude, String company,
+                                         String platform, String appVersion, String deviceKey,  String currency,
+                                         String userID, String deviceID, String locationID
+            , String deviceModel, String timeZone,String customerId
+    ) {
+        String body;
+        body = "{\n" +
+                "  \"language\" : \"" + language + "\",\n" +
+                "  \"__lat\" : \"" + latitude + "\",\n" +
+                "  \"company\" : \"" + company + "\",\n" +
+                "  \"__platform\" : \"" + platform + "\",\n" +
+                "  \"app_version\" : \"" + appVersion + "\",\n" +
+                "  \"device_key\" : \"" + deviceKey + "\",\n" +
+                "  \"currency\" : \"" + currency + "\",\n" +
+                "  \"user_id\" : \"" + userID + "\",\n" +
+                "  \"__device_id\" : \"" + deviceID + "\",\n" +
+                "  \"lng\" : \"" + longitude + "\",\n" +
+                "  \"session_token\" : \"" + AppConstants.sessionID + "\",\n" +
+                "  \"location_id\" : \"" + locationID + "\",\n" +
+                "  \"device_model\" : \"" + deviceModel + "\",\n" +
+                "  \"time_zone\" : \"" + timeZone + "\",\n" +
+                "  \"__lng\" : \"" + longitude + "\",\n" +
+                "  \"device_os\" : \"" + platform + "\",\n" +
+                "  \"lat\" : \"" + latitude + "\",\n" +
+                "  \"__c\" : \"" + company + "\",\n" +
+                "  \"platform\" : \"" + platform + "\",\n" +
+                "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
+                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\", " +
+                "  \"customer_id\" : \"" + customerId + "\"\n" +
+
+                "}";
+        return body;
+    }
+    public static String pingReceiveOffers( String language, String longitude,  String latitude, String company,
+                                            String platform, String appVersion, String deviceKey,  String currency,
+                                            String userID, String deviceID, String locationID
+            , String deviceModel, String timeZone,String customerId
+    ) {
+        String body;
+        body = "{\n" +
+                "  \"language\" : \"" + language + "\",\n" +
+                "  \"__lat\" : \"" + latitude + "\",\n" +
+                "  \"company\" : \"" + company + "\",\n" +
+                "  \"__platform\" : \"" + platform + "\",\n" +
+                "  \"app_version\" : \"" + appVersion + "\",\n" +
+                "  \"device_key\" : \"" + deviceKey + "\",\n" +
+                "  \"currency\" : \"" + currency + "\",\n" +
+                "  \"user_id\" : \"" + userID + "\",\n" +
+                "  \"__device_id\" : \"" + deviceID + "\",\n" +
+                "  \"lng\" : \"" + longitude + "\",\n" +
+                "  \"session_token\" : \"" + AppConstants.sessionID + "\",\n" +
+                "  \"location_id\" : \"" + locationID + "\",\n" +
+                "  \"device_model\" : \"" + deviceModel + "\",\n" +
+                "  \"time_zone\" : \"" + timeZone + "\",\n" +
+                "  \"__lng\" : \"" + longitude + "\",\n" +
+                "  \"device_os\" : \"" + platform + "\",\n" +
+                "  \"lat\" : \"" + latitude + "\",\n" +
+                "  \"__c\" : \"" + company + "\",\n" +
+                "  \"platform\" : \"" + platform + "\",\n" +
+                "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
+                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" ," +
+                "  \"customer_id\" : \"" + customerId + "\"\n" +
+
+                "}";
+        return body;
+    }
 
 }

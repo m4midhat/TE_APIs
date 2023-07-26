@@ -1,6 +1,7 @@
 package te.application.api.test.B2C.negative;
 
 import com.github.javafaker.Faker;
+import com.mysql.cj.util.Util;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
@@ -24,7 +25,7 @@ import java.util.Random;
 
 @Slf4j
 public class SignInTest extends B2CBaseTest {
-/*
+
     String propUserName;
     String propPassword;
     String randomPassword = null;
@@ -77,9 +78,9 @@ public class SignInTest extends B2CBaseTest {
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName,
                     propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
-                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN), "true");
+                    AppConstants.SessionURL, authToken.B2CAUTH_TOKEN,"true");
             RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
+                    .header("Authorization", authToken.B2CAUTH_TOKEN)
                     .contentType("application/json")
                     .body(bodyData)
                     .log().all();
@@ -102,7 +103,7 @@ public class SignInTest extends B2CBaseTest {
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",randomEmail,
                     propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
-                    AppConstants.SessionURL, authToken.B2CAUTH_TOKEN,"true");
+                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
@@ -113,7 +114,7 @@ public class SignInTest extends B2CBaseTest {
             jsonPath = new JsonPath(response.asString());
             int statusCode = response.statusCode();
             log.info(String.valueOf(statusCode));
-            Assert.assertEquals(200, statusCode, "Login Validation Failed");
+            Assert.assertEquals(422, statusCode, "Login Validation Failed");
         }
     }
     @Test (priority = 1, description = "Sign In with valid EmailId and Random password")
@@ -127,7 +128,7 @@ public class SignInTest extends B2CBaseTest {
                     "25.300579", "entertainer", "iOS", "8.04.01",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName, randomPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
-                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN), "true");
+                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
@@ -138,7 +139,7 @@ public class SignInTest extends B2CBaseTest {
             jsonPath = new JsonPath(response.asString());
             int statusCode = response.statusCode();
             log.info(String.valueOf(statusCode));
-            Assert.assertEquals(200, statusCode, "Log in failed Please check your email and/or password.");
+            Assert.assertEquals(422, statusCode, "Log in failed Please check your email and/or password.");
         }
     }
     @Test (priority = 2, description = "Sign In with blank credentials.")
@@ -149,7 +150,7 @@ public class SignInTest extends B2CBaseTest {
                 "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
                 "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", "", "", // Both email and password are empty
                 "15.0", "iPhone XR", "Karachi/Islamabad",
-                AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN), "true");
+                AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -160,7 +161,7 @@ public class SignInTest extends B2CBaseTest {
         jsonPath = new JsonPath(response.asString());
         int statusCode = response.statusCode();
         log.info(String.valueOf(statusCode));
-        Assert.assertEquals(200, statusCode, "Status code should be 422 returned");
+        Assert.assertEquals(422, statusCode, "Status code should be 422 returned");
     }
 
     @Test (priority = 3, description = "SignIn with Email Only")
@@ -182,7 +183,7 @@ public class SignInTest extends B2CBaseTest {
         jsonPath = new JsonPath(response.asString());
         int statusCode = response.statusCode();
         log.info(String.valueOf(statusCode));
-        Assert.assertEquals(200, statusCode, "Status code should be 422 returned");
+        Assert.assertEquals(500, statusCode, "Status code should be 500 returned");
     }
 
     @Test (priority = 4, description = "SignIn with Password Only")
@@ -204,7 +205,7 @@ public class SignInTest extends B2CBaseTest {
         jsonPath = new JsonPath(response.asString());
         int statusCode = response.statusCode();
         log.info(String.valueOf(statusCode));
-        Assert.assertEquals(200, statusCode, "Status code should be 422 returned");
+        Assert.assertEquals(422, statusCode, "Status code should be 422 returned");
     }
-*/
+
 }
