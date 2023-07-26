@@ -1,5 +1,6 @@
 package te.application.api.test.B2C.positive;
 
+import com.github.javafaker.App;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -40,13 +41,13 @@ public class SignUpTest extends B2CBaseTest {
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FirstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "",nationality, email,"17.0","iPhone 11",
                 "Asia/Karachi",password);
 
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", Utils.decodeString(bearerToken.B2C))
+                .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();
@@ -54,7 +55,25 @@ public class SignUpTest extends B2CBaseTest {
         System.out.println(response.asString());
         jsonPath = response.jsonPath();
         AppConstants.sessionID = jsonPath.getString("data.user.session_token");
-        //log.info("Session ID : " + AppConstants.sessionID);
+        System.out.println("Session ID : " + AppConstants.sessionID);
+        String get_message = jsonPath.getString("message");
+
+        if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
+            Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
+            setUp();
+        }
+        if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
+            Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
+            setUp();
+        } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
+            Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
+            setUp();
+
+        } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
+            Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
+            setUp();
+
+        }
 
         FN=FirstName;
         LN=LastName;

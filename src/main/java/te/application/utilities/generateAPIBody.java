@@ -282,12 +282,123 @@ public class generateAPIBody {
                 "  \"device_os\" : \""+OSPlatform+"\",\n" +
                 "  \"lat\" : \""+latitude+"\",\n" +
                 "  \"__c\" : \""+company+"\",\n" +
-                "  \"__t\" : \""+token+"\",\n" +
+                "  \"__t\" : \""+AppConstants.sessionID+"\",\n" +
                 "  \"customer_id\" : \""+customerId+"\",\n" +
                 "  \"platform\" : \""+OSPlatform+"\"\n" +
                 "}";
 
         return bodyData;
+    }
+
+    public static String autoMegaSearch(String category,String categoryID, String includeTravelOutlets,
+                                        String locationID, String fromSearch, String searchQuery, String language,
+                                        String autoRedeemibility ,int CSAOlSize, String latitude,String longitude,
+                                        int outletSize,  String timeZone, String t,String currency,
+                                        String userID, String customerID, String company,
+                                        String appVersion,  String platform,String deviceOS,
+                                        String deviceID, String deviceModel, String deviceKey){
+        String body;
+        body = "{\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"__outlets_size\" : \""+outletSize+"\",\n" +
+                "  \"__lat\" : \""+latitude+"\",\n" +
+                "  \"company\" : \""+company+"\",\n" +
+                "  \"__platform\" : \""+platform+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"__l\" : \""+language+"\",\n" +
+                "  \"currency\" : \""+currency+"\",\n" +
+                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"query\" : \""+searchQuery+"\",\n" +
+                "\"__device_id\" : \""+deviceID+"\",\n" +
+                "\"category\" : \""+category+"\",\n" +
+                "  \"lng\" : \""+longitude+"\",\n" +
+                "\"customer_id\" : \""+customerID+"\",\n" +
+                "  \"device_os\" : \""+deviceOS+"\",\n" +
+                "  \"session_token\" : \""+AppConstants.sessionID+"\",\n" +
+                "  \"location_id\" : \""+locationID+"\",\n" +
+                "  \"include_travel_outlets\" : \""+includeTravelOutlets+"\",\n" +
+                "  \"from_search\" : "+fromSearch+",\n" +
+                "  \"device_model\" : \""+deviceModel+"\",\n" +
+                "  \"time_zone\" : \""+timeZone+"\",\n" +
+                "  \"__lng\" : \""+longitude+"\",\n" +
+                "  \"__c_s_a_ol_size\" : \""+CSAOlSize+"\",\n" +
+                "  \"auto_redeembility\" : "+autoRedeemibility+",\n" +
+                "  \"category_id\" : \""+categoryID+"\",\n" +
+                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" " +
+                "}";
+        return body;
+    }
+
+    public static String trendingSearch(Boolean includeTravelOutlets, String locationID, String category,String categoryID,
+                                        String language,int CSAOlSize, String latitude,String longitude,
+                                        String timeZone,String currency, String userID, String customerID, String company,
+                                        String appVersion,  String platform,String deviceOS, String deviceID, String deviceModel, String deviceKey)
+    {
+        String body;
+        body = "{\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"__lat\" : \""+latitude+"\",\n" +
+                "  \"company\" : \""+company+"\",\n" +
+                "  \"__platform\" : \""+platform+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"__l\" : \""+language+"\",\n" +
+                "  \"currency\" : \""+currency+"\",\n" +
+                "  \"user_id\" : \""+userID+"\",\n" +
+                "\"__device_id\" : \""+deviceID+"\",\n" +
+                "\"category\" : \""+category+"\",\n" +
+                "  \"lng\" : \""+longitude+"\",\n" +
+                "\"customer_id\" : \""+customerID+"\",\n" +
+                "  \"device_os\" : \""+deviceOS+"\",\n" +
+                "  \"session_token\" : \""+AppConstants.sessionID+"\",\n" +
+                "  \"location_id\" : \""+locationID+"\",\n" +
+                "  \"include_travel_outlets\" : \""+includeTravelOutlets+"\",\n" +
+                "  \"device_model\" : \""+deviceModel+"\",\n" +
+                "  \"time_zone\" : \""+timeZone+"\",\n" +
+                "  \"__lng\" : \""+longitude+"\",\n" +
+                "  \"__c_s_a_ol_size\" : \""+CSAOlSize+"\",\n" +
+                "  \"category_id\" : \""+categoryID+"\",\n" +
+                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" " +
+                "}";
+        return body;
+    }
+
+    public static String filter (String language, String __lat, String company, String __platform, String app_version, String device_Key,
+                                 String __i, String currency, String user_id, int coming_from_normal_outlet_listing, String __device_id,
+                                 String category, String lng, String session_token, String location_id, int include_travel_outlets,
+                                 String os_version, String device_model, String time_zone, String __lng, String device_os,
+                                 String lat, String sessionURL, String b2cauthToken) {
+        {
+            String bodyData = "{\n" +
+                    "  \"language\" : \""+language+"\",\n" +
+                    "  \"__lat\" : \""+__lat +"\",\n" +
+                    "  \"company\" : \""+company+ "\",\n" +
+                    "  \"__platform\" : \""+__platform+"\",\n" +
+                    "  \"app_version\" : \""+app_version+"\",\n" +
+                    "  \"device_key\" : \""+device_Key+"\",\n" +
+                    "  \"__i\" : \""+__i+"\",\n" +
+                    "  \"currency\" : \""+currency+"\",\n" +
+                    "  \"user_id\" : \""+user_id+"\",\n" +
+                    "  \"coming_from_normal_outlet_listing\" : "+coming_from_normal_outlet_listing+",\n" +
+                    "  \"__device_id\" : \""+__device_id+"\",\n"+
+                    "  \"category\" : \""+category+"\",\n"+
+                    "  \"lng\" : \""+lng+"\",\n" +
+                    "  \"session_token\" : \""+session_token+"\",\n" +
+                    "  \"location_id\" : \""+location_id+"\",\n" +
+                    "  \"include_travel_outlets\" : \""+include_travel_outlets+"\",\n"+
+                    "  \"os_version\" : \""+os_version+"\",\n" +
+                    "  \"device_model\" : \""+device_model+"\",\n" +
+                    "  \"time_zone\" : \""+time_zone+"\",\n" +
+                    "  \"__lng\" : \""+__lng+"\",\n" +
+                    "  \"device_os\" : \""+device_os+"\",\n" +
+                    "  \"lat\" : \""+lat+"\",\n" +
+                    "  \"encryption_disable_key\" : \""+"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba"+"\"\n" +
+
+                    "}";
+
+            return bodyData;
+        }
     }
 
 

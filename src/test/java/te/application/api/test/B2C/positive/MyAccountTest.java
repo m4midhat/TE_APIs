@@ -27,8 +27,6 @@ import java.io.IOException;
 public class MyAccountTest extends B2CBaseTest {
     @BeforeClass
     public void ValidateMyAccount() throws IOException {
-        SignInTest SignIn = new SignInTest();
-        SignIn.setUp();
         RestAssured.basePath = AppConstants.PROFILE_BASE_PATH;
 
         //Passing bodyData to profile function
@@ -52,7 +50,7 @@ public class MyAccountTest extends B2CBaseTest {
         jsonPath = response.jsonPath();
 
         //Getting session token from jsonPath and storing into AppConstants
-        AppConstants.sessionID = jsonPath.getString("data.user.session_token");
+        //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
         log.info("Session ID : " + AppConstants.sessionID);
 
     }

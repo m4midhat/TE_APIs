@@ -18,22 +18,17 @@ import static org.testng.Assert.assertEquals;
 public class SignUpTest  extends B2CBaseTest {
 
     private Faker faker = new Faker();
-    public  String FN;
-    public String LN;
-    public String em;
-    public String pwd;
-    public String na;
-    public String dob;
+    public  String firstName, lastName, emailAddress, password, nationality, dob;
 
     @Test(priority = 0, description = "Signup with blank credentials body" )
-    public void  Signup_with_blank_Credentials() throws IOException {
+    public void  signUpWithBlankCredentials() throws IOException {
 
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -54,17 +49,17 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 1, description = "Signup with only firstname " )
-    public void  Signup_with_only_FirstName() throws IOException {
+    public void  signUpWithFirstNameOnly() throws IOException {
 
         //Faker faker = new Faker();
         String FirstName = faker.name().firstName();
-        FN=FirstName;
+        firstName =FirstName;
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FirstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
 
@@ -85,17 +80,17 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 2, description = "Signup with only Lastname " )
-    public void  Signup_with_only_LastName() throws IOException {
+    public void  signUpWithLastNameOnly() throws IOException {
 
         //Faker faker = new Faker();
         String LastName = faker.name().lastName();
-        LN=LastName;
+        lastName =LastName;
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",LastName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
 
@@ -116,18 +111,18 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 3, description = "Signup with only password " )
-    public void  Signup_with_only_Password() throws IOException {
+    public void  signUpWithPasswordOnly() throws IOException {
 
 
         //Faker faker = new Faker();
         String password1 = faker.internet().password(8,16, true,true,true);
-        pwd= password1;
+        password = password1;
         String bodyData = generateAPIBody.signUp(password1, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi",password1);
 
@@ -144,14 +139,14 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
         System.out.println(get_message);
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Password();
+            signUpWithPasswordOnly();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Password();
+            signUpWithPasswordOnly();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Password();
+            signUpWithPasswordOnly();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Password();
+            signUpWithPasswordOnly();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Invalid email address", get_message, "Blank Fields");
@@ -159,17 +154,17 @@ public class SignUpTest  extends B2CBaseTest {
 
     }
     @Test(priority = 4, description = "Signup with only email & First Name " )
-    public void  Signup_with_EmailAndFirstName() throws IOException {
+    public void signupWithEmailAndFirstName() throws IOException {
 
         String email = faker.internet().emailAddress();
 
 
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", email,"17.0","iPhone 11",
                 "Asia/Karachi","");
 
@@ -189,15 +184,15 @@ public class SignUpTest  extends B2CBaseTest {
         assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 5, description = "Signup with only email & Last Name " )
-    public void  Signup_with_EmailAndLastName() throws IOException {
+    public void signupWithEmailAndLastName() throws IOException {
 
         String email = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", email,"17.0","iPhone 11",
                 "Asia/Karachi","");
 
@@ -217,17 +212,17 @@ public class SignUpTest  extends B2CBaseTest {
         assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 6, description = "Signup with only email & Password " )
-    public void  Signup_with_EmailAndPassword() throws IOException {
+    public void signupWithEmailAndPassword() throws IOException {
 
         String email = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp(pwd, 0, "",
+        String bodyData = generateAPIBody.signUp(password, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", email,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                "Asia/Karachi", password);
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -243,28 +238,28 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_EmailAndPassword();
+            signupWithEmailAndPassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_EmailAndPassword();
+            signupWithEmailAndPassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_EmailAndPassword();
+            signupWithEmailAndPassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_EmailAndPassword();
+            signupWithEmailAndPassword();
         }
 
         assertEquals( "Request parameter firstname is empty",get_message,"Blank Fields");
         assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 7, description = "Signup with only FirstName & LastName" )
-    public void  Signup_with_FirstNameAndLastName() throws IOException {
+    public void signupWithFirstNameAndLastName() throws IOException {
 
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "","17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -284,18 +279,18 @@ public class SignUpTest  extends B2CBaseTest {
         assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 8, description = "Signup with only first name & password " )
-    public void  Signup_with_FirstNameAndPassword() throws IOException {
+    public void signupWithFirstNameAndPassword() throws IOException {
 
-        pwd= faker.internet().password(8,16, true,true,true);
-        FN = faker.name().firstName();
-        String bodyData = generateAPIBody.signUp(pwd, 0, "",
+        password = faker.internet().password(8,16, true,true,true);
+        firstName = faker.name().firstName();
+        String bodyData = generateAPIBody.signUp(password, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "","17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -311,32 +306,32 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_FirstNameAndPassword();
+            signupWithFirstNameAndPassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_FirstNameAndPassword();
+            signupWithFirstNameAndPassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_FirstNameAndPassword();
+            signupWithFirstNameAndPassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_FirstNameAndPassword();
+            signupWithFirstNameAndPassword();
         }
         assertEquals( "Invalid email address",get_message,"Blank Fields");
         assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 9, description = "Signup with only email, first & last name " )
-    public void  Signup_with_Email_FirstName_LastName() throws IOException {
+    public void signupWithEmailFirstNameLastName() throws IOException {
 
         //pwd= faker.internet().password(8,16, true,true,true);
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        lastName = faker.name().lastName();
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -356,20 +351,20 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 10, description = "Signup with only email, first name & password" )
-    public void  Signup_with_Email_FirstName_Password() throws IOException {
+    public void signupWithEmailFirstNamePassword() throws IOException {
 
-        pwd= faker.internet().password(8,16, true,true,true);
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
         //LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(pwd, 0, "",
+        String bodyData = generateAPIBody.signUp(password, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -385,33 +380,33 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_Email_FirstName_Password();
+            signupWithEmailFirstNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_Email_FirstName_Password();
+            signupWithEmailFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_Email_FirstName_Password();
+            signupWithEmailFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_Email_FirstName_Password();
+            signupWithEmailFirstNamePassword();
         }
         assertEquals( "Request parameter lastname is empty",get_message,"Blank Fields");
         assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 11, description = "Signup with only first name, last name & password" )
-    public void  Signup_with_LastName_FirstName_Password() throws IOException {
+    public void signupWithLastNameFirstNamePassword() throws IOException {
 
-        pwd= faker.internet().password(8,16, true,true,true);
-        FN = faker.name().firstName();
+        password = faker.internet().password(8,16, true,true,true);
+        firstName = faker.name().firstName();
         //em = faker.internet().emailAddress();
-        LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(pwd, 0, LN,
+        lastName = faker.name().lastName();
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "","17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -426,34 +421,34 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_LastName_FirstName_Password();
+            signupWithLastNameFirstNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_LastName_FirstName_Password();
+            signupWithLastNameFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_LastName_FirstName_Password();
+            signupWithLastNameFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_LastName_FirstName_Password();
+            signupWithLastNameFirstNamePassword();
         }
         System.out.println(get_message);
         assertEquals( "Invalid email address",get_message,"Blank Fields");
         assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 12, description = "Signup with only email, last name & password" )
-    public void  Signup_with_Email_LastName_Password() throws IOException {
+    public void signupWithEmailLastNamePassword() throws IOException {
 
-        pwd= faker.internet().password(8,16, true,true,true);
+        password = faker.internet().password(8,16, true,true,true);
         //FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(pwd, 0, LN,
+        emailAddress = faker.internet().emailAddress();
+        lastName = faker.name().lastName();
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -469,33 +464,33 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_Email_LastName_Password();
+            signupWithEmailLastNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_Email_LastName_Password();
+            signupWithEmailLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_Email_LastName_Password();
+            signupWithEmailLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_Email_LastName_Password();
+            signupWithEmailLastNamePassword();
         }
         assertEquals( "Request parameter firstname is empty",get_message,"Blank Fields");
         assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 500");
     }
     @Test(priority = 13, description = "Signup with only Email,first name,last name & password" )
-    public void  Signup_with_Email_FirstName_LastName_Password() throws IOException {
+    public void signupWithEmailFirstNameLastNamePassword() throws IOException {
 
-        pwd= faker.internet().password(8,16, true,true,true);
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(pwd, 0, LN,
+        password = faker.internet().password(8,16, true,true,true);
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        lastName = faker.name().lastName();
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -510,14 +505,14 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_Email_FirstName_LastName_Password();
+            signupWithEmailFirstNameLastNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_Email_FirstName_LastName_Password();
+            signupWithEmailFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_Email_FirstName_LastName_Password();
+            signupWithEmailFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_Email_FirstName_LastName_Password();
+            signupWithEmailFirstNameLastNamePassword();
         }
         System.out.println(get_message);
         assertEquals( "success",get_message,"Blank Fields");
@@ -525,7 +520,7 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 14, description = "Signup with only Date of Birth " )
-    public void  Signup_with_only_Date_of_Birth() throws IOException {
+    public void signupWithOnlyDateOfBirth() throws IOException {
         dob = String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
@@ -535,8 +530,8 @@ public class SignUpTest  extends B2CBaseTest {
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -558,17 +553,17 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 15, description = "Signup with only Date of Birth, first name" )
-    public void  Signup_with_only_DateOfBirth_and_FirstName() throws IOException {
+    public void signupWithOnlyDateOfBirthAndFirstName() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        FN = faker.name().firstName();
+        firstName = faker.name().firstName();
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -589,18 +584,18 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 16, description = "Signup with only Date of Birth, last name" )
-    public void  Signup_with_only_DateOfBirth_and_LastName() throws IOException {
+    public void signupWithOnlyDateOfBirthAndLastName() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -621,18 +616,18 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 17, description = "Signup with only Date of Birth,first name, last name" )
-    public void  Signup_with_only_DateOfBirth_FirstName_LastName() throws IOException {
+    public void signupWithOnlyDateOfBirthFirstNameLastName() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
+        lastName = faker.name().lastName();
 
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "","", "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
@@ -653,20 +648,20 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 18, description = "Signup with only Email,Date of Birth,first name, last name" )
-    public void  Signup_with_only_Email_DateOfBirth_FirstName_LastName() throws IOException {
+    public void signupWithOnlyEmailDateOfBirthFirstNameLastName() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp("", 0, LN,
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -686,22 +681,22 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 19, description = "Signup with only Email,Date of Birth,first name, last name & password" )
-    public void  Signup_with_only_Email_DateOfBirth_FirstName_LastName_Password() throws IOException {
+    public void signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0, LN,
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em ,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -716,14 +711,14 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Email_DateOfBirth_FirstName_LastName_Password();
+            signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Email_DateOfBirth_FirstName_LastName_Password();
+            signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Email_DateOfBirth_FirstName_LastName_Password();
+            signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Email_DateOfBirth_FirstName_LastName_Password();
+            signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword();
         }
         System.out.println(get_message);
         Assert.assertNotNull(get_message);
@@ -731,22 +726,22 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 20, description = "Sign up with Email, Date of Birth & password" )
-    public void  Signup_with_only_Email_DateOfBirth_Password() throws IOException {
+    public void signupWithOnlyEmailDateOfBirthPassword() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         //LN = faker.name().lastName();
         //FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0, "",
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em ,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -760,14 +755,14 @@ public class SignUpTest  extends B2CBaseTest {
         //log.info("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Email_DateOfBirth_Password();
+            signupWithOnlyEmailDateOfBirthPassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Email_DateOfBirth_Password();
+            signupWithOnlyEmailDateOfBirthPassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Email_DateOfBirth_Password();
+            signupWithOnlyEmailDateOfBirthPassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Email_DateOfBirth_Password();
+            signupWithOnlyEmailDateOfBirthPassword();
         }
         System.out.println(get_message);
         Assert.assertNotNull(get_message);
@@ -775,21 +770,21 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 21, description = "Signup with only Date of Birth , Email " )
-    public void  Signup_with_only_DateOfBirth_Password() throws IOException {
+    public void signupWithOnlyDateOfBirthPassword() throws IOException {
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         //LN = faker.name().lastName();
         //FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
+        emailAddress = faker.internet().emailAddress();
         // pwd= faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "","", em ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "","", emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -804,14 +799,14 @@ public class SignUpTest  extends B2CBaseTest {
         //log.info("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_DateOfBirth_Password();
+            signupWithOnlyDateOfBirthPassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_DateOfBirth_Password();
+            signupWithOnlyDateOfBirthPassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_DateOfBirth_Password();
+            signupWithOnlyDateOfBirthPassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_DateOfBirth_Password();
+            signupWithOnlyDateOfBirthPassword();
         }
         System.out.println(get_message);
         Assert.assertNotNull(get_message);
@@ -819,15 +814,15 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 22, description = "Signup with only Nationality" )
-    public void  Signup_with_only_Nationality() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationality() throws IOException {
+        nationality =faker.nation().nationality();
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "" ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -847,16 +842,16 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 23, description = "Signup with only Nationality, first name" )
-    public void  Signup_with_only_Nationality_FirstName() throws IOException {
-        na=faker.nation().nationality();
-        FN=faker.name().firstName();
+    public void signupWithOnlyNationalityFirstName() throws IOException {
+        nationality =faker.nation().nationality();
+        firstName =faker.name().firstName();
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "" ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -876,16 +871,16 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 24, description = "Signup with only Nationality, Email" )
-    public void  Signup_with_only_Nationality_Email() throws IOException {
-        em=faker.internet().emailAddress();
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityEmail() throws IOException {
+        emailAddress =faker.internet().emailAddress();
+        nationality =faker.nation().nationality();
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -906,17 +901,17 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 25, description = "Signup with only Nationality,Password" )
-    public void  Signup_with_only_Nationality_Password() throws IOException {
-        pwd=faker.internet().password(8,16,true,true,true);
-        na=faker.nation().nationality();
-        String bodyData = generateAPIBody.signUp(pwd, 0, "",
+    public void signupWithOnlyNationalityPassword() throws IOException {
+        password =faker.internet().password(8,16,true,true,true);
+        nationality =faker.nation().nationality();
+        String bodyData = generateAPIBody.signUp(password, 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "" ,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "" ,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -931,14 +926,14 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
         System.out.println(get_message);
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Password();
+            signupWithOnlyNationalityPassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Password();
+            signupWithOnlyNationalityPassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Password();
+            signupWithOnlyNationalityPassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Password();
+            signupWithOnlyNationalityPassword();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Invalid email address", get_message,"Blank Fields");
@@ -946,8 +941,8 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 26, description = "Signup with only Nationality,Date of birth" )
-    public void  Signup_with_only_Nationality_Date_of_birth() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityDateOfBirth() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
@@ -956,9 +951,9 @@ public class SignUpTest  extends B2CBaseTest {
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "" ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "" ,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -978,18 +973,18 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 27, description = "Signup with only Nationality,First Name,Email" )
-    public void  Signup_with_only_Nationality_FirstName_Email() throws IOException {
-        na=faker.nation().nationality();
-        FN=faker.name().firstName();
-        em=faker.internet().emailAddress();
+    public void signupWithOnlyNationalityFirstNameEmail() throws IOException {
+        nationality =faker.nation().nationality();
+        firstName =faker.name().firstName();
+        emailAddress =faker.internet().emailAddress();
 
         String bodyData = generateAPIBody.signUp("", 0, "",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -1009,18 +1004,18 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 28, description = "Signup with only Nationality,Last Name, Email" )
-    public void  Signup_with_only_Nationality_LastName_Email() throws IOException {
-        na=faker.nation().nationality();
-        em=faker.internet().emailAddress();
-        LN=faker.name().lastName();
+    public void signupWithOnlyNationalityLastNameEmail() throws IOException {
+        nationality =faker.nation().nationality();
+        emailAddress =faker.internet().emailAddress();
+        lastName =faker.name().lastName();
 
-        String bodyData = generateAPIBody.signUp("", 0,LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em ,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -1040,25 +1035,25 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 30, description = "Signup with only Nationality, First Name, Password" )
-    public void  Signup_with_only_Nationality_FirstName_Password() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityFirstNamePassword() throws IOException {
+        nationality =faker.nation().nationality();
        /*dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));*/
         //LN = faker.name().lastName();
-        FN = faker.name().firstName();
+        firstName = faker.name().firstName();
         // em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
+        password = faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp(pwd, 0,"",
+        String bodyData = generateAPIBody.signUp(password, 0,"",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "","17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "","17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1074,38 +1069,38 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_FirstName_Password();
+            signupWithOnlyNationalityFirstNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_FirstName_Password();
+            signupWithOnlyNationalityFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_FirstName_Password();
+            signupWithOnlyNationalityFirstNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_FirstName_Password();
+            signupWithOnlyNationalityFirstNamePassword();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Invalid email address", get_message,"Blank Fields");
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 32, description = "Signup with only Nationality, First Name, Date of Birth" )
-    public void  Signup_with_only_Nationality_FirstName_Date_of_birth() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityFirstNameDateOfBirth() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         //LN = faker.name().lastName();
-        FN = faker.name().firstName();
+        firstName = faker.name().firstName();
         // em = faker.internet().emailAddress();
         //pwd= faker.internet().password(8,16, true,true,true);
 
 
         String bodyData = generateAPIBody.signUp("", 0,"",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "","17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "","17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -1125,25 +1120,25 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 30, description = "Signup with only Nationality, Last Name, Password" )
-    public void  Signup_with_only_Nationality_LastName_Password() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityLastNamePassword() throws IOException {
+        nationality =faker.nation().nationality();
        /*dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));*/
-        LN = faker.name().lastName();
+        lastName = faker.name().lastName();
         //FN = faker.name().firstName();
         // em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
+        password = faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp(pwd, 0,LN,
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "","17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "","17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1159,38 +1154,38 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_LastName_Password();
+            signupWithOnlyNationalityLastNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_LastName_Password();
+            signupWithOnlyNationalityLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_LastName_Password();
+            signupWithOnlyNationalityLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_LastName_Password();
+            signupWithOnlyNationalityLastNamePassword();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Invalid email address", get_message,"Blank Fields");
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 33, description = "Signup with only Nationality, Last Name, Date of Birth" )
-    public void  Signup_with_only_Nationality_LastName_Date_of_birth() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityLastNameDateOfBirth() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
+        lastName = faker.name().lastName();
         //FN = faker.name().firstName();
         // em = faker.internet().emailAddress();
         //pwd= faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp("", 0,LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "","17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "","17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -1210,25 +1205,25 @@ public class SignUpTest  extends B2CBaseTest {
         Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 34, description = "Signup with only Nationality,email, password, Date of Birth" )
-    public void  Signup_with_only_Nationality_Email_password_Date_of_birth() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityEmailPasswordDateOfBirth() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         // LN = faker.name().lastName();
         //FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp(pwd, 0,"",
+        String bodyData = generateAPIBody.signUp(password, 0,"",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1245,36 +1240,36 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Email_password_Date_of_birth();
+            signupWithOnlyNationalityEmailPasswordDateOfBirth();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Email_password_Date_of_birth();
+            signupWithOnlyNationalityEmailPasswordDateOfBirth();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Email_password_Date_of_birth();
+            signupWithOnlyNationalityEmailPasswordDateOfBirth();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Email_password_Date_of_birth();
+            signupWithOnlyNationalityEmailPasswordDateOfBirth();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Request parameter firstname is empty", get_message,"Blank Fields");
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 35, description = "Signup with only Nationality, first name, last name, email, Date of Birth" )
-    public void  Signup_with_only_Nationality_Email_FirstName_LastName_Date_Of_birth() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityEmailFirstNameLastNameDateOfBirth() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
         //pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp("", 0,LN,
+        String bodyData = generateAPIBody.signUp("", 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em,"17.0","iPhone 11",
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
                 "Asia/Karachi","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
@@ -1295,23 +1290,23 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 37, description = "Signup with only Nationality, first name, last name, Date of birth, Password")
-    public void  Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
         //em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0,LN,
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, "","17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, "","17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1327,14 +1322,14 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Invalid email address", get_message,"Blank Fields");
@@ -1342,23 +1337,23 @@ public class SignUpTest  extends B2CBaseTest {
     }
 
     @Test(priority = 38, description = "Signup with only Nationality, first name, last name, Date of birth, Password, Email")
-    public void  Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password_Email() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0,LN,
+        lastName = faker.name().lastName();
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1374,37 +1369,37 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("success", get_message,"Blank Fields");
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 39, description = "Signup with only first name, email, password, Date of Birth, Nationality")
-    public void  Signup_with_only_Nationality_Date_of_birth_FirstName_Password_Email() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         //LN = faker.name().lastName();
-        FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0,"",
+        firstName = faker.name().firstName();
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0,"",
                 "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1419,37 +1414,37 @@ public class SignUpTest  extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
         System.out.println(get_message);
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Date_of_birth_FirstName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Date_of_birth_FirstName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail();
         }
         Assert.assertNotNull(get_message);
         Assert.assertEquals("Request parameter lastname is empty" , get_message,"Blank Fields");
         Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
     }
     @Test(priority = 40, description = "Signup with only last name, email, password, Date of Birth, Nationality")
-    public void  Signup_with_only_Nationality_Date_of_birth_LastName_Password_Email() throws IOException {
-        na=faker.nation().nationality();
+    public void signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail() throws IOException {
+        nationality =faker.nation().nationality();
         dob=String.valueOf(Utils.generateRandomNumber(1950,2010))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
-        LN = faker.name().lastName();
+        lastName = faker.name().lastName();
         //FN = faker.name().firstName();
-        em = faker.internet().emailAddress();
-        pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp(pwd, 0,LN,
+        emailAddress = faker.internet().emailAddress();
+        password = faker.internet().password(8,16, true,true,true);
+        String bodyData = generateAPIBody.signUp(password, 0, lastName,
                 "en",1,"25.095395","entertainer","ios","8.18.06",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
-                "https://entutapi.theentertainerme.com/et_rs_prd/web/v801/sessions",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
-                "",na, em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
+                "", nationality, emailAddress,"17.0","iPhone 11",
+                "Asia/Karachi", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1465,14 +1460,14 @@ public class SignUpTest  extends B2CBaseTest {
         System.out.println(get_message);
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Signup_with_only_Nationality_Date_of_birth_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
-            Signup_with_only_Nationality_Date_of_birth_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain 1 capital letter")) {
-            Signup_with_only_Nationality_Date_of_birth_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail();
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
-            Signup_with_only_Nationality_Date_of_birth_LastName_Password_Email();
+            signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail();
         }
 
         Assert.assertNotNull(get_message);

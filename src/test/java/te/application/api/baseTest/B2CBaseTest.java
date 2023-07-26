@@ -20,7 +20,7 @@ public class B2CBaseTest {
     @BeforeSuite
     public void setUpSuite(){
         AppConstants.START_DATE = LocalDateTime.now();
-        RestAssured.baseURI = "https://entutapi.theentertainerme.com/";
+        RestAssured.baseURI = AppConstants.BASE_URI_B2C;
 
     }
 

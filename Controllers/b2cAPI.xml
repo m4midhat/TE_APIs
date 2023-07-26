@@ -54,4 +54,22 @@
         </classes>
     </test>
 
+    <test name="Mega Auto Search">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.MegaAutoSuggestionTest" />
+        </classes>
+    </test>
+
+    <test name="Trending Search">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.TrendingSearchTest" />
+        </classes>
+    </test>
+
+    <test name="Filters">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.FilterCategoriesTest" />
+        </classes>
+    </test>
+
 </suite>

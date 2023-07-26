@@ -65,7 +65,7 @@ public class FetchLocationsTest extends B2CBaseTest {
             response = httpRequest.post();
             log.info(response.asString());
             jsonPath = response.jsonPath();
-            AppConstants.sessionID = jsonPath.getString("data.user.session_token");
+            //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
             log.info("Session ID : " + AppConstants.sessionID);
         }
     }
