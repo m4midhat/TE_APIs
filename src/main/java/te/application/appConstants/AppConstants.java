@@ -1,10 +1,5 @@
 package te.application.appConstants;
 
-import com.mysql.cj.jdbc.MysqlDataSource;
-import te.application.utilities.Utils;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.time.LocalDateTime;
 
 public class AppConstants {
@@ -34,5 +29,13 @@ public class AppConstants {
     public static final  String BASE_PATH_Mega_AUTO_SEARCH= "pysearch/v2/mega-auto-suggestions";
     public static final String BASE_PATH_TRENDING_SEARCH="pysearch/v2/trending-search";
     public static final String PYTHON_BASE_URI = "https://uatpysch.theentertainerme.com/";
+
+    public static String testDataLanguage,
+            testDataOSPlatform,
+            testDataOSVersion,
+            testDataDeviceModel,
+            testDataTimeZone,
+            testDataCurrency,
+            testDataAppVersion;
 
 }

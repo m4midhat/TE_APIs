@@ -1,6 +1,5 @@
 package te.application.api.test.B2C.positive;
 
-import com.github.javafaker.App;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -31,20 +30,18 @@ public class SignUpTest extends B2CBaseTest {
         String email = faker.internet().emailAddress();
         String FirstName = faker.name().firstName();
         String LastName = faker.name().lastName();
-        //Date Birth_day = faker.date().between("18/07/1919","18/07/1989");
-        // Date dt=new Date("2023-12-31");
-        //String Birthday = String.valueOf(Birth_day);
+
         String password = faker.internet().password(8,12,true,true,true);
         String nationality = faker.nation().nationality();
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String bodyData = generateAPIBody.signUp(password, 0, LastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FirstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,"8.18.06",
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","USD","0",FirstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "",nationality, email,"17.0","iPhone 11",
-                "Asia/Karachi",password);
+                "",nationality, email, AppConstants.testDataOSVersion ,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,password);
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -59,7 +56,7 @@ public class SignUpTest extends B2CBaseTest {
         String get_message = jsonPath.getString("message");
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
-            Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
+            Assert.assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");
             setUp();
         }
         if (get_message.equalsIgnoreCase("Password should contain 1 small letter")){
@@ -156,13 +153,13 @@ public class SignUpTest extends B2CBaseTest {
     public void  checkAlreadyExistEmail() throws IOException {
 
         String bodyData = generateAPIBody.signUp(pwd, 0, LN,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FN,
+                "en",1,"25.095395","entertainer", AppConstants.testDataOSPlatform,"8.18.06",
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0",FN,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(bearerToken.B2C),
-                "",na, em,"17.0","iPhone 11",
-                "Asia/Karachi",pwd);
+                "",na, em,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,pwd);
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(bearerToken.B2C))

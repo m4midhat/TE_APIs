@@ -29,17 +29,16 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
     public void setUp() throws IOException {
         RestAssured.baseURI = AppConstants.PYTHON_BASE_URI;
         RestAssured.basePath = AppConstants.BASE_PATH_Mega_AUTO_SEARCH;
-        log.info("\n>>>>>>>>>>>>>>>>>>"+AppConstants.sessionID);
         String generatedString = RandomStringUtils.randomAlphabetic(2).toLowerCase();
-        log.info("///////////////................."+generatedString);
+        log.info(generatedString);
 
 
         String bodyData = generateAPIBody.autoMegaSearch("All","0","true",
                 "1","true",generatedString,"en","true",3,
-                "25.300579","55.307709",10,"Asia/Karachi",
+                "25.300579","55.307709",10,AppConstants.testDataTimeZone,
                 AppConstants.sessionID,"AED","9120772","9120772",
-                "entertainer","8.18.04","android","android","dc57c128bcfc4155",
-                "samsung%20SM-M515F","dc57c128bcfc4155");
+                "entertainer",AppConstants.testDataAppVersion,"android",AppConstants.testDataOSVersion,
+                "dc57c128bcfc4155", AppConstants.testDataDeviceModel,"dc57c128bcfc4155");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

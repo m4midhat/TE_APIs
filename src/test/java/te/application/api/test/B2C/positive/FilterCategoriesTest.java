@@ -30,10 +30,10 @@ public class FilterCategoriesTest extends B2CBaseTest {
             String propPassword = Utils.decodeString(properties.getProperty("password"));
 
             String bodyData = generateAPIBody.filter("en","31.527539", "entertainer",
-                    "ios", "8.18.06", "ios-C21A0532-B8A5-442D-9204-43805238DE88", "9143933",
+                    AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "9143933",
                     "AED", "9143933", 1, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "Restaurants and Bars",
-                    "74.352919", "c86078f5-5a6c-4831-ba8a-1e9914a1ce33", "1", 0, "16.0.3", "iPhone XS",
-                    "Asia/Karachi", "74.352919", "íos", "31.527539",
+                    "74.352919", "c86078f5-5a6c-4831-ba8a-1e9914a1ce33", "1", 0, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel,
+                    AppConstants.testDataTimeZone, "74.352919", AppConstants.testDataOSPlatform, "31.527539",
                     AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN));
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

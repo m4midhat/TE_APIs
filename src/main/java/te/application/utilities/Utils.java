@@ -2,9 +2,11 @@ package te.application.utilities;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import te.application.appConstants.AppConstants;
 
 import java.io.*;
 import java.util.*;
@@ -131,6 +133,103 @@ public class Utils {
             countryCode = jsonObject.get(countryName).toString();
         }
         return countryCode;
+    }
+
+    public static JSONObject readTestData() throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        File file = new File("./src/test/java/te/application/data/testData.json");
+        JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
+        //if(!jsonObject.isEmpty()){
+            //JSONArray lang = (JSONArray) jsonObject.get("language");
+            //System.out.println(lang.get(generateRandomNumber(0, lang.size() - 1)).toString());
+        //}
+
+        return jsonObject;
+    }
+
+    public static String getRandomSupportedLanguage(JSONObject jsonObject){
+        String randomLanguage = "";
+        if(!jsonObject.isEmpty()){
+            JSONArray lang = (JSONArray) jsonObject.get("language");
+            randomLanguage = lang.get(generateRandomNumber(0, lang.size() - 1)).toString();
+            System.out.println("Random language selected from file : "+randomLanguage);
+        }
+        return randomLanguage;
+    }
+
+    public static String getRandomOS(JSONObject jsonObject){
+        String operatingSystem = "";
+        if(!jsonObject.isEmpty()){
+            JSONArray os = (JSONArray) jsonObject.get("OS");
+            operatingSystem = os.get(generateRandomNumber(0, os.size() - 1)).toString();
+            System.out.println("Random operating system selected from file : "+operatingSystem);
+        }
+        return operatingSystem;
+    }
+
+    public static String getRandomDeviceOS(JSONObject jsonObject){
+        String operatingSystem = "";
+        JSONArray deviceOS;
+        if(!jsonObject.isEmpty()){
+            if(AppConstants.testDataOSPlatform.compareToIgnoreCase("iOS")==0) {
+                deviceOS = (JSONArray) jsonObject.get("iOS");
+                operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
+            }
+            else if(AppConstants.testDataOSPlatform.compareToIgnoreCase("android")==0) {
+                deviceOS = (JSONArray) jsonObject.get("android");
+                operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
+            }
+            System.out.println("Random device OS selected from file : "+operatingSystem);
+        }
+        return operatingSystem;
+    }
+
+    public static String getRandomDevice(JSONObject jsonObject){
+        String device = "";
+        JSONArray devices;
+        if(!jsonObject.isEmpty()){
+            if(AppConstants.testDataOSPlatform.compareToIgnoreCase("iOS")==0) {
+                devices = (JSONArray) jsonObject.get("iOS Device");
+                device = devices.get(generateRandomNumber(0, devices.size() - 1)).toString();
+            }
+            else if(AppConstants.testDataOSPlatform.compareToIgnoreCase("android")==0) {
+                devices = (JSONArray) jsonObject.get("Android Device");
+                device = devices.get(generateRandomNumber(0, devices.size() - 1)).toString();
+            }
+            System.out.println("Random device OS selected from file : "+device);
+        }
+
+        return device;
+    }
+
+    public static String getRandomTimeZone(JSONObject jsonObject){
+        String timeZoneSelected = "";
+        if(!jsonObject.isEmpty()){
+            JSONArray timeZone = (JSONArray) jsonObject.get("Time Zone");
+            timeZoneSelected = timeZone.get(generateRandomNumber(0, timeZone.size() - 1)).toString();
+            System.out.println("Random time zone selected from file : "+timeZoneSelected);
+        }
+        return timeZoneSelected;
+    }
+
+    public static String getRandomCurrency(JSONObject jsonObject){
+        String currencySelected = "";
+        if(!jsonObject.isEmpty()){
+            JSONArray Currency = (JSONArray) jsonObject.get("Currency");
+            currencySelected = Currency.get(generateRandomNumber(0, Currency.size() - 1)).toString();
+            System.out.println("Random Currency selected from file : "+currencySelected);
+        }
+        return currencySelected;
+    }
+
+    public static String getRandomAppVersion(JSONObject jsonObject){
+        String appVersion = "";
+        if(!jsonObject.isEmpty()){
+            JSONArray versions = (JSONArray) jsonObject.get("AppVersion");
+            appVersion = versions.get(generateRandomNumber(0, versions.size() - 1)).toString();
+            System.out.println("Random appVersion selected from file : "+appVersion);
+        }
+        return appVersion;
     }
 
 }

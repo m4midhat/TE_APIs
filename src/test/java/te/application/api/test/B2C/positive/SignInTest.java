@@ -1,7 +1,6 @@
 package te.application.api.test.B2C.positive;
 
 
-import com.mysql.cj.util.Util;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
@@ -44,10 +43,10 @@ public class SignInTest extends B2CBaseTest {
             propPassword = Utils.decodeString(properties.getProperty("password"));
 
             String bodyData = generateAPIBody.signIn(0, "en", true,
-                    "25.300579", "entertainer", "ios", "8.04.01",
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED", "0", "55.307709",
+                    "25.300579", "entertainer", AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion,
+                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "USD", "0", "55.307709",
                     "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName,
-                    propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
+                    propPassword, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel, AppConstants.testDataTimeZone,
                     AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -123,8 +122,8 @@ public class SignInTest extends B2CBaseTest {
     @Test(priority = 6, description = "Verify Default currency")
     public void verifyDefaultCurrency(){
         String defaultCurrency = jsonPath.getString("data.user.currency");
-        String expectedDefaultCurrency = "USD";
-        Assert.assertEquals(expectedDefaultCurrency, defaultCurrency, "Default currency should be USD");
+        String expectedDefaultCurrency = AppConstants.testDataCurrency;
+        Assert.assertEquals("USD", defaultCurrency, "Default currency should be USD");
         System.out.println(">>>>>>>>>>>>>>>>>"+defaultCurrency);
         log.info(defaultCurrency);
 
@@ -148,9 +147,10 @@ public class SignInTest extends B2CBaseTest {
     public void signInWithValidEmailAndPasswordOnMultipleDevices() {
         RestAssured.basePath = AppConstants.B2C_LOGIN;
         String bodyData = generateAPIBody.signIn(0, "en", true,
-                "25.300579", "entertainer", "ios", "8.04.01",
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "USD", "0", "55.307709",
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName, propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
+                "25.300579", "entertainer", AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion,
+                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.testDataCurrency, "0", "55.307709",
+                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName, propPassword,
+                AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel, AppConstants.testDataTimeZone,
                 AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

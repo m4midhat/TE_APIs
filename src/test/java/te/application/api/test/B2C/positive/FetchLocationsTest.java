@@ -52,10 +52,10 @@ public class FetchLocationsTest extends B2CBaseTest {
 
             //initalizing params
             String bodyData = generateAPIBody.locations(0, "en", true, "25.300579", "entertainer",
-                    "iOS", "8.04.01", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
+                    AppConstants.testDataOSPlatform, "8.04.01", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
                     "0", "1", "55.307709", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",
-                    propPassword, "15.0", "iPhone XR", "Karachi/Islamabad",
-                    "1", "8070037d-eea1-4499-882a-b3de8f12d63c", "55.307709", "ios", "25.300579",
+                    propPassword, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel, "Karachi/Islamabad",
+                    "1", "8070037d-eea1-4499-882a-b3de8f12d63c", "55.307709", AppConstants.testDataOSPlatform, "25.300579",
                     AppConstants.SessionURL, authToken.B2CAUTH_TOKEN);
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -75,13 +75,10 @@ public class FetchLocationsTest extends B2CBaseTest {
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
     }
 
-    @Test(priority = 1, description = "printing locations name")
+    @Test(priority = 1, description = "Verify locations array size")
     public void location_print() {
         int size = jsonPath.getInt("data.locations.size()");
-        for (int i = 0; i < size; i++) {
-            LocationsName = jsonPath.getString("data.locations[" + i + "].name");
-            System.out.println("Location name at index " + i + ": " + LocationsName);
-        }
+        Assert.assertNotEquals(size,0);
     }
 
     @Test(priority = 2, description = "asserting all locations at each index")
@@ -90,56 +87,8 @@ public class FetchLocationsTest extends B2CBaseTest {
         int size = jsonPath.getInt("data.locations.size()");
         for (int i = 0; i < size; i++) {
             log.info("Location extracted : "+locations.get(i));
-            Assert.assertEquals(jsonPath.getString("data.locations["+i+"].name"),locations.get(i));
+            Assert.assertEquals(jsonPath.getString("data.locations["+i+"].name"),locations.get(i), "Incorrect location returned");
         }
-
-        /*String loc1Name = jsonPath.getString("data.locations[0].name");
-        Assert.assertEquals(loc1Name, "Dubai & N. Emirates", "location verified");
-
-        String loc2Name = jsonPath.getString("data.locations[1].name");
-        Assert.assertEquals(loc2Name, "Abu Dhabi & Al Ain", "location verified");
-
-        String loc3Name = jsonPath.getString("data.locations[2].name");
-        Assert.assertEquals(loc3Name, "Bahrain", "location verified");
-
-        String loc4Name = jsonPath.getString("data.locations[3].name");
-        Assert.assertEquals(loc4Name, "Cape Town", "location verified");
-
-        String loc5Name = jsonPath.getString("data.locations[4].name");
-        Assert.assertEquals(loc5Name, "Kuwait", "location verified");
-
-        String loc6Name = jsonPath.getString("data.locations[5].name");
-        Assert.assertEquals(loc6Name, "Oman", "location verified");
-
-        String loc7Name = jsonPath.getString("data.locations[6].name");
-        Assert.assertEquals(loc7Name, "Qatar", "location verified");
-
-        String loc8Name = jsonPath.getString("data.locations[7].name");
-        Assert.assertEquals(loc8Name, "Riyadh", "location verified");
-
-        String loc9Name = jsonPath.getString("data.locations[8].name");
-        Assert.assertEquals(loc9Name, "Singapore", "location verified");
-
-        String loc10Name = jsonPath.getString("data.locations[9].name");
-        Assert.assertEquals(loc10Name, "Johannesburg & Pretoria", "location verified");
-
-        String loc11Name = jsonPath.getString("data.locations[10].name");
-        Assert.assertEquals(loc11Name, "United Kingdom", "location verified");
-
-        String loc12Name = jsonPath.getString("data.locations[11].name");
-        Assert.assertEquals(loc12Name, "Jeddah", "location verified");
-
-        String loc13Name = jsonPath.getString("data.locations[12].name");
-        Assert.assertEquals(loc13Name, "Durban", "location verified");
-
-        String loc14Name = jsonPath.getString("data.locations[13].name");
-        Assert.assertEquals(loc14Name, "Athens", "location verified");
-
-        String loc15Name = jsonPath.getString("data.locations[14].name");
-        Assert.assertEquals(loc15Name, "Eastern Province", "location verified");
-
-        String loc16Name = jsonPath.getString("data.locations[15].name");
-        Assert.assertEquals(loc16Name, "Egypt", "location verified");*/
 
     }
 }

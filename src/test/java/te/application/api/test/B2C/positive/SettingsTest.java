@@ -1,4 +1,5 @@
 package te.application.api.test.B2C.positive;
+import com.github.javafaker.App;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +24,12 @@ public class SettingsTest extends B2CBaseTest {
     public void setUp() throws IOException {
         RestAssured.basePath = AppConstants.BASE_PATH_SETTINGS;
 
-        log.info(">>>>>>>>>>>>>>>>>>"+AppConstants.sessionID);
-
         String bodyData = generateAPIBody.settings("en","25.300579","entertainer",
-                "android","8.18.04","dc57c128bcfc4155","EGP",
+                AppConstants.testDataOSPlatform ,AppConstants.testDataAppVersion,"dc57c128bcfc4155","EGP",
                 "9143020","55.307709","dc57c128bcfc4155","1",
-                "samsung%20SM-M515F","Asia/Karachi","entertainer",
-                true, true,"android",
-                "af7312a5-ca5c-4876-92a0-bbb5b18b2767","9143020");
+                AppConstants.testDataDeviceModel,AppConstants.testDataTimeZone,"entertainer",
+                true, true,AppConstants.testDataOSPlatform,
+                AppConstants.sessionID,"9143020");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(bearerToken.B2C))
                 .contentType("application/json")

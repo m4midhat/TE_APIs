@@ -1,5 +1,6 @@
 package te.application.api.test.B2C.positive;
 
+import com.github.javafaker.App;
 import com.google.gson.*;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -28,10 +29,12 @@ public class HomeTest extends B2CBaseTest{
         log.info(".............Session ID"+AppConstants.sessionID);
         RestAssured.basePath = AppConstants.BASE_PATH_HOME;
         String bodyData = generateAPIBody.home(1,"ar","26.22876",
-                "entertainer","ios","8.07.01","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62",
-                "9124814","USD","9124814","50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62",
-                "3","15.5","iPhone XS","Asia/Karachi","https://entutapi.theentertainerme.com/et_rs_prd/web/v801/home",
-                "Basic cWx6ZnFnaHBrZWl3aG16ZzprJFZ9QiooNkRLNXltVE5iSD80PHJqM3VHRjtbfnQ+cQ==",
+                "entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "9124814","USD","9124814",
+                "50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "3",
+                AppConstants.testDataOSVersion ,AppConstants.testDataDeviceModel,AppConstants.testDataTimeZone,
+                AppConstants.BASE_URI_B2C+ AppConstants.BASE_PATH_HOME,
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 1
         );
         RequestSpecification httpRequest = RestAssured.given()

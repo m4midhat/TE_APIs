@@ -24,13 +24,13 @@ public class SignUpTest  extends B2CBaseTest {
     public void  signUpWithBlankCredentials() throws IOException {
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -39,9 +39,6 @@ public class SignUpTest  extends B2CBaseTest {
                 .log().all();
         response = httpRequest.post();
         jsonPath = response.jsonPath();
-        //jsonPath = new JsonPath(response.asString());
-        //AppConstants.sessionID = jsonPath.getString()
-        //log.info("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
         System.out.println(get_message);
         Assert.assertNotNull(get_message);
@@ -55,13 +52,13 @@ public class SignUpTest  extends B2CBaseTest {
         String FirstName = faker.name().firstName();
         firstName =FirstName;
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",FirstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0",FirstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -86,13 +83,13 @@ public class SignUpTest  extends B2CBaseTest {
         String LastName = faker.name().lastName();
         lastName =LastName;
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0",LastName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0",LastName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -118,13 +115,13 @@ public class SignUpTest  extends B2CBaseTest {
         String password1 = faker.internet().password(8,16, true,true,true);
         password = password1;
         String bodyData = generateAPIBody.signUp(password1, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi",password1);
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,password1);
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -160,13 +157,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", email,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", email,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -188,13 +185,13 @@ public class SignUpTest  extends B2CBaseTest {
 
         String email = faker.internet().emailAddress();
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", email,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", email,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -216,13 +213,13 @@ public class SignUpTest  extends B2CBaseTest {
 
         String email = faker.internet().emailAddress();
         String bodyData = generateAPIBody.signUp(password, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", email,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", email,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
 
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -255,13 +252,13 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithFirstNameAndLastName() throws IOException {
 
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "","17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -284,13 +281,13 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         firstName = faker.name().firstName();
         String bodyData = generateAPIBody.signUp(password, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "","17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -326,13 +323,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -358,13 +355,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         //LN = faker.name().lastName();
         String bodyData = generateAPIBody.signUp(password, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -400,13 +397,13 @@ public class SignUpTest  extends B2CBaseTest {
         //em = faker.internet().emailAddress();
         lastName = faker.name().lastName();
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "","17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -442,13 +439,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -484,13 +481,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -527,13 +524,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -559,13 +556,13 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,28));
         firstName = faker.name().firstName();
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -591,13 +588,13 @@ public class SignUpTest  extends B2CBaseTest {
         lastName = faker.name().lastName();
         firstName = faker.name().firstName();
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -623,13 +620,13 @@ public class SignUpTest  extends B2CBaseTest {
         lastName = faker.name().lastName();
 
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -656,13 +653,13 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -690,13 +687,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -735,13 +732,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -779,13 +776,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         // pwd= faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "","", emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "","", emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -817,13 +814,13 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithOnlyNationality() throws IOException {
         nationality =faker.nation().nationality();
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -846,13 +843,13 @@ public class SignUpTest  extends B2CBaseTest {
         nationality =faker.nation().nationality();
         firstName =faker.name().firstName();
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -875,13 +872,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress =faker.internet().emailAddress();
         nationality =faker.nation().nationality();
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -905,13 +902,13 @@ public class SignUpTest  extends B2CBaseTest {
         password =faker.internet().password(8,16,true,true,true);
         nationality =faker.nation().nationality();
         String bodyData = generateAPIBody.signUp(password, 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "" ,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -948,13 +945,13 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,28));
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "" ,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, "" ,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -979,13 +976,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress =faker.internet().emailAddress();
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1010,13 +1007,13 @@ public class SignUpTest  extends B2CBaseTest {
         lastName =faker.name().lastName();
 
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1047,13 +1044,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp(password, 0,"",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "","17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1095,13 +1092,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp("", 0,"",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "","17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1132,13 +1129,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","", "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "","17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1180,13 +1177,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "","17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1217,13 +1214,13 @@ public class SignUpTest  extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.signUp(password, 0,"",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1264,13 +1261,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         //pwd= faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp("", 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi","");
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1300,13 +1297,13 @@ public class SignUpTest  extends B2CBaseTest {
         //em = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, "","17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, "",AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1347,13 +1344,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1393,13 +1390,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0,"",
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0", firstName,
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0", firstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -1438,13 +1435,13 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         String bodyData = generateAPIBody.signUp(password, 0, lastName,
-                "en",1,"25.095395","entertainer","ios","8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","AED","0","",
+                "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0","",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",dob, "55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
-                "", nationality, emailAddress,"17.0","iPhone 11",
-                "Asia/Karachi", password);
+                "", nationality, emailAddress,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

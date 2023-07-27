@@ -44,9 +44,11 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     @BeforeClass
     public void getMerchantsData()  {
         LocalDateTime requestTime = LocalDateTime.now();
-        String bodyData = merchantDetails("andriod", "default", "entertainer", "Travel", 9120877, "none", 0,1, "None",
-                "False", 31930199, "en", "json", merchantID, 11133, "None", "USD", "None", "None", "None",
-                "None", "3bc5d207fb86dab8", AppConstants.sessionID, "redeemable_reusable", "8.04.02");
+        String bodyData = merchantDetails("andriod", "default", "entertainer", "Travel",
+                9120877, AppConstants.testDataDeviceModel, 0,1, "None", "False",
+                31930199, "en", "json", merchantID, 11133, AppConstants.testDataTimeZone,
+                "USD", "None", "None", "None", "None", "3bc5d207fb86dab8",
+                AppConstants.sessionID, "redeemable_reusable", AppConstants.testDataAppVersion);
         RestAssured.basePath = AppConstants.B2C_BASE_PATH_MERCHANT + merchantID;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(bearerToken.B2C))
