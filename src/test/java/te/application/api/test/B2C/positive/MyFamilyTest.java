@@ -23,25 +23,20 @@ public class MyFamilyTest  extends B2CBaseTest {
     @BeforeClass
     public void setUp() throws IOException {
         RestAssured.basePath = AppConstants.B2C_FAMILY;
-        Properties properties = Utils.initProperties("AppAuthentication");
-        if (properties != null) {
-            String propUserName = Utils.decodeString(properties.getProperty("username"));
-            String propPassword = Utils.decodeString(properties.getProperty("password"));
 
-            String bodyData = generateAPIBody.Family("en", "25.300579", "entertainer", "ios",
-                    "8.18.04", "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8", "AED", AppConstants.UserID,
-                    "55.307709", "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8",
-                    "1", "1", "16.0", "iPhone XS Max China",
-                    "Asia/Karachi", "55.307709", "25.300579");
-            RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
-                    .contentType("application/json")
-                    .body(bodyData)
-                    .log().all();
-            response = httpRequest.post();
-            log.info(response.asString());
-            jsonPath = response.jsonPath();
-        }
+        String bodyData = generateAPIBody.Family("en", "25.300579", "entertainer", AppConstants.testDataOSPlatform,
+                AppConstants.testDataAppVersion, "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8", "AED", AppConstants.UserID,
+                "55.307709", "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8",
+                "1", "1", AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel,
+                AppConstants.testDataTimeZone, "55.307709", "25.300579");
+        RequestSpecification httpRequest = RestAssured.given()
+                .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
+                .contentType("application/json")
+                .body(bodyData)
+                .log().all();
+        response = httpRequest.post();
+        log.info(response.asString());
+        jsonPath = response.jsonPath();
     }
 
     @Test(description = "Member information array should be populated")
@@ -77,6 +72,20 @@ public class MyFamilyTest  extends B2CBaseTest {
         String member = jsonPath.getString("data.member_info.primary_member_name").trim();
         log.info(member);
         Assert.assertEquals(member, SignInTest.firstName+SignInTest.lastName );
-
     }
+
+    @Test(priority = 5, description = "Verify Maximum number of family members")
+    public void verifyMaxNumberOfMembers(){
+        int members = jsonPath.getInt("data.family_list_section.max_member_limit");
+        log.info(String.valueOf(members));
+        Assert.assertEquals(members, AppConstants.FAMILY_MEMBERS_ALLOWED);
+    }
+
+    @Test(priority = 6, description = "Verify current number of family members")
+    public void verifyNumberOfMembers(){
+        int members = jsonPath.getInt("data.family_list_section.total_members");
+        log.info(String.valueOf(members));
+        Assert.assertTrue(members <= AppConstants.FAMILY_MEMBERS_ALLOWED);
+    }
+
 }

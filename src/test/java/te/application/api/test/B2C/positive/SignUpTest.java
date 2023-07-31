@@ -2,6 +2,7 @@ package te.application.api.test.B2C.positive;
 
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
@@ -20,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 @Slf4j
 public class SignUpTest extends B2CBaseTest {
-    public  String FN;
+    public String FN;
     public String LN;
     public String em;
     public String pwd;
@@ -37,6 +38,7 @@ public class SignUpTest extends B2CBaseTest {
         password+=Utils.get3CharactersForPassword();
         log.info("Final Password : "+password);
         String nationality = faker.nation().nationality();
+        RestAssured.baseURI = AppConstants.BASE_URI_B2C;
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String bodyData = generateAPIBody.signUp(password, 0, LastName,
                 "en",1,"25.095395","entertainer",AppConstants.testDataOSPlatform,"8.18.06",
@@ -55,8 +57,6 @@ public class SignUpTest extends B2CBaseTest {
         response = httpRequest.post();
         System.out.println(response.asString());
         jsonPath = response.jsonPath();
-        //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
-        System.out.println("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
 
         if (get_message.equalsIgnoreCase("Password should contain 1 numeric letter")){
@@ -73,7 +73,6 @@ public class SignUpTest extends B2CBaseTest {
         } if (get_message.equalsIgnoreCase("Password should contain minimum 8 letter")) {
             Assert.assertEquals(500, response.getStatusCode(), "Incorrect status code returned, expected value 422");
             setUp();
-
         }
 
         FN=FirstName;
@@ -81,6 +80,8 @@ public class SignUpTest extends B2CBaseTest {
         pwd = password;
         na=nationality;
         em= email;
+        log.info("STATUS CODE "+response.getStatusCode());
+        log.info("Data Sent : "+ FN+ " "+ LN+" "+em);
 
     }
 
@@ -158,12 +159,12 @@ public class SignUpTest extends B2CBaseTest {
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.testDataCurrency,"0",FN,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
                 AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
-                Utils.decodeString(bearerToken.B2C),
+                Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "",na, em,AppConstants.testDataOSVersion,AppConstants.testDataDeviceModel,
                 AppConstants.testDataTimeZone,pwd);
 
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", Utils.decodeString(bearerToken.B2C))
+                .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();

@@ -42,6 +42,6 @@ public class AppConstants {
             testDataAppVersion;
 
     public static String UserID;
-
+    public static final int FAMILY_MEMBERS_ALLOWED = 4;
     public static String B2C_FAMILY = "et_rs_prd/web/v801/family/familyinfo";
 }

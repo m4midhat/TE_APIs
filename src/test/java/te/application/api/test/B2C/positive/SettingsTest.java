@@ -31,7 +31,7 @@ public class SettingsTest extends B2CBaseTest {
                 true, true,AppConstants.testDataOSPlatform,
                 AppConstants.sessionID,"9143020");
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", Utils.decodeString(bearerToken.B2C))
+                .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();

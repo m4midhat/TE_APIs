@@ -10,6 +10,7 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
+import te.application.appConstants.authToken;
 import te.application.appConstants.bearerToken;
 import te.application.utilities.Utils;
 
@@ -51,7 +52,7 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
                 AppConstants.sessionID, "redeemable_reusable", AppConstants.testDataAppVersion);
         RestAssured.basePath = AppConstants.B2C_BASE_PATH_MERCHANT + merchantID;
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", Utils.decodeString(bearerToken.B2C))
+                .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();
