@@ -1,6 +1,7 @@
 package te.application.api.test.B2C.positive;
 
 
+import com.github.javafaker.App;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
@@ -57,7 +58,9 @@ public class SignInTest extends B2CBaseTest {
             log.info(response.asString());
             jsonPath = response.jsonPath();
             AppConstants.sessionID = jsonPath.getString("data.user.session_token");
+            AppConstants.UserID = jsonPath.getString("data.user.user_id");
             log.info("Session ID : " + AppConstants.sessionID);
+            log.info("User ID : "+ AppConstants.UserID);
             firstName = jsonPath.getString("data.user.first_name");
             lastName =jsonPath.getString("data.user.last_name");
             //String profileImage = jsonPath.getString("data.user.profile_image");

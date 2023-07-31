@@ -35,6 +35,22 @@ public class Utils {
         return emailAddress.toLowerCase();
     }
 
+    public static String get3CharactersForPassword(){
+        String capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String smalls = "abcdefghijklmnopqrstuvxyz";
+        String characters = "+_)(*&^%$#@!~)`!-=?:><,./:[]";
+
+        char c = capitals.charAt(Utils.generateRandomNumber(0, capitals.length()-1));
+        char s = smalls.charAt(Utils.generateRandomNumber(0, smalls.length()-1));
+        char sp = characters.charAt(Utils.generateRandomNumber(0, characters.length()-1));
+        System.out.println(c);
+        System.out.println(s);
+        System.out.println(sp);
+        String pwd = new StringBuilder().append(c).append(s).append(sp).toString();
+        System.out.println(pwd);
+        return pwd;
+    }
+
      public static String getAlphaNumericString(int n) {
 
         // choose a Character random from this String

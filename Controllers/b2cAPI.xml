@@ -6,15 +6,15 @@
         <listener class-name="te.application.Analyzer.AnnotationTransformer" />
     </listeners>
 
-    <test name="Sign Up Negative Scenarios">
+    <test name="Forgot Password">
         <classes>
-            <class name="te.application.api.test.B2C.negative.SignUpTest" />
+            <class name="te.application.api.test.B2C.positive.ForgetPasswordTest" />
         </classes>
     </test>
 
-    <test name="Sign In Negative Scenarios">
+    <test name="Sign Up Negative Scenarios">
         <classes>
-            <class name="te.application.api.test.B2C.negative.SignInTest" />
+            <class name="te.application.api.test.B2C.negative.SignUpTest" />
         </classes>
     </test>
 
@@ -24,7 +24,13 @@
         </classes>
     </test>
 
-    <test name="Sign In ">
+    <test name="Sign In Negative Scenarios">
+        <classes>
+            <class name="te.application.api.test.B2C.negative.SignInTest" />
+        </classes>
+    </test>
+
+    <test name="Sign In">
         <classes>
             <class name="te.application.api.test.B2C.positive.SignInTest" />
         </classes>
@@ -39,6 +45,18 @@
     <test name="Settings">
         <classes>
             <class name="te.application.api.test.B2C.positive.SettingsTest" />
+        </classes>
+    </test>
+
+    <test name="Redemptions Negative Test">
+        <classes>
+            <class name="te.application.api.test.B2C.negative.RedemptionTest" />
+        </classes>
+    </test>
+
+    <test name="Redemptions">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.RedemptionTest" />
         </classes>
     </test>
 
@@ -60,12 +78,26 @@
         </classes>
     </test>
 
+    <test name="My Family">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.MyFamilyTest" />
+        </classes>
+    </test>
+
     <test name="Send Pings">
         <classes>
             <class name="te.application.api.test.B2C.positive.PingSendOffersTest" />
         </classes>
     </test>
 
+
+    <test name="Receive Pings">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.PingReceiveOffersTest" />
+        </classes>
+    </test>
+
+    <!-- Python APIs -->
     <test name="Mega Auto Search">
         <classes>
             <class name="te.application.api.test.B2C.positive.MegaAutoSuggestionTest" />
@@ -81,6 +113,12 @@
     <test name="Filters">
         <classes>
             <class name="te.application.api.test.B2C.positive.FilterCategoriesTest" />
+        </classes>
+    </test>
+    <!-- PHP API -->
+    <test name="Sign Out">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.SignOutTest" />
         </classes>
     </test>
 

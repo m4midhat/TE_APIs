@@ -13,13 +13,14 @@ public class AppConstants {
     public static final String B2C_LOGIN = "et_rs_prd/web/v801/sessions";
     public static final String BASE_PATH_SIGNUP = "et_rs_prd/web/v801/users";
     public static final String BASE_PATH_OUTLETS = "api_ets/v3/outlets";
-    public static final String BASE_PATH_REDEEM = "api_ets/v3/offer/redeem";
+    public static final String BASE_PATH_REDEEM = "et_rs_prd/web/v801/redemptions";
     public static final String BASE_PATH_SETTINGS = "et_rs_prd/web/v801/profile/settings";
     public static final String B2C_LOCATIONS = "et_rs_prd/web/v801/locations";
     public static final String PROFILE_BASE_PATH = "et_rs_prd/web/v801/user/get/profile";
     public static final String BASE_PATH_HOME = "et_rs_prd/web/v801/home";
     public static final String B2C_FILTERS = "pysearch/v2/filter-list";
     public static final String BASE_PATH_PINGS_SEND_OFFERS = "et_rs_prd/web/v801/sharing/sendoffers";
+    public static final String BASE_PATE_PINGS_RECEIVE_OFFERS = "et_rs_prd/web/v801/sharing/receivedoffers";
     public static LocalDateTime START_DATE, END_DATE;
     public static String ENV = System.getProperty("Env");
     public static String SessionURL = "https://rcapi.theentertainerme.com/et_rs_prd/web/v801/sessions";
@@ -29,6 +30,8 @@ public class AppConstants {
     public static final  String BASE_PATH_Mega_AUTO_SEARCH= "pysearch/v2/mega-auto-suggestions";
     public static final String BASE_PATH_TRENDING_SEARCH="pysearch/v2/trending-search";
     public static final String PYTHON_BASE_URI = "https://uatpysch.theentertainerme.com/";
+    public static final String B2C_FORGOT_PASSWORD = "et_rs_prd/web/v801/passwords";
+    public static final String BASE_PATH_SIGNOUT = "et_rs_prd/web/v801/session/logout";
 
     public static String testDataLanguage,
             testDataOSPlatform,
@@ -38,4 +41,7 @@ public class AppConstants {
             testDataCurrency,
             testDataAppVersion;
 
+    public static String UserID;
+
+    public static String B2C_FAMILY = "et_rs_prd/web/v801/family/familyinfo";
 }

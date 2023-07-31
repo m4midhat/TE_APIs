@@ -31,7 +31,7 @@ public class FilterCategoriesTest extends B2CBaseTest {
 
             String bodyData = generateAPIBody.filter("en","31.527539", "entertainer",
                     AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "9143933",
-                    "AED", "9143933", 1, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "Restaurants and Bars",
+                    "AED", AppConstants.UserID, 1, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "Restaurants and Bars",
                     "74.352919", "c86078f5-5a6c-4831-ba8a-1e9914a1ce33", "1", 0, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel,
                     AppConstants.testDataTimeZone, "74.352919", AppConstants.testDataOSPlatform, "31.527539",
                     AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN));
@@ -43,8 +43,8 @@ public class FilterCategoriesTest extends B2CBaseTest {
             response = httpRequest.post();
             log.info(response.asString());
             jsonPath = response.jsonPath();
-            AppConstants.sessionID = jsonPath.getString("data.user.session_token");
-            log.info("Session ID : " + AppConstants.sessionID);
+            //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
+            //log.info("Session ID : " + AppConstants.sessionID);
         }
     }
 

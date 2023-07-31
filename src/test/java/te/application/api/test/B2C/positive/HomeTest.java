@@ -30,7 +30,7 @@ public class HomeTest extends B2CBaseTest{
         RestAssured.basePath = AppConstants.BASE_PATH_HOME;
         String bodyData = generateAPIBody.home(1,"ar","26.22876",
                 "entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
-                "ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "9124814","USD","9124814",
+                "ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "9124814","USD",
                 "50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "3",
                 AppConstants.testDataOSVersion ,AppConstants.testDataDeviceModel,AppConstants.testDataTimeZone,
                 AppConstants.BASE_URI_B2C+ AppConstants.BASE_PATH_HOME,

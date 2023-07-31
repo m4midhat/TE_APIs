@@ -3,6 +3,7 @@ package te.application.api.test.B2C.positive;
 import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 
+@Slf4j
 public class SignUpTest extends B2CBaseTest {
     public  String FN;
     public String LN;
@@ -32,6 +34,8 @@ public class SignUpTest extends B2CBaseTest {
         String LastName = faker.name().lastName();
 
         String password = faker.internet().password(8,12,true,true,true);
+        password+=Utils.get3CharactersForPassword();
+        log.info("Final Password : "+password);
         String nationality = faker.nation().nationality();
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String bodyData = generateAPIBody.signUp(password, 0, LastName,
@@ -97,9 +101,6 @@ public class SignUpTest extends B2CBaseTest {
 
     }
     @Test(priority = 2, description = "Verify First name" )
-
-
-
     public void  checkFirstName(){
         String FirstName1 = jsonPath.getString("data.user.first_name");
         System.out.println(FirstName1);

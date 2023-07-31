@@ -53,7 +53,7 @@ public class FetchLocationsTest extends B2CBaseTest {
             //initalizing params
             String bodyData = generateAPIBody.locations(0, "en", true, "25.300579", "entertainer",
                     AppConstants.testDataOSPlatform, "8.04.01", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
-                    "0", "1", "55.307709", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",
+                    AppConstants.UserID, "1", "55.307709", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",
                     propPassword, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel, "Karachi/Islamabad",
                     "1", "8070037d-eea1-4499-882a-b3de8f12d63c", "55.307709", AppConstants.testDataOSPlatform, "25.300579",
                     AppConstants.SessionURL, authToken.B2CAUTH_TOKEN);

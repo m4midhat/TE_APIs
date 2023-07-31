@@ -70,7 +70,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__i\" : \"0\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"__configuration\" : {\n" +
@@ -95,7 +95,7 @@ public class generateAPIBody {
 
     public static String home(int epcEnable, String language, String latitude, String company,
                               String OSPlatform, String appVersion, String deviceKey, String i, String currency,
-                              String userID, String longitude, String deviceID, String locationID,
+                               String longitude, String deviceID, String locationID,
                               String OSVersion, String deviceModel, String timeZone,
                               String configURL, String configAuthToken, int freemiumBaseHome){
         String body;
@@ -108,10 +108,10 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__i\" : \""+i+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"is_freemium_base_home\" : "+freemiumBaseHome+",\n" +
 
-                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\", " +
+                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"lng\" : \""+longitude+"\",\n" +
                 "  \"__configuration\" : {\n" +
@@ -150,7 +150,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__i\" : \""+i+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"firstname\" : \""+Firstname+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"date_of_birth\" : \""+Birthdate+"\",\n" +
@@ -194,7 +194,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__i\" : \"0\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"is_freemium_base_home\" : \""+freemiumBase+"\",\n" +
@@ -235,7 +235,7 @@ public class generateAPIBody {
                 "  \"app_version\" : \"" + appVersion + "\",\n" +
                 "  \"device_key\" : \"" + deviceKey + "\",\n" +
                 "  \"currency\" : \"" + currency + "\",\n" +
-                "  \"user_id\" : \"" + userID + "\",\n" +
+                "  \"user_id\" : \"" + AppConstants.UserID + "\",\n" +
                 "  \"__device_id\" : \"" + deviceID + "\",\n" +
                 "  \"lng\" : \"" + longitude + "\",\n" +
                 "  \"session_token\" : \"" + AppConstants.sessionID + "\",\n" +
@@ -273,7 +273,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__i\" : \"0\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"__configuration\" : {\n" +
@@ -311,7 +311,7 @@ public class generateAPIBody {
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"session_token\" :  \""+AppConstants.sessionID+"\",\n" +
@@ -348,7 +348,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__l\" : \""+language+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"query\" : \""+searchQuery+"\",\n" +
                 "\"__device_id\" : \""+deviceID+"\",\n" +
                 "\"category\" : \""+category+"\",\n" +
@@ -365,7 +365,7 @@ public class generateAPIBody {
                 "  \"__c_s_a_ol_size\" : \""+CSAOlSize+"\",\n" +
                 "  \"auto_redeembility\" : "+autoRedeemibility+",\n" +
                 "  \"category_id\" : \""+categoryID+"\",\n" +
-                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" " +
+                "  \"encryption_disable_key\" : \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\"" +
                 "}";
         return body;
     }
@@ -385,7 +385,7 @@ public class generateAPIBody {
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
                 "  \"__l\" : \""+language+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
-                "  \"user_id\" : \""+userID+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "\"__device_id\" : \""+deviceID+"\",\n" +
                 "\"category\" : \""+category+"\",\n" +
                 "  \"lng\" : \""+longitude+"\",\n" +
@@ -399,7 +399,7 @@ public class generateAPIBody {
                 "  \"__lng\" : \""+longitude+"\",\n" +
                 "  \"__c_s_a_ol_size\" : \""+CSAOlSize+"\",\n" +
                 "  \"category_id\" : \""+categoryID+"\",\n" +
-                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" " +
+                "  \"encryption_disable_key\" : \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\"" +
                 "}";
         return body;
     }
@@ -419,7 +419,7 @@ public class generateAPIBody {
                     "  \"device_key\" : \""+device_Key+"\",\n" +
                     "  \"__i\" : \""+__i+"\",\n" +
                     "  \"currency\" : \""+currency+"\",\n" +
-                    "  \"user_id\" : \""+user_id+"\",\n" +
+                    "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                     "  \"coming_from_normal_outlet_listing\" : "+coming_from_normal_outlet_listing+",\n" +
                     "  \"__device_id\" : \""+__device_id+"\",\n"+
                     "  \"category\" : \""+category+"\",\n"+
@@ -433,8 +433,7 @@ public class generateAPIBody {
                     "  \"__lng\" : \""+__lng+"\",\n" +
                     "  \"device_os\" : \""+device_os+"\",\n" +
                     "  \"lat\" : \""+lat+"\",\n" +
-                    "  \"encryption_disable_key\" : \""+"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba"+"\"\n" +
-
+                    "  \"encryption_disable_key\" : \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\"" +
                     "}";
 
             return bodyData;
@@ -456,7 +455,7 @@ public class generateAPIBody {
                 "  \"app_version\" : \"" + appVersion + "\",\n" +
                 "  \"device_key\" : \"" + deviceKey + "\",\n" +
                 "  \"currency\" : \"" + currency + "\",\n" +
-                "  \"user_id\" : \"" + userID + "\",\n" +
+                "  \"user_id\" : \"" + AppConstants.UserID + "\",\n" +
                 "  \"__device_id\" : \"" + deviceID + "\",\n" +
                 "  \"lng\" : \"" + longitude + "\",\n" +
                 "  \"session_token\" : \"" + AppConstants.sessionID + "\",\n" +
@@ -469,17 +468,86 @@ public class generateAPIBody {
                 "  \"__c\" : \"" + company + "\",\n" +
                 "  \"platform\" : \"" + platform + "\",\n" +
                 "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
-                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\", " +
+                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
                 "  \"customer_id\" : \"" + customerId + "\"\n" +
 
                 "}";
         return body;
     }
+
+
+    public static String forgotPassword(String deviceModel, String currency, String deviceKey,String appVersion, String company, String userID, String title, String locationID,
+                                        String latitude, String longitude,String language, String deviceID,String i,String deviceOs,
+                                        String OSVersion,  String emailAddress, String platform,  String timeZone){
+
+        String bodyData = "{\n" +
+                "  \"device_model\" : \""+deviceModel+"\",\n" +
+                "  \"currency\" : \""+currency+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"session_token\" : \"\",\n" +
+                "  \"company\" : \""+company+ "\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
+                "  \"title\" : \""+title+"\",\n" +
+                "  \"location_id\" : \""+locationID+"\",\n" +
+                "  \"__lat\" : \""+latitude+"\",\n" +
+                "  \"__lng\" : \""+longitude+"\",\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"__i\" : \""+i+"\",\n" +
+                "  \"__device_id\" : \""+deviceID+"\",\n" +
+                "  \"device_os\" : \""+deviceOs+"\",\n" +
+                "  \"os_version\" : \""+OSVersion+"\",\n" +
+                "  \"email\" : \""+emailAddress+"\",\n" +
+                "  \"__platform\" : \""+platform+"\",\n" +
+                "  \"time_zone\" : \""+timeZone+"\",\n" +
+                "  \"encryption_disable_key\" : \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\"" +
+                "}";
+
+        return bodyData;
+    }
+
+
+    public static String SignOutTest(String language, String _latitude, String company, String OSPlatform, String appVersion,
+                                     String deviceKey, String __i, String currency, String userID, String longitude1,
+                                     String deviceID, String configURL,
+                                     String configAuthToken,String sessionID, String locationID, String OSVersion, String deviceModel, String timeZone,
+                                     String longitude, String deviceOS,String __lat)
+    {
+        String bodyData = "{\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"__lat\" : \""+_latitude+"\",\n" +
+                "  \"company\" : \""+company+ "\",\n" +
+                "  \"__platform\" : \""+OSPlatform+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"__i\" : \""+__i+"\",\n" +
+                "  \"currency\" : \""+currency+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
+                "  \"lng\" : \""+longitude1+"\",\n" +
+                "  \"__device_id\" : \""+deviceID+"\",\n" +
+                "  \"__configuration\" : {\n" +
+                "    \"url\" : \""+configURL+"\",\n" +
+                "    \"Authorization\" : \""+ configAuthToken+"\"\n" +
+                "  },\n" +
+                "  \"session_token\" : \""+sessionID+"\",\n" +
+                "  \"location_id\" : \""+locationID+"\",\n" +
+                "  \"os_version\" : \""+OSVersion+"\",\n" +
+                "  \"device_model\" : \""+deviceModel+"\",\n" +
+                "  \"time_zone\" : \""+timeZone+"\",\n" +
+                "  \"__lng\" : \""+longitude+"\",\n" +
+                "  \"device_os\" : \""+deviceOS+"\",\n" +
+                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
+                "  \"lat\" : \""+__lat+"\"\n" +
+                "}";
+
+        return bodyData;
+    }
+
+
     public static String pingReceiveOffers( String language, String longitude,  String latitude, String company,
                                             String platform, String appVersion, String deviceKey,  String currency,
                                             String userID, String deviceID, String locationID
-            , String deviceModel, String timeZone,String customerId
-    ) {
+            , String deviceModel, String timeZone,String customerId) {
         String body;
         body = "{\n" +
                 "  \"language\" : \"" + language + "\",\n" +
@@ -489,7 +557,7 @@ public class generateAPIBody {
                 "  \"app_version\" : \"" + appVersion + "\",\n" +
                 "  \"device_key\" : \"" + deviceKey + "\",\n" +
                 "  \"currency\" : \"" + currency + "\",\n" +
-                "  \"user_id\" : \"" + userID + "\",\n" +
+                "  \"user_id\" : \"" + AppConstants.UserID + "\",\n" +
                 "  \"__device_id\" : \"" + deviceID + "\",\n" +
                 "  \"lng\" : \"" + longitude + "\",\n" +
                 "  \"session_token\" : \"" + AppConstants.sessionID + "\",\n" +
@@ -502,11 +570,80 @@ public class generateAPIBody {
                 "  \"__c\" : \"" + company + "\",\n" +
                 "  \"platform\" : \"" + platform + "\",\n" +
                 "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
-                "\"encryption_disable_key\": \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\" ," +
+                "\"encryption_disable_key\": \"" + AppConstants.ENCRYPTION_DISABLE_KEY + "\",\n" +
                 "  \"customer_id\" : \"" + customerId + "\"\n" +
 
                 "}";
         return body;
     }
 
+
+    public static String RedemptionsDetails(String lat,String platform,String company,String language,String app_version,
+                                            String device_key,String __i,String currency,String user_id,String transaction_id,
+                                            String __device_id,int offer_id,String merchant_pin,String session_token,String location_id,
+                                            int quantity,int is_reattempt,int product_id,String is_shared,String os_version,
+                                            String device_model,String time_zone,String __lng,String device_os,String outlet_currency,
+                                            int outlet_id,String is_family_offer) {
+        body = "{\"__lat\": \""+lat+"\"," +
+                "\"__platform\":\""+platform+"\", " +
+                "\"company\": \""+company+"\", " +
+                "\"language\": \""+language+"\", " +
+                "\"app_version\": \""+app_version+"\", " +
+                "\"device_key\":\" "+device_key+"\", " +
+                "\"__i\": \""+__i+"\", " +
+                "\"currency\": \""+currency+"\", " +
+                "\"user_id\": \""+AppConstants.UserID+"\"," +
+                "\"transaction_id\": \""+transaction_id+"\", " +
+                "\"__device_id\": \""+__device_id+"\", " +
+                "\"offer_id\": "+offer_id+", " +
+                "\"merchant_pin\": \""+merchant_pin+"\", " +
+                "\"session_token\": \""+session_token+"\", " +
+                "\"location_id\": \""+location_id+"\", " +
+                "\"quantity\": "+quantity+", " +
+                "\"is_reattempt\": "+is_reattempt+", " +
+                "\"product_id\": "+product_id+", " +
+                "\"is_shared\": \""+is_shared+"\", " +
+                "\"os_version\": \""+os_version+"\", " +
+                "\"device_model\": \""+device_model+"\", " +
+                "\"time_zone\": \""+time_zone+"\", " +
+                "\"__lng\": \""+__lng+"\", " +
+                "\"device_os\": \""+device_os+"\", " +
+                "\"outlet_currency\": \""+outlet_currency+"\", " +
+                "\"outlet_id\": "+outlet_id+", " +
+                "\"encryption_disable_key\": \""+ AppConstants.ENCRYPTION_DISABLE_KEY +"\", " +
+                "\"is_family_offer\": \""+is_family_offer+"\"" +
+                "}";
+        return body;
+    }
+
+    public static String Family(String language, String __lat, String Company, String OsPlatform, String appVersion,
+                                String deviceKey, String Currency, String userID, String lng, String deviceID,
+                                String LocationId, String FamilyLimit,
+                                String OsVer, String DeviceModel, String TimeZone, String __lng,
+                                String lat){
+        String bodyData = "{\n" +
+                "  \"language\" : \""+language+"\",\n" +
+                "  \"__lat\" : \""+__lat+"\",\n" +
+                "  \"company\" : \""+Company+"\",\n" +
+                "  \"__platform\" : \""+OsPlatform+"\",\n" +
+                "  \"app_version\" : \""+appVersion+"\",\n" +
+                "  \"device_key\" : \""+deviceKey+"\",\n" +
+                "  \"currency\" : \""+Currency+"\",\n" +
+                "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
+                "  \"lng\" : \""+lng+"\",\n" +
+                "  \"__device_id\" : \""+deviceID+ "\",\n" +
+                "  \"session_token\" : \""+AppConstants.sessionID+ "\",\n" +
+                "  \"location_id\" : \""+LocationId+"\",\n" +
+                "  \"family_limit\" : \""+FamilyLimit+"\",\n" +
+                "  \"os_version\" : \""+OsVer+"\",\n" +
+                "  \"device_model\" : \""+DeviceModel+"\",\n" +
+                "  \"time_zone\" : \""+TimeZone+"\",\n" +
+                "  \"__lng\" : \""+__lng+"\",\n" +
+                "  \"device_os\" : \""+OsPlatform+"\",\n" +
+                "  \"lat\" : \""+lat+"\",\n" +
+                "  \"encryption_disable_key\" : \"0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba\"" +
+                "}";
+
+        return bodyData;
+    }
 }
