@@ -11,6 +11,7 @@ import te.application.api.baseTest.B2CBaseTest;
 
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
+import te.application.data.response.myFamily;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
@@ -77,14 +78,14 @@ public class MyFamilyTest  extends B2CBaseTest {
     public void verifyMaxNumberOfMembers(){
         int members = jsonPath.getInt("data.family_list_section.max_member_limit");
         log.info(String.valueOf(members));
-        Assert.assertEquals(members, AppConstants.FAMILY_MEMBERS_ALLOWED);
+        Assert.assertEquals(members, myFamily.FAMILY_MEMBERS_ALLOWED);
     }
 
     @Test(priority = 6, description = "Verify current number of family members")
     public void verifyNumberOfMembers(){
         int members = jsonPath.getInt("data.family_list_section.total_members");
         log.info(String.valueOf(members));
-        Assert.assertTrue(members <= AppConstants.FAMILY_MEMBERS_ALLOWED);
+        Assert.assertTrue(members <= myFamily.FAMILY_MEMBERS_ALLOWED);
     }
 
 }

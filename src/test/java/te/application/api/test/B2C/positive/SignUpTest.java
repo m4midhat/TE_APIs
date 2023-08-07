@@ -53,7 +53,7 @@ public class SignUpTest extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
         String get_message = jsonPath.getString("message");
 
@@ -102,7 +102,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 2, description = "Verify First name" )
     public void  checkFirstName(){
         String FirstName1 = jsonPath.getString("data.user.first_name");
-        System.out.println(FirstName1);
+        log.info(FirstName1);
         Assert.assertNotNull(FirstName1);
         assertEquals(FirstName1, FN,"name should be like this");
 
@@ -110,7 +110,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 3, description = "Verify last name" )
     public void  checkLastName(){
         String LastName1 = jsonPath.getString("data.user.last_name");
-        System.out.println(LastName1 );
+        log.info(LastName1 );
         Assert.assertNotNull(LastName1);
         assertEquals(LastName1,LN, "name should be like this");
 
@@ -118,7 +118,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 4, description = "Verify session token" )
     public void  checkSessionToken(){
         String SessionToken = jsonPath.getString("data.user.session_token");
-        System.out.println(SessionToken);
+        log.info(SessionToken);
         Assert.assertNotNull(SessionToken);
 
     }
@@ -127,7 +127,7 @@ public class SignUpTest extends B2CBaseTest {
     public void  checkNewResister(){
         String is_new_register = jsonPath.getString("data.is_new_registered");
         boolean isVerify=Boolean.valueOf(is_new_register);
-        System.out.println(isVerify);
+        log.info(String.valueOf(isVerify));
         Assert.assertNotNull(isVerify);
         assertEquals(true,isVerify, "it should be true in new user case" );
 
@@ -135,7 +135,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 6, description = "Verify nationality" )
     public void  checkNationality(){
         String Nationality = jsonPath.getString("data.user.nationality");
-        System.out.println(Nationality);
+        log.info(Nationality);
         Assert.assertNotNull(Nationality);
 
     }
@@ -143,7 +143,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 7, description = "Verify date of birth" )
     public void  checkBirthdate(){
         String Birthdate = jsonPath.getString("data.user.date_of_birth");
-        System.out.println(Birthdate);
+        log.info(Birthdate);
         Assert.assertNotNull(Birthdate);
         assertEquals("18/07/1989", Birthdate,"It must be greater then 13 years.");
 
@@ -167,12 +167,12 @@ public class SignUpTest extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
         AppConstants.sessionID = jsonPath.getString("data.user.session_token");
         //log.info("Session ID : " + AppConstants.sessionID);
         String get_message = jsonPath.getString("message");
-        System.out.println(get_message);
+        log.info(get_message);
         Assert.assertNotNull(get_message);
         assertEquals("A customer with this email address exists.", get_message,"Already customer exist :(");
         assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 422");

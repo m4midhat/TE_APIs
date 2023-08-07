@@ -40,9 +40,9 @@ public class PingSendOffersTest extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
-        System.out.println("Session ID : " + AppConstants.sessionID);
+        log.info("Session ID : " + AppConstants.sessionID);
 //.............................................................................
         String jsonData = response.asString();
         JsonParser parser = new JsonParser();
@@ -51,27 +51,27 @@ public class PingSendOffersTest extends B2CBaseTest {
         JsonObject jsonObject = root.getAsJsonObject();
         dataObject = jsonObject.getAsJsonObject("data");
         shareOffersArray = dataObject.getAsJsonArray("shareOffers");
-        System.out.println("......................................................");
-        System.out.println(shareOffersArray);
-        System.out.println("......................................................");
+        log.info("......................................................");
+        log.info(String.valueOf(shareOffersArray));
+        log.info("......................................................");
     }
 
     @Test(priority = 300, description = "Status code check")
     public void CheckStatus() {
-        System.out.println("status code: " + response.getStatusCode());
+        log.info("status code: " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
-        System.out.println(response.getStatusCode());
+        log.info(String.valueOf(response.getStatusCode()));
     }
 
     @Test(priority = 301, description = "Test offerMerchantName")
     public void merchantName() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String offerMerchantName = jsonPath.getString("data.shareOffers[" + i + "].merchantName");
-                System.out.println("offerMerchantName : " + i + " " + offerMerchantName);
+                log.info("offerMerchantName : " + i + " " + offerMerchantName);
                 Assert.assertNotNull(offerMerchantName, "offerMerchantName is null");
             }
         }
@@ -80,12 +80,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 302, description = "Test offerName")
     public void offerName() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String offerName = jsonPath.getString("data.shareOffers[" + i + "].offerName");
-                System.out.println("offerName : " + i + " " + offerName);
+                log.info("offerName : " + i + " " + offerName);
                 Assert.assertNotNull(offerName, "offerName is null");
             }
         }
@@ -94,12 +94,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 303, description = "Test offerImageURL")
     public void offerImageURL() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String logoSmallUrl = jsonPath.getString("data.shareOffers[" + i + "].logoSmallUrl");
-                System.out.println("logoSmallUrl : " + i + " " + logoSmallUrl);
+                log.info("logoSmallUrl : " + i + " " + logoSmallUrl);
                 Assert.assertNotNull(logoSmallUrl, "logoSmallUrl is null");
             }
         }
@@ -108,12 +108,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 304, description = "Test offerisSent")
     public void offerisSent() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 Boolean OfferIsSentTest = jsonPath.getBoolean("data.shareOffers[" + i + "].is_sent");
-                System.out.println("OfferIsSentTest : " + i + " " + OfferIsSentTest);
+                log.info("OfferIsSentTest : " + i + " " + OfferIsSentTest);
                 Assert.assertTrue(OfferIsSentTest, "offer is not sent");
             }
         }
@@ -123,12 +123,12 @@ public class PingSendOffersTest extends B2CBaseTest {
 
     public void offerPingIsAccepted() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
                 int status = jsonPath.getInt("data.shareOffers[" + i + "].status");
                 boolean pingStatus = jsonPath.getBoolean("data.shareOffers[" + i + "].is_accepted");
-                System.out.println("pingStatus : " + status + " " + pingStatus);
+                log.info("pingStatus : " + status + " " + pingStatus);
                 if (status == 0) {
                     Assert.assertFalse(pingStatus, "is_accepted");
                 } else if (status == 1) {
@@ -136,7 +136,7 @@ public class PingSendOffersTest extends B2CBaseTest {
                 } else if (status == 3) {
                     Assert.assertFalse(pingStatus, "is not accepted");
                 } else {
-                    System.out.println("something is wrong with the status : " + i);
+                    log.info("something is wrong with the status : " + i);
                 }
             }
         }
@@ -145,12 +145,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 306, description = "Test offerPingStatus")
     public void offerPingStatus() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
                 int status = jsonPath.getInt("data.shareOffers[" + i + "].status");
                 String pingStatus = jsonPath.getString("data.shareOffers[" + i + "].ping_status");
-                System.out.println("pingStatus : " + status + " " + pingStatus);
+                log.info("pingStatus : " + status + " " + pingStatus);
 
                 if (status == 0) {
                     Assert.assertEquals("Sent", pingStatus);
@@ -159,7 +159,7 @@ public class PingSendOffersTest extends B2CBaseTest {
                 } else if (status == 3) {
                     Assert.assertEquals("Recalled", pingStatus);
                 } else {
-                    System.out.println("something is wrong with the status : " + i);
+                    log.info("something is wrong with the status : " + i);
                 }
             }
         }
@@ -168,12 +168,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 305, description = "Test recall_button_text")
     public void offerPingRecallButton() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String recallButtonText = jsonPath.getString("data.shareOffers[" + i + "].recall_button_text");
-                System.out.println("recallButtonText : " + i + " " + recallButtonText);
+                log.info("recallButtonText : " + i + " " + recallButtonText);
                 Assert.assertEquals("Recall", recallButtonText);
             }
         }
@@ -182,12 +182,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 306, description = "Test recall_message")
     public void offerPingRecallMessage() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String recallMessage = jsonPath.getString("data.shareOffers[" + i + "].recall_message");
-                System.out.println("recallMessage : " + i + " " + recallMessage);
+                log.info("recallMessage : " + i + " " + recallMessage);
                 Assert.assertEquals("Are you sure want to recall this ping?", recallMessage);
             }
         }
@@ -196,12 +196,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 306, description = "Test recall_title")
     public void offerPingRecallTitle() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String recallTitle = jsonPath.getString("data.shareOffers[" + i + "].recall_title");
-                System.out.println("recallTitle : " + i + " " + recallTitle);
+                log.info("recallTitle : " + i + " " + recallTitle);
                 Assert.assertEquals("Recall Ping", recallTitle);
             }
         }
@@ -210,19 +210,19 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 307, description = "Test message")
     public void offerMessage() {
         String messageTest = jsonPath.getString("data.ping_section.message");
-        System.out.println("messageTest :  " + messageTest);
+        log.info("messageTest :  " + messageTest);
         Assert.assertNotNull(messageTest, "messageTest is null");
     }
 
     @Test(priority = 311, description = "Test offerPingInfo")
     public void offerPingInfo() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
 
                 String pingInfoTest = jsonPath.getString("data.shareOffers[" + i + "].ping_info");
-                System.out.println("pingInfoTest : " + i + " " + pingInfoTest);
+                log.info("pingInfoTest : " + i + " " + pingInfoTest);
                 Assert.assertNotNull(pingInfoTest, "pingInfo is null");
             }
         }
@@ -231,12 +231,12 @@ public class PingSendOffersTest extends B2CBaseTest {
     @Test(priority = 312, description = "Test offerPingIsCancellable")
     public void offerPingIsCancellable() {
         if (shareOffersArray.size() == 0) {
-            System.out.println(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
+            log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
                 Integer status = jsonPath.getInt("data.shareOffers[" + i + "].status");
                 Boolean pingCancellableStatus = jsonPath.getBoolean("data.shareOffers[" + i + "].is_cancellable");
-                System.out.println("pingCancellableStatus : " + status + " " + pingCancellableStatus);
+                log.info("pingCancellableStatus : " + status + " " + pingCancellableStatus);
                 if (status == 0) {
                     Assert.assertTrue(pingCancellableStatus, "not cancellable");
 
@@ -246,7 +246,7 @@ public class PingSendOffersTest extends B2CBaseTest {
 
                     Assert.assertFalse(pingCancellableStatus, "is cancellable");
                 } else {
-                    System.out.println("something is wrong with the status : " + i);
+                    log.info("something is wrong with the status : " + i);
                 }
 
             }

@@ -2,6 +2,7 @@ package te.application.api.test.B2C.positive;
 
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,6 +14,7 @@ import te.application.utilities.generateAPIBody;
 
 import static org.testng.Assert.assertEquals;
 
+@Slf4j
 public class SignOutTest extends B2CBaseTest{
 
 @BeforeClass
@@ -26,18 +28,18 @@ public class SignOutTest extends B2CBaseTest{
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1", AppConstants.BASE_URI_B2C+AppConstants.BASE_PATH_SIGNOUT,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN), AppConstants.sessionID, "1", AppConstants.requestOSVersion,
                 AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "55.307709", AppConstants.requestOSPlatform,"25.300579");
-        System.out.println(bodyData);
+        log.info(bodyData);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
 
         String get_message = jsonPath.getString("message");
-        System.out.println(get_message);
+        log.info(get_message);
 
     }
 

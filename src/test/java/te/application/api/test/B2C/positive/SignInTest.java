@@ -94,7 +94,7 @@ public class SignInTest extends B2CBaseTest {
     public void verifyNewUser() {
         boolean newUserVal = jsonPath.getBoolean("data.user.new_user");
         //log.info(String.valueOf(newUserVal));
-        System.out.println(newUserVal);
+        log.info(String.valueOf(newUserVal));
         //Assert.assertEquals(newUserVal, "true", "New User value should be false");
         Assert.assertFalse(newUserVal);
     }
@@ -104,7 +104,7 @@ public class SignInTest extends B2CBaseTest {
     @Test(priority = 4, description = "Check Session Token is not null")
     public void verifySessionToken() {
         String sessionToken = jsonPath.getString("data.validation_params.session_token");
-        System.out.println(">>>>>>>>>>>>>>>>>"+sessionToken);
+        log.info(">>>>>>>>>>>>>>>>>"+sessionToken);
         int statusCode = response.statusCode();
         log.info(String.valueOf(statusCode));
         Assert.assertNotNull(sessionToken, "Session token should not be null");
@@ -126,7 +126,7 @@ public class SignInTest extends B2CBaseTest {
         String defaultCurrency = jsonPath.getString("data.user.currency");
         String expectedDefaultCurrency = AppConstants.requestCurrency;
         Assert.assertEquals("USD", defaultCurrency, "Default currency should be USD");
-        System.out.println(">>>>>>>>>>>>>>>>>"+defaultCurrency);
+        log.info(">>>>>>>>>>>>>>>>>"+defaultCurrency);
         log.info(defaultCurrency);
 
     }

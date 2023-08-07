@@ -42,10 +42,10 @@ public class TrendingSearchTest extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
 
         jsonPath = response.jsonPath();
-        System.out.println("............Session ID : " + AppConstants.sessionID);
+        log.info("............Session ID : " + AppConstants.sessionID);
 
         //..........................................................
         jsonData =response.asString();
@@ -55,15 +55,13 @@ public class TrendingSearchTest extends B2CBaseTest {
         JsonObject jsonObject = root.getAsJsonObject();
         dataObject = jsonObject.getAsJsonObject("data");
         resultsArray = dataObject.getAsJsonArray("results");
-        System.out.println("......................................................");
-        System.out.println(resultsArray);
-        System.out.println("......................................................");
+        log.info(String.valueOf(resultsArray));
     }
     @Test(priority = 250, description = "Status code check" )
     public void CheckStatus(){
 
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
-        System.out.println(response.getStatusCode());
+        log.info(String.valueOf(response.getStatusCode()));
     }
 
     @Test(priority = 251, description = "Test Section Identifiers" )
@@ -71,7 +69,7 @@ public class TrendingSearchTest extends B2CBaseTest {
         for (int i = 0; i < resultsArray.size(); i++) {
 
             String resultSectionsIdentifiers = jsonPath.getString("data.results["+i+"].section_identifier");
-            System.out.println("resultSectionsIdentifiers : "+ i+" "+resultSectionsIdentifiers);
+            log.info("resultSectionsIdentifiers : "+ i+" "+resultSectionsIdentifiers);
             Assert.assertNotNull(resultSectionsIdentifiers,"resultSectionsIdentifiers is null");
         }
     }
@@ -88,7 +86,7 @@ public class TrendingSearchTest extends B2CBaseTest {
             for (int j = 0; j < detailArray.size(); j++) {
                 Integer detailSize = jsonPath.getInt("data.results[" + i + "].details[" + j + "].size()");
 
-                System.out.println("detailSize : " + i + j + " " + detailSize);
+                log.info("detailSize : " + i + j + " " + detailSize);
                 Assert.assertNotEquals(0, detailSize);
             }
         }
@@ -104,7 +102,7 @@ public class TrendingSearchTest extends B2CBaseTest {
 
             for (int j = 0; j < detailArray.size(); j++) {
                 String QueryParamsTitle = jsonPath.getString("data.results[" + i + "].details[" + j + "].title");
-                System.out.println("QueryParamsTitle : " + i + j + " " + QueryParamsTitle);
+                log.info("QueryParamsTitle : " + i + j + " " + QueryParamsTitle);
                 softAssert.assertNotNull(QueryParamsTitle, "QueryParamsTitle is null");
             }
         }

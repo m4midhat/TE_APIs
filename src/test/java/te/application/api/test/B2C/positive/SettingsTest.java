@@ -46,16 +46,12 @@ public class SettingsTest extends B2CBaseTest {
     @Test(priority = 101, description = "Check location title" )
     public void CheckLocationTitle(){
         String locTitle = jsonPath.getString("data.profile[0].section_list[0].title");
-        System.out.println("locTitle : "+locTitle);
-        Assert.assertNotNull(locTitle,"location title is null");
         Assert.assertEquals("Location", locTitle,"Location title should be 'Location'");
 
     }
     @Test(priority = 102, description = "My Account check" )
     public void CheckMyAccountTitle(){
         String AccTitle = jsonPath.getString("data.profile[0].section_list[1].title");
-        System.out.println("AccTitle : "+AccTitle);
-        Assert.assertNotNull(AccTitle,"Account title is null");
         Assert.assertEquals("My Account", AccTitle,"Account title should be 'My Account'");
     }
 
@@ -63,22 +59,18 @@ public class SettingsTest extends B2CBaseTest {
     public void CheckWalletTitle(){
         String walletTitle = jsonPath.getString("data.profile[0].section_list[2].title");
         System.out.println("walletTitle : "+walletTitle);
-        Assert.assertNotNull(walletTitle,"Wallet title is null");
         Assert.assertEquals("Wallet", walletTitle,"Wallet title should be 'Wallet'");
         String wallet_webURL_Title = jsonPath.getString("data.profile[0].section_list[2].web_url");
-        System.out.println("wallet_webURL_Title : "+wallet_webURL_Title);
         Assert.assertNotNull(wallet_webURL_Title,"Wallet title is null");
     }
     @Test(priority = 104, description = "Wallet check" )
     public void CheckWalletURL(){
         String wallet_webURL_Title = jsonPath.getString("data.profile[0].section_list[2].web_url");
-        System.out.println("wallet_webURL_Title : "+wallet_webURL_Title);
         Assert.assertNotNull(wallet_webURL_Title,"Wallet title is null");
     }
     @Test(priority = 105, description = "My Family check" )
     public void CheckMyFamily(){
         String FamilyTitle = jsonPath.getString("data.profile[1].section_list[0].title");
-        System.out.println("FamilyTitle : "+FamilyTitle);
         Assert.assertNotNull(FamilyTitle,"My Family title is null");
         Assert.assertEquals("My Family", FamilyTitle,"My Family title should be 'My Family'");
     }
