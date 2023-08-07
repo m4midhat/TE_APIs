@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
-import te.application.appConstants.bearerToken;
 import te.application.utilities.Utils;
 
 import java.time.LocalDateTime;
@@ -46,10 +45,10 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     public void getMerchantsData()  {
         LocalDateTime requestTime = LocalDateTime.now();
         String bodyData = merchantDetails("andriod", "default", "entertainer", "Travel",
-                9120877, AppConstants.testDataDeviceModel, 0,1, "None", "False",
-                31930199, "en", "json", merchantID, 11133, AppConstants.testDataTimeZone,
+                9120877, AppConstants.requestDeviceModel, 0,1, "None", "False",
+                31930199, AppConstants.requestLanguage, "json", merchantID, 11133, AppConstants.requestTimeZone,
                 "USD", "None", "None", "None", "None", "3bc5d207fb86dab8",
-                AppConstants.sessionID, "redeemable_reusable", AppConstants.testDataAppVersion);
+                AppConstants.sessionID, "redeemable_reusable", AppConstants.requestAppVersion);
         RestAssured.basePath = AppConstants.B2C_BASE_PATH_MERCHANT + merchantID;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

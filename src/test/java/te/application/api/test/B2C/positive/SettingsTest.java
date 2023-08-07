@@ -1,5 +1,4 @@
 package te.application.api.test.B2C.positive;
-import com.github.javafaker.App;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
@@ -11,12 +10,10 @@ import te.application.api.baseTest.B2CBaseTest;
 
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
-import te.application.appConstants.bearerToken;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
 import java.io.IOException;
-import java.util.Properties;
 
 @Slf4j
 public class SettingsTest extends B2CBaseTest {
@@ -24,11 +21,11 @@ public class SettingsTest extends B2CBaseTest {
     public void setUp() throws IOException {
         RestAssured.basePath = AppConstants.BASE_PATH_SETTINGS;
 
-        String bodyData = generateAPIBody.settings("en","25.300579","entertainer",
-                AppConstants.testDataOSPlatform ,AppConstants.testDataAppVersion,"dc57c128bcfc4155","EGP",
+        String bodyData = generateAPIBody.settings(AppConstants.requestLanguage,"25.300579","entertainer",
+                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,"dc57c128bcfc4155","EGP",
                 "9143020","55.307709","dc57c128bcfc4155","1",
-                AppConstants.testDataDeviceModel,AppConstants.testDataTimeZone,"entertainer",
-                true, true,AppConstants.testDataOSPlatform,
+                AppConstants.requestDeviceModel,AppConstants.requestTimeZone,"entertainer",
+                true, true,AppConstants.requestOSPlatform,
                 AppConstants.sessionID,"9143020");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

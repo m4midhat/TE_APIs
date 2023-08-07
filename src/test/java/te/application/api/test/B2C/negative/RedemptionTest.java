@@ -8,13 +8,10 @@ import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
-import te.application.appConstants.bearerToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 import static te.application.utilities.dbDriver.getRandomOfferFromDB;
@@ -42,7 +39,7 @@ public class RedemptionTest extends B2CBaseTest {
         int product_id= Integer.valueOf(dbInfo.get(5));
         int offer= Integer.valueOf(dbInfo.get(0));
 
-        String bodyData = RedemptionsDetails("25.300579","ios","entertainer","en","8.03.01",
+        String bodyData = RedemptionsDetails("25.300579","ios","entertainer",AppConstants.requestLanguage,"8.03.01",
                 "ios-277C9450-8B64-4521-9B89-3583B6F788D7", dbInfo.get(0),"USD",AppConstants.UserID,"ios-277C9450-8B64-4521-9B89-3583B6F788D7","ios-277C9450-8B64-4521-9B89-3583B6F788D7",
                 offer,"7777",AppConstants.sessionID ,"1",1,1,product_id,"0","ios","Unknown Device",
                 "Asia/Karachi","55.307709","ios",

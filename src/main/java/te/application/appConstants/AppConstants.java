@@ -1,5 +1,7 @@
 package te.application.appConstants;
 
+import te.application.utilities.Utils;
+
 import java.time.LocalDateTime;
 
 public class AppConstants {
@@ -23,6 +25,7 @@ public class AppConstants {
     public static final String BASE_PATE_PINGS_RECEIVE_OFFERS = "et_rs_prd/web/v801/sharing/receivedoffers";
     public static LocalDateTime START_DATE, END_DATE;
     public static String ENV = System.getProperty("Env");
+    public static String LANG = System.getProperty("Language");
     public static String SessionURL = "https://rcapi.theentertainerme.com/et_rs_prd/web/v801/sessions";
     public static String sessionID;
     public static String ENCRYPTION_DISABLE_KEY = "0af5d6f0-4dd9-498d-8d2c-acf8c80ad9ba";
@@ -33,15 +36,20 @@ public class AppConstants {
     public static final String B2C_FORGOT_PASSWORD = "et_rs_prd/web/v801/passwords";
     public static final String BASE_PATH_SIGNOUT = "et_rs_prd/web/v801/session/logout";
 
-    public static String testDataLanguage,
-            testDataOSPlatform,
-            testDataOSVersion,
-            testDataDeviceModel,
-            testDataTimeZone,
-            testDataCurrency,
-            testDataAppVersion;
+    public static String requestLanguage,
+            requestOSPlatform,
+            requestOSVersion,
+            requestDeviceModel,
+            requestTimeZone,
+            requestCurrency,
+            requestAppVersion;
 
     public static String UserID;
     public static final int FAMILY_MEMBERS_ALLOWED = 4;
     public static String B2C_FAMILY = "et_rs_prd/web/v801/family/familyinfo";
+
+    public static void main(String[] args){
+        System.out.println( Utils.encodeString("testqaaruat100@gmail.com"));
+        System.out.println( Utils.encodeString("Testuser1@"));
+    }
 }

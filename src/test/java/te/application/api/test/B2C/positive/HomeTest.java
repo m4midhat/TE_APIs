@@ -1,6 +1,5 @@
 package te.application.api.test.B2C.positive;
 
-import com.github.javafaker.App;
 import com.google.gson.*;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -28,11 +27,11 @@ public class HomeTest extends B2CBaseTest{
     public void setUp() throws IOException {
         log.info(".............Session ID"+AppConstants.sessionID);
         RestAssured.basePath = AppConstants.BASE_PATH_HOME;
-        String bodyData = generateAPIBody.home(1,"ar","26.22876",
-                "entertainer",AppConstants.testDataOSPlatform,AppConstants.testDataAppVersion,
+        String bodyData = generateAPIBody.home(1,AppConstants.requestLanguage,"26.22876",
+                "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 "ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "9124814","USD",
-                "50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "3",
-                AppConstants.testDataOSVersion ,AppConstants.testDataDeviceModel,AppConstants.testDataTimeZone,
+                "50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "1",
+                AppConstants.requestOSVersion,AppConstants.requestDeviceModel,AppConstants.requestTimeZone,
                 AppConstants.BASE_URI_B2C+ AppConstants.BASE_PATH_HOME,
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 1
@@ -67,7 +66,6 @@ public class HomeTest extends B2CBaseTest{
         log.info(String.valueOf(response.getStatusCode()));
         String msg = jsonPath.getString("message");
         log.info("Message : "+ msg);
-        Assert.assertTrue(jsonData.contains("\"success\":"));
         Assert.assertEquals("success",msg);
     }
     @Test(priority = 51, description = "Test Section Identifiers" )

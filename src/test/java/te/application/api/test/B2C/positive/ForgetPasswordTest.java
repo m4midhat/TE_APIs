@@ -45,12 +45,12 @@ public class ForgetPasswordTest extends B2CBaseTest {
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
-            String bodyData = generateAPIBody.forgotPassword(AppConstants.testDataDeviceModel, "AED",
-                    "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.testDataAppVersion, "entertainer",
+            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, "AED",
+                    "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.requestAppVersion, "entertainer",
                     AppConstants.UserID, AppConstants.BASE_URI_B2C+AppConstants.B2C_FORGOT_PASSWORD, "1",
-                    "25.300579", "55.307709", "en", "ios-48195B02-3646-4EDF-A46B-67646935624B",
-                    "9143773", AppConstants.testDataOSPlatform, AppConstants.testDataOSVersion, propUserName,
-                    AppConstants.testDataOSPlatform, AppConstants.testDataTimeZone);
+                    "25.300579", "55.307709", AppConstants.requestLanguage, "ios-48195B02-3646-4EDF-A46B-67646935624B",
+                    "9143773", AppConstants.requestOSPlatform, AppConstants.requestOSVersion, propUserName,
+                    AppConstants.requestOSPlatform, AppConstants.requestTimeZone);
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")

@@ -29,11 +29,11 @@ public class FilterCategoriesTest extends B2CBaseTest {
             String propUserName = Utils.decodeString(properties.getProperty("username"));
             String propPassword = Utils.decodeString(properties.getProperty("password"));
 
-            String bodyData = generateAPIBody.filter("en","31.527539", "entertainer",
-                    AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "9143933",
+            String bodyData = generateAPIBody.filter(AppConstants.requestLanguage,"31.527539", "entertainer",
+                    AppConstants.requestOSPlatform, AppConstants.requestAppVersion, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "9143933",
                     "AED", AppConstants.UserID, 1, "ios-C21A0532-B8A5-442D-9204-43805238DE88", "Restaurants and Bars",
-                    "74.352919", "c86078f5-5a6c-4831-ba8a-1e9914a1ce33", "1", 0, AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel,
-                    AppConstants.testDataTimeZone, "74.352919", AppConstants.testDataOSPlatform, "31.527539",
+                    "74.352919", "c86078f5-5a6c-4831-ba8a-1e9914a1ce33", "1", 0, AppConstants.requestOSVersion, AppConstants.requestDeviceModel,
+                    AppConstants.requestTimeZone, "74.352919", AppConstants.requestOSPlatform, "31.527539",
                     AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN));
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

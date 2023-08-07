@@ -34,11 +34,11 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.autoMegaSearch("All","0","true",
-                "1","true",generatedString,"en","true",3,
-                "25.300579","55.307709",10,AppConstants.testDataTimeZone,
+                "1","true",generatedString,AppConstants.requestLanguage,"true",3,
+                "25.300579","55.307709",10,AppConstants.requestTimeZone,
                 AppConstants.sessionID,"AED","9120772","9120772",
-                "entertainer",AppConstants.testDataAppVersion,"android",AppConstants.testDataOSVersion,
-                "dc57c128bcfc4155", AppConstants.testDataDeviceModel,"dc57c128bcfc4155");
+                "entertainer",AppConstants.requestAppVersion,"android",AppConstants.requestOSVersion,
+                "dc57c128bcfc4155", AppConstants.requestDeviceModel,"dc57c128bcfc4155");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

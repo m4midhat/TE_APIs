@@ -11,8 +11,6 @@ import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
-import java.io.IOException;
-
 import static org.testng.Assert.assertEquals;
 
 public class SignOutTest extends B2CBaseTest{
@@ -23,11 +21,11 @@ public class SignOutTest extends B2CBaseTest{
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNOUT;
 
         String bodyData = generateAPIBody.SignOutTest("en", "25.300579", "entertainer",
-                AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion,
+                AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1", "9120772", "AED", "9120772", "55.307709",
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1", AppConstants.BASE_URI_B2C+AppConstants.BASE_PATH_SIGNOUT,
-                Utils.decodeString(authToken.B2CAUTH_TOKEN), AppConstants.sessionID, "1", AppConstants.testDataOSVersion,
-                AppConstants.testDataDeviceModel, AppConstants.testDataTimeZone, "55.307709", AppConstants.testDataOSPlatform,"25.300579");
+                Utils.decodeString(authToken.B2CAUTH_TOKEN), AppConstants.sessionID, "1", AppConstants.requestOSVersion,
+                AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "55.307709", AppConstants.requestOSPlatform,"25.300579");
         System.out.println(bodyData);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

@@ -35,7 +35,7 @@ public class Utils {
         return emailAddress.toLowerCase();
     }
 
-    public static String get3CharactersForPassword(){
+    public static String get3RequiredCharactersForPassword(){
         String capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String smalls = "abcdefghijklmnopqrstuvxyz";
         String characters = "+_)(*&^%$#@!~)`!-=?:><,./:[]";
@@ -186,11 +186,11 @@ public class Utils {
         String operatingSystem = "";
         JSONArray deviceOS;
         if(!jsonObject.isEmpty()){
-            if(AppConstants.testDataOSPlatform.compareToIgnoreCase("iOS")==0) {
+            if(AppConstants.requestOSPlatform.compareToIgnoreCase("iOS")==0) {
                 deviceOS = (JSONArray) jsonObject.get("iOS");
                 operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
             }
-            else if(AppConstants.testDataOSPlatform.compareToIgnoreCase("android")==0) {
+            else if(AppConstants.requestOSPlatform.compareToIgnoreCase("android")==0) {
                 deviceOS = (JSONArray) jsonObject.get("android");
                 operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
             }
@@ -203,11 +203,11 @@ public class Utils {
         String device = "";
         JSONArray devices;
         if(!jsonObject.isEmpty()){
-            if(AppConstants.testDataOSPlatform.compareToIgnoreCase("iOS")==0) {
+            if(AppConstants.requestOSPlatform.compareToIgnoreCase("iOS")==0) {
                 devices = (JSONArray) jsonObject.get("iOS Device");
                 device = devices.get(generateRandomNumber(0, devices.size() - 1)).toString();
             }
-            else if(AppConstants.testDataOSPlatform.compareToIgnoreCase("android")==0) {
+            else if(AppConstants.requestOSPlatform.compareToIgnoreCase("android")==0) {
                 devices = (JSONArray) jsonObject.get("Android Device");
                 device = devices.get(generateRandomNumber(0, devices.size() - 1)).toString();
             }

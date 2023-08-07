@@ -1,13 +1,8 @@
 package te.application.api.test.B2C.positive;
 
-import com.github.javafaker.App;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -18,9 +13,6 @@ import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 
@@ -31,10 +23,10 @@ public class MyAccountTest extends B2CBaseTest {
         RestAssured.basePath = AppConstants.PROFILE_BASE_PATH;
 
         //Passing bodyData to profile function
-        String bodyData = generateAPIBody.Profile("en","25.300579","entertainer",
-                AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion,"6316ba8cb97be5be","USD","9130899",
-                "55.307709","6316ba8cb97be5be","1",AppConstants.testDataDeviceModel,
-                AppConstants.testDataTimeZone,AppConstants.sessionID,"9130899",AppConstants.sessionID);
+        String bodyData = generateAPIBody.Profile(AppConstants.requestLanguage,"25.300579","entertainer",
+                AppConstants.requestOSPlatform, AppConstants.requestAppVersion,"6316ba8cb97be5be","USD","9130899",
+                "55.307709","6316ba8cb97be5be","1",AppConstants.requestDeviceModel,
+                AppConstants.requestTimeZone,AppConstants.sessionID,"9130899",AppConstants.sessionID);
 
         //Passing Request specifications
         RequestSpecification httpRequest = RestAssured.given()

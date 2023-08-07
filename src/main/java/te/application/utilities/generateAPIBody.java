@@ -207,12 +207,12 @@ public class generateAPIBody {
                 "  \"device_os\" : \""+OSPlatform+"\",\n" +
                 "  \"lat\" : \""+latitude+"\",\n" +
                 "  \"force_login\" : \"true\",\n" +
-                "  \"password\" : \""+password+"\"\n" +
-                "  \"epc_enabled\" : \""+epc+"\"\n" +
+                "  \"password\" : \""+password+"\",\n" +
+                "  \"epc_enabled\" : \""+epc+"\",\n" +
                 "  \"session_token\" : \"\",\n" +
-                "  \"os_version\" : \""+OSVersion+"\"\n" +
-                "  \"__lng\" : \""+Longitude+"\"\n" +
-                "  \"device_os\" : \""+DevOs+"\"\n" +
+                "  \"os_version\" : \""+OSVersion+"\",\n" +
+                "  \"__lng\" : \""+Longitude+"\",\n" +
+                "  \"device_os\" : \""+DevOs+"\",\n" +
                 "  \"lat\" : \""+Lat+"\"\n" +
 
                 "}";

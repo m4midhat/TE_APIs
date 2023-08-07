@@ -31,9 +31,9 @@ public class PingSendOffersTest extends B2CBaseTest {
 
         RestAssured.basePath = AppConstants.BASE_PATH_PINGS_SEND_OFFERS;
 
-        String bodyData = generateAPIBody.pingSendOffers("en", "74.3528115", "31.527362", "entertainer",
-                AppConstants.testDataOSPlatform, AppConstants.testDataAppVersion, "dc57c128bcfc4155", "AED", "9120772", "dc57c128bcfc4155",
-                "1", AppConstants.testDataDeviceModel, AppConstants.testDataTimeZone, "9120772");
+        String bodyData = generateAPIBody.pingSendOffers(AppConstants.requestLanguage, "74.3528115", "31.527362", "entertainer",
+                AppConstants.requestOSPlatform, AppConstants.requestAppVersion, "dc57c128bcfc4155", "AED", "9120772", "dc57c128bcfc4155",
+                "1", AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "9120772");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

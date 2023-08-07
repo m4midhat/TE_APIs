@@ -23,11 +23,11 @@ public class ForgetPasswordTest extends B2CBaseTest {
     @Test(priority = 5, description = "Reset password with blank Email Id")
     public void  resetPasswordWithBlankEmail(){
         RestAssured.basePath = AppConstants.B2C_FORGOT_PASSWORD;
-        String bodyData = generateAPIBody.forgotPassword(AppConstants.testDataDeviceModel, "AED",
-                "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.testDataAppVersion, "entertainer",
+        String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, "AED",
+                "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.requestAppVersion, "entertainer",
                 "9143773", AppConstants.BASE_URI_B2C+AppConstants.B2C_FORGOT_PASSWORD, "1",
-                "25.300579", "55.307709", "en", "ios-48195B02-3646-4EDF-A46B-67646935624B",
-                "9143773", AppConstants.testDataOSPlatform, AppConstants.testDataOSVersion, "", AppConstants.testDataOSPlatform, AppConstants.testDataTimeZone);
+                "25.300579", "55.307709", AppConstants.requestLanguage, "ios-48195B02-3646-4EDF-A46B-67646935624B",
+                "9143773", AppConstants.requestOSPlatform, AppConstants.requestOSVersion, "", AppConstants.requestOSPlatform, AppConstants.requestTimeZone);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -46,12 +46,12 @@ public class ForgetPasswordTest extends B2CBaseTest {
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             String randomEmail = generateRandomEmail(12);
-            String bodyData = generateAPIBody.forgotPassword(AppConstants.testDataDeviceModel, "AED",
-                    "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.testDataAppVersion,
+            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, "AED",
+                    "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.requestAppVersion,
                     "entertainer", "9143773", AppConstants.BASE_URI_B2C+AppConstants.B2C_FORGOT_PASSWORD,
-                    "1", "25.300579", "55.307709", "en",
-                    "ios-48195B02-3646-4EDF-A46B-67646935624B", "9143773", AppConstants.testDataOSPlatform,
-                    AppConstants.testDataOSVersion, randomEmail, AppConstants.testDataOSPlatform, AppConstants.testDataTimeZone);
+                    "1", "25.300579", "55.307709", AppConstants.requestLanguage,
+                    "ios-48195B02-3646-4EDF-A46B-67646935624B", "9143773", AppConstants.requestOSPlatform,
+                    AppConstants.requestOSVersion, randomEmail, AppConstants.requestOSPlatform, AppConstants.requestTimeZone);
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")

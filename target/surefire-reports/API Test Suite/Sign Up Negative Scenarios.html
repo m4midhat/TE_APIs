@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>TestNG:  Sign Up Negative Scenarios</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Sign Up Negative Scenarios</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>39/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Aug 07 13:10:12 PKT 2023</td>
+</tr>
+<tr><td>Total time:</td><td>31 seconds (31688 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signUpWithBlankCredentials()'><b>signUpWithBlankCredentials</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with blank credentials body</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signUpWithFirstNameOnly()'><b>signUpWithFirstNameOnly</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only firstname </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signUpWithLastNameOnly()'><b>signUpWithLastNameOnly</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Lastname </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signUpWithPasswordOnly()'><b>signUpWithPasswordOnly</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only password </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailAndFirstName()'><b>signupWithEmailAndFirstName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email & First Name </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailAndLastName()'><b>signupWithEmailAndLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email & Last Name </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailAndPassword()'><b>signupWithEmailAndPassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email & Password </td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailFirstNameLastName()'><b>signupWithEmailFirstNameLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email, first & last name </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailFirstNameLastNamePassword()'><b>signupWithEmailFirstNameLastNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Email,first name,last name & password</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailFirstNamePassword()'><b>signupWithEmailFirstNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email, first name & password</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithEmailLastNamePassword()'><b>signupWithEmailLastNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only email, last name & password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithFirstNameAndLastName()'><b>signupWithFirstNameAndLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only FirstName & LastName</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithFirstNameAndPassword()'><b>signupWithFirstNameAndPassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only first name & password </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithLastNameFirstNamePassword()'><b>signupWithLastNameFirstNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only first name, last name & password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyDateOfBirth()'><b>signupWithOnlyDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Date of Birth </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyDateOfBirthAndFirstName()'><b>signupWithOnlyDateOfBirthAndFirstName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Date of Birth, first name</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyDateOfBirthAndLastName()'><b>signupWithOnlyDateOfBirthAndLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Date of Birth, last name</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyDateOfBirthFirstNameLastName()'><b>signupWithOnlyDateOfBirthFirstNameLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Date of Birth,first name, last name</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyDateOfBirthPassword()'><b>signupWithOnlyDateOfBirthPassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Date of Birth , Email </td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyEmailDateOfBirthFirstNameLastName()'><b>signupWithOnlyEmailDateOfBirthFirstNameLastName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Email,Date of Birth,first name, last name</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword()'><b>signupWithOnlyEmailDateOfBirthFirstNameLastNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Email,Date of Birth,first name, last name & password</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyEmailDateOfBirthPassword()'><b>signupWithOnlyEmailDateOfBirthPassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Sign up with Email, Date of Birth & password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationality()'><b>signupWithOnlyNationality</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityDateOfBirth()'><b>signupWithOnlyNationalityDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality,Date of birth</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword()'><b>signupWithOnlyNationalityDateOfBirthFirstNameLastNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, first name, last name, Date of birth, Password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail()'><b>signupWithOnlyNationalityDateOfBirthFirstNameLastNamePasswordEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, first name, last name, Date of birth, Password, Email</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail()'><b>signupWithOnlyNationalityDateOfBirthFirstNamePasswordEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only first name, email, password, Date of Birth, Nationality</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail()'><b>signupWithOnlyNationalityDateOfBirthLastNamePasswordEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only last name, email, password, Date of Birth, Nationality</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityEmail()'><b>signupWithOnlyNationalityEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, Email</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityEmailFirstNameLastNameDateOfBirth()'><b>signupWithOnlyNationalityEmailFirstNameLastNameDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, first name, last name, email, Date of Birth</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityEmailPasswordDateOfBirth()'><b>signupWithOnlyNationalityEmailPasswordDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality,email, password, Date of Birth</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityFirstName()'><b>signupWithOnlyNationalityFirstName</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, first name</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityFirstNameDateOfBirth()'><b>signupWithOnlyNationalityFirstNameDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, First Name, Date of Birth</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityFirstNameEmail()'><b>signupWithOnlyNationalityFirstNameEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality,First Name,Email</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityFirstNamePassword()'><b>signupWithOnlyNationalityFirstNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, First Name, Password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityLastNameDateOfBirth()'><b>signupWithOnlyNationalityLastNameDateOfBirth</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, Last Name, Date of Birth</td>
+<td></td>
+<td>1</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityLastNameEmail()'><b>signupWithOnlyNationalityLastNameEmail</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality,Last Name, Email</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityLastNamePassword()'><b>signupWithOnlyNationalityLastNamePassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality, Last Name, Password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+<tr>
+<td title='te.application.api.test.B2C.negative.SignUpTest.signupWithOnlyNationalityPassword()'><b>signupWithOnlyNationalityPassword</b><br>Test class: te.application.api.test.B2C.negative.SignUpTest<br>Test method: Signup with only Nationality,Password</td>
+<td></td>
+<td>0</td>
+<td>te.application.api.test.B2C.negative.SignUpTest@72e5a8e</td></tr>
+</table><p>
+</body>
+</html>

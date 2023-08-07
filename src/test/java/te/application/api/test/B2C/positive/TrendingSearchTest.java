@@ -33,9 +33,9 @@ public class TrendingSearchTest extends B2CBaseTest {
         //RestAssured.basePath = AppConstants.BASE_PATE_TRENDING_SEARCH;
 
         String bodyData = generateAPIBody.trendingSearch(true,"1","All",
-                "0","en",3,"31.5273517","74.3528161", AppConstants.testDataTimeZone,
-                "AED","9120772","9120772","entertainer",AppConstants.testDataAppVersion,
-                AppConstants.testDataOSPlatform,AppConstants.testDataOSVersion,"dc57c128bcfc4155",AppConstants.testDataDeviceModel,"dc57c128bcfc4155");
+                "0",AppConstants.requestLanguage,3,"31.5273517","74.3528161", AppConstants.requestTimeZone,
+                "AED","9120772","9120772","entertainer",AppConstants.requestAppVersion,
+                AppConstants.requestOSPlatform,AppConstants.requestOSVersion,"dc57c128bcfc4155",AppConstants.requestDeviceModel,"dc57c128bcfc4155");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

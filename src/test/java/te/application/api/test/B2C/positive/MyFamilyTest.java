@@ -15,7 +15,6 @@ import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
 import java.io.IOException;
-import java.util.Properties;
 
 @Slf4j
 public class MyFamilyTest  extends B2CBaseTest {
@@ -24,11 +23,11 @@ public class MyFamilyTest  extends B2CBaseTest {
     public void setUp() throws IOException {
         RestAssured.basePath = AppConstants.B2C_FAMILY;
 
-        String bodyData = generateAPIBody.Family("en", "25.300579", "entertainer", AppConstants.testDataOSPlatform,
-                AppConstants.testDataAppVersion, "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8", "AED", AppConstants.UserID,
+        String bodyData = generateAPIBody.Family(AppConstants.requestLanguage, "25.300579", "entertainer", AppConstants.requestOSPlatform,
+                AppConstants.requestAppVersion, "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8", "AED", AppConstants.UserID,
                 "55.307709", "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8",
-                "1", "1", AppConstants.testDataOSVersion, AppConstants.testDataDeviceModel,
-                AppConstants.testDataTimeZone, "55.307709", "25.300579");
+                "1", "1", AppConstants.requestOSVersion, AppConstants.requestDeviceModel,
+                AppConstants.requestTimeZone, "55.307709", "25.300579");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -71,7 +70,7 @@ public class MyFamilyTest  extends B2CBaseTest {
     public void verifyPrimaryMemberName(){
         String member = jsonPath.getString("data.member_info.primary_member_name").trim();
         log.info(member);
-        Assert.assertEquals(member, SignInTest.firstName+SignInTest.lastName );
+        Assert.assertEquals(member, (SignInTest.firstName+" "+SignInTest.lastName).trim() );
     }
 
     @Test(priority = 5, description = "Verify Maximum number of family members")

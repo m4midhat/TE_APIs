@@ -26,14 +26,35 @@ public class B2CBaseTest {
     public static void setUpSuite() throws IOException, ParseException {
         AppConstants.START_DATE = LocalDateTime.now();
         testData = Utils.readTestData();
-        AppConstants.testDataLanguage = Utils.getRandomSupportedLanguage(testData);
-        AppConstants.testDataOSPlatform = Utils.getRandomOS(testData);
-        AppConstants.testDataOSVersion = Utils.getRandomDeviceOS(testData);
-        AppConstants.testDataDeviceModel = Utils.getRandomDevice(testData);
-        AppConstants.testDataTimeZone = Utils.getRandomTimeZone(testData);
-        AppConstants.testDataCurrency = Utils.getRandomCurrency(testData);
-        AppConstants.testDataAppVersion = Utils.getRandomAppVersion(testData);
+        //AppConstants.testDataLanguage = Utils.getRandomSupportedLanguage(testData);
+        AppConstants.requestOSPlatform = Utils.getRandomOS(testData);
+        AppConstants.requestOSVersion = Utils.getRandomDeviceOS(testData);
+        AppConstants.requestDeviceModel = Utils.getRandomDevice(testData);
+        AppConstants.requestTimeZone = Utils.getRandomTimeZone(testData);
+        AppConstants.requestCurrency = Utils.getRandomCurrency(testData);
+        AppConstants.requestAppVersion = Utils.getRandomAppVersion(testData);
         RestAssured.baseURI = AppConstants.BASE_URI_B2C;
+        if(AppConstants.LANG != null) {
+            if (AppConstants.LANG.compareToIgnoreCase("en") == 0) {
+                log.info("Selected Language : 'English'");
+                AppConstants.requestLanguage = "en";
+            } else if (AppConstants.LANG.compareToIgnoreCase("ru") == 0) {
+                log.info("Selected Language : 'Russian'");
+                AppConstants.requestLanguage = "ru";
+            } else if (AppConstants.LANG.compareToIgnoreCase("ar") == 0) {
+                log.info("Selected Language : 'Arabic'");
+                AppConstants.requestLanguage = "ar";
+            } else if (AppConstants.LANG.compareToIgnoreCase("all") == 0) {
+                log.info("Suite will be executed for all languages");
+            } else {
+                log.error("Invalid Language Selected");
+                AppConstants.requestLanguage = Utils.getRandomSupportedLanguage(testData);
+            }
+        }
+        else
+            AppConstants.requestLanguage = Utils.getRandomSupportedLanguage(testData);
+
+        AppConstants.requestLanguage = "en";
     }
 
 
