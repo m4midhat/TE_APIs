@@ -3,6 +3,7 @@ package te.application.api.test.B2C.positive;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -18,23 +19,24 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 import static te.application.utilities.dbDriver.getRandomOfferFromDB;
 
+@Slf4j
 public class RedemptionTest  extends B2CBaseTest {
 
     @BeforeClass
     public void testRedemptionsData() throws IOException {
 
         List<String > dbInfo = getRandomOfferFromDB();
-        System.out.println(dbInfo);
+        log.info(dbInfo.toString());
         while (dbInfo.isEmpty()){
 
             dbInfo= getRandomOfferFromDB();
         }
-        System.out.println(dbInfo.get(0));
-        System.out.println(dbInfo.get(1));
-        System.out.println(dbInfo.get(2));
-        System.out.println(dbInfo.get(3));
-        System.out.println(dbInfo.get(4));
-        System.out.println(dbInfo.get(5));
+        log.info(dbInfo.get(0));
+        log.info(dbInfo.get(1));
+        log.info(dbInfo.get(2));
+        log.info(dbInfo.get(3));
+        log.info(dbInfo.get(4));
+        log.info(dbInfo.get(5));
         int outlet_id= Integer.valueOf(dbInfo.get(4));
         int product_id= Integer.valueOf(dbInfo.get(5));
         int offer= Integer.valueOf(dbInfo.get(0));
@@ -45,7 +47,7 @@ public class RedemptionTest  extends B2CBaseTest {
                 offer,dbInfo.get(2),AppConstants.sessionID ,"1",1,1,product_id,"0","ios","Unknown Device",
                 "Asia/Karachi","55.307709","ios",
                 "AED",outlet_id,"0");
-        System.out.println(bodyData);
+        log.info(bodyData);
 
         RestAssured.basePath = AppConstants.BASE_PATH_REDEEM;
         RequestSpecification httpRequest = RestAssured.given()
@@ -55,10 +57,10 @@ public class RedemptionTest  extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
         jsonPath = new JsonPath(response.asString());
-        System.out.println(jsonPath);
+        log.info(String.valueOf(jsonPath));
         String get_message = jsonPath.getString("message");
         Assert.assertNotNull(get_message);
 

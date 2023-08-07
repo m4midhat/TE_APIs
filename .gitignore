@@ -1,3 +1,4 @@
-          TestReport
-          target
-          TestReport/*.html
+target
+.idea
+TestReport
+*.html
