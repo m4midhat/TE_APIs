@@ -12,35 +12,15 @@ import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
+
+import static te.application.data.response.locations.locations;
 
 @Slf4j
 public class FetchLocationsTest extends B2CBaseTest {
 
-    List<String> locations = new ArrayList<>();
-
     @BeforeClass
     public void setUp() throws IOException {
-
-        locations.add("Dubai & N. Emirates");
-        locations.add("Abu Dhabi & Al Ain");
-        locations.add("Bahrain");
-        locations.add("Cape Town");
-        locations.add("Kuwait");
-        locations.add("Oman");
-        locations.add("Qatar");
-        locations.add("Riyadh");
-        locations.add("Singapore");
-        locations.add("Johannesburg & Pretoria");
-        locations.add("United Kingdom");
-        locations.add("Jeddah");
-        locations.add("Durban");
-        locations.add("Athens");
-        locations.add("Eastern Province");
-        locations.add("Egypt");
-
 
         //Defining api url
         RestAssured.basePath = AppConstants.B2C_LOCATIONS;
@@ -50,9 +30,9 @@ public class FetchLocationsTest extends B2CBaseTest {
 
             //initializing params
             String bodyData = generateAPIBody.locations(0, AppConstants.requestLanguage, true, "25.300579", "entertainer",
-                    AppConstants.requestOSPlatform, "8.04.01", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
+                    AppConstants.requestOSPlatform, AppConstants.requestAppVersion, "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
                     AppConstants.UserID, "1", "55.307709", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",
-                    propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, "Karachi/Islamabad",
+                    propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                     "1", AppConstants.sessionID, "55.307709", AppConstants.requestOSPlatform, "25.300579",
                     AppConstants.SessionURL, authToken.B2CAUTH_TOKEN);
             RequestSpecification httpRequest = RestAssured.given()
@@ -84,7 +64,7 @@ public class FetchLocationsTest extends B2CBaseTest {
 
         int size = jsonPath.getInt("data.locations.size()");
         for (int i = 0; i < size; i++) {
-            log.info("Location extracted : "+locations.get(i));
+            log.info("Location extracted : "+ locations.get(i));
             Assert.assertEquals(jsonPath.getString("data.locations["+i+"].name"),locations.get(i), "Incorrect location returned");
         }
     }

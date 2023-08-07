@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import static java.time.temporal.ChronoUnit.MILLIS;
+import static te.application.data.response.locations.loadLocations;
 
 @Slf4j
 public class B2CBaseTest {
@@ -25,6 +26,7 @@ public class B2CBaseTest {
     @BeforeSuite
     public static void setUpSuite() throws IOException, ParseException {
         AppConstants.START_DATE = LocalDateTime.now();
+        loadLocations();
         testData = Utils.readTestData();
         //AppConstants.testDataLanguage = Utils.getRandomSupportedLanguage(testData);
         AppConstants.requestOSPlatform = Utils.getRandomOS(testData);

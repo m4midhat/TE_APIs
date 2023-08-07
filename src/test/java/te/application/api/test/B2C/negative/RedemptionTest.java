@@ -3,11 +3,13 @@ package te.application.api.test.B2C.negative;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
+import te.application.data.response.redemption;
 import te.application.utilities.Utils;
 
 import java.io.IOException;
@@ -17,6 +19,7 @@ import static org.testng.Assert.assertEquals;
 import static te.application.utilities.dbDriver.getRandomOfferFromDB;
 import static te.application.utilities.generateAPIBody.RedemptionsDetails;
 
+@Slf4j
 public class RedemptionTest extends B2CBaseTest {
 
 
@@ -24,27 +27,27 @@ public class RedemptionTest extends B2CBaseTest {
     public void Redemption_with_invalid_merchant_pin() throws IOException {
 
         List<String > dbInfo = getRandomOfferFromDB();
-        System.out.println(dbInfo);
+        log.info(dbInfo.toString());
         while (dbInfo.isEmpty()){
-
             dbInfo= getRandomOfferFromDB();
         }
-        System.out.println(dbInfo.get(0));
-        System.out.println(dbInfo.get(1));
-        System.out.println(dbInfo.get(2));
-        System.out.println(dbInfo.get(3));
-        System.out.println(dbInfo.get(4));
-        System.out.println(dbInfo.get(5));
-        int outlet_id= Integer.valueOf(dbInfo.get(4));
-        int product_id= Integer.valueOf(dbInfo.get(5));
-        int offer= Integer.valueOf(dbInfo.get(0));
+        log.info(dbInfo.get(0));
+        log.info(dbInfo.get(1));
+        log.info(dbInfo.get(2));
+        log.info(dbInfo.get(3));
+        log.info(dbInfo.get(4));
+        log.info(dbInfo.get(5));
+        int outlet_id= Integer.parseInt(dbInfo.get(4));
+        int product_id= Integer.parseInt(dbInfo.get(5));
+        int offer= Integer.parseInt(dbInfo.get(0));
 
-        String bodyData = RedemptionsDetails("25.300579","ios","entertainer",AppConstants.requestLanguage,"8.03.01",
-                "ios-277C9450-8B64-4521-9B89-3583B6F788D7", dbInfo.get(0),"USD",AppConstants.UserID,"ios-277C9450-8B64-4521-9B89-3583B6F788D7","ios-277C9450-8B64-4521-9B89-3583B6F788D7",
-                offer,"7777",AppConstants.sessionID ,"1",1,1,product_id,"0","ios","Unknown Device",
-                "Asia/Karachi","55.307709","ios",
+        String bodyData = RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",AppConstants.requestLanguage,
+                AppConstants.requestAppVersion, "ios-277C9450-8B64-4521-9B89-3583B6F788D7", dbInfo.get(0),
+                "USD",AppConstants.UserID,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
+                "ios-277C9450-8B64-4521-9B89-3583B6F788D7", offer,"7777",AppConstants.sessionID ,
+                "1",1,1,product_id,"0",AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
+                AppConstants.requestTimeZone,"55.307709",AppConstants.requestOSPlatform,
                 "AED",outlet_id,"0");
-        System.out.println(bodyData);
 
         RestAssured.basePath = AppConstants.BASE_PATH_REDEEM;
         RequestSpecification httpRequest = RestAssured.given()
@@ -54,13 +57,13 @@ public class RedemptionTest extends B2CBaseTest {
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
-        System.out.println(response.asString());
+        log.info(response.asString());
         jsonPath = response.jsonPath();
         jsonPath = new JsonPath(response.asString());
-        System.out.println(jsonPath);
-        String get_message = jsonPath.getString("message");
-        Assert.assertNotNull(get_message);
-        assertEquals("Invalid merchant PIN", get_message, "Try again");
+        log.info(String.valueOf(jsonPath));
+        String msg = jsonPath.getString("message");
+        Assert.assertNotNull(msg);
+        assertEquals(redemption.invalidPin, msg, "Invalid merchant pin error should be displayed");
         assertEquals(422, response.getStatusCode(), "Incorrect status code returned, expected value 200");
     }
 

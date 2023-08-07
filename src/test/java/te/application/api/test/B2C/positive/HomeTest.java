@@ -45,7 +45,7 @@ public class HomeTest extends B2CBaseTest{
         log.info(response.asString());
 
         jsonPath = response.jsonPath();
-        log.info("............Session ID : " + AppConstants.sessionID);
+        log.info("Session ID : " + AppConstants.sessionID);
 
         //..........................................................
         jsonData =response.asString();
@@ -55,9 +55,7 @@ public class HomeTest extends B2CBaseTest{
         JsonObject jsonObject = root.getAsJsonObject();
         dataObject = jsonObject.getAsJsonObject("data");
         homeSectionsArray = dataObject.getAsJsonArray("home_sections");
-        log.info("......................................................");
         log.info(String.valueOf(homeSectionsArray));
-        log.info("......................................................");
     }
     @Test(priority = 50, description = "Status code check" )
     public void CheckStatus(){
@@ -89,7 +87,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String messageTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].message");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].message")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.error(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else{
 
                     log.info("message : "+ i+j+" "+messageTest);
@@ -110,7 +108,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String buttonTitleTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].button_title");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].button_title")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.error(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else{
 
                     log.info("buttonTitleTest : "+ i+j+" "+buttonTitleTest);
@@ -131,7 +129,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String subTitleTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].sub_title");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].sub_title")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else {
                     log.info("subTitleTest : " + i + j + " " + subTitleTest);
                     softAssert.assertNotNull(subTitleTest, "subTitleTest is null");
@@ -152,7 +150,7 @@ public class HomeTest extends B2CBaseTest{
                 String showTileTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].show_tile");
                 boolean temp=Boolean.parseBoolean(showTileTest);
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].show_tile")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else {
                     log.info("showTileTest : " + i + j + " " + temp);
                     softAssert.assertTrue(temp, "show tile is false at : " + i + j);
@@ -169,7 +167,7 @@ public class HomeTest extends B2CBaseTest{
             String IsOverlap = jsonPath.getString("data.home_sections["+i+"].is_overlap");
             boolean temp=Boolean.parseBoolean(IsOverlap);
             if (response.path("data.home_sections["+i+"].is_overlap")==null){
-                log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
             }else {
                 log.info("IsOverlap : " + i + " " + temp);
                 softAssert.assertFalse(temp, "show tile is true at : " + i);
@@ -184,7 +182,7 @@ public class HomeTest extends B2CBaseTest{
         for (int i = 0; i < homeSectionsArray.size(); i++) {
             String secTitle = jsonPath.getString("data.home_sections["+i+"].title");
             if (response.path("data.home_sections["+i+"].title")==null){
-                log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
             }else {
                 log.info("secTitle : " + i + " " + secTitle);
                 softAssert.assertNotNull(secTitle, "secTitle is null");
@@ -203,7 +201,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String analyticName = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_analytic_name");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_analytic_name")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else {
                     log.info("analyticName : "+ i+j+" "+analyticName);
                     softAssert.assertNotNull(analyticName,"secTitle is null");
@@ -223,7 +221,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String tileTitle = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_title");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_title")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else {
                     log.info("tileTitle : "+ i+j+" "+tileTitle);
                     softAssert.assertNotNull(tileTitle,"tileTitle is null");
@@ -242,7 +240,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String TypeAnalytics = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_type_analytics");
                 if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_type_analytics")==null){
-                    log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
                 }else {
                     log.info("TypeAnalytics : "+ i+j+" "+TypeAnalytics);
                     softAssert.assertNotNull(TypeAnalytics,"TypeAnalytics is null");
@@ -255,7 +253,7 @@ public class HomeTest extends B2CBaseTest{
 
         int showLocationSize = jsonPath.getInt("data.location.size()");
         if (response.path("data.location.size()")==null){
-            log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+            log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
         }else {
             log.info("showLocationSize : " + showLocationSize);
             Assert.assertNotEquals(0, showLocationSize);
@@ -266,7 +264,7 @@ public class HomeTest extends B2CBaseTest{
         SoftAssert softAssert = new SoftAssert();
         String deliveryTab = jsonPath.getString("data.location.delivery_tab");
         if (response.path("data.location.delivery_tab")==null){
-            log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
+            log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
         }else {
             log.info("deliveryTab : "+deliveryTab);
             softAssert.assertNotNull(deliveryTab,"deliveryTab is null");

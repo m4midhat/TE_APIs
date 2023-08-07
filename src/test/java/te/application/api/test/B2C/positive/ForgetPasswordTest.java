@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
+import te.application.data.response.forgotPassword;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
@@ -86,21 +87,14 @@ public class ForgetPasswordTest extends B2CBaseTest {
 
     @Test(priority = 3, description = "Check Email sent is true")
     public void checkSentStatus() {
-        String expectedkey = "true";
         String actualkey = jsonPath.getString("data.is_sent");
-        Assert.assertEquals(expectedkey, actualkey, "Sent Key validated");
-        log.info("Expected value is : " + expectedkey);
-        log.info("Actual value in response is : " + actualkey);
+        Assert.assertTrue(Boolean.parseBoolean(actualkey), "Sent Key validated");
     }
 
     @Test(priority = 4, description = "Verify ResetPassword Message")
     public void checkResetPasswordMessage() {
         String actualMessage = jsonPath.getString("data.message");
-        String expectedMessage = "We’ve sent the password reset link to your registered mail.";
-        Assert.assertEquals(actualMessage, expectedMessage, "Link should be sent on registered email");
-        log.info(">>>>>>>>>>>>>>>>>" + actualMessage);
-        log.info(expectedMessage);
+        Assert.assertEquals(actualMessage, forgotPassword.msgEnglish, "Link should be sent on registered email");
     }
-
 
 }
