@@ -21,18 +21,18 @@ public class HomeTest extends B2CBaseTest{
     String jsonData = "";
     JsonObject dataObject;
     JsonArray homeSectionsArray;
-    boolean exists;
 
-    @BeforeClass
+
+    @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
-        log.info(".............Session ID"+AppConstants.sessionID);
-        RestAssured.basePath = AppConstants.BASE_PATH_HOME;
+        log.info("Session ID"+AppConstants.sessionID);
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_HOME");
         String bodyData = generateAPIBody.home(1,AppConstants.requestLanguage,"26.22876",
                 "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
-                "ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "9124814","USD",
-                "50.584381","ios-C72ECFA5-AC6C-4F5D-927A-D6D5E5AA3A62", "1",
+                AppConstants.requestDeviceKey, AppConstants.UserID ,"USD",
+                "50.584381",AppConstants.requestDeviceKey, "1",
                 AppConstants.requestOSVersion,AppConstants.requestDeviceModel,AppConstants.requestTimeZone,
-                AppConstants.BASE_URI_B2C+ AppConstants.BASE_PATH_HOME,
+                endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("BASE_PATH_HOME"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 1
         );
@@ -57,7 +57,7 @@ public class HomeTest extends B2CBaseTest{
         homeSectionsArray = dataObject.getAsJsonArray("home_sections");
         log.info(String.valueOf(homeSectionsArray));
     }
-    @Test(priority = 50, description = "Status code check" )
+    @Test(priority = 50, description = "Status code check" , groups = {"Smoke", "Sanity", "Regression"})
     public void CheckStatus(){
 
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
@@ -66,7 +66,9 @@ public class HomeTest extends B2CBaseTest{
         log.info("Message : "+ msg);
         Assert.assertEquals("success",msg);
     }
-    @Test(priority = 51, description = "Test Section Identifiers" )
+
+
+    @Test(priority = 51, description = "Test Section Identifiers" , groups = {"Sanity", "Regression"})
     public void SectionIdentifiers() {
 
         for (int i = 0; i < homeSectionsArray.size(); i++) {
@@ -76,7 +78,9 @@ public class HomeTest extends B2CBaseTest{
             Assert.assertNotNull(homeSectionsIdentifiers,"homeSections is null");
         }
     }
-    @Test(priority = 52, description = "Test Identifiers Tiles_Messages" )
+
+
+    @Test(priority = 52, description = "Test Identifiers Tiles_Messages" , groups = {"Sanity", "Regression"})
     public void IdentifiersTilesMessages() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -97,7 +101,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 53, description = "Test Identifiers Tiles Button_Title" )
+    @Test(priority = 53, description = "Test Identifiers Tiles Button_Title" , groups = {"Sanity", "Regression"})
     public void IdentifiersTilesButtonTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -118,7 +122,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 54, description = "Test Identifiers Tiles Sub_Title" )
+    @Test(priority = 54, description = "Test Identifiers Tiles Sub_Title" , groups = {"Regression"})
     public void IdentifiersTilesSubTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -138,7 +142,9 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 55, description = "Test Identifiers Tiles Show_Tile" )
+
+
+    @Test(priority = 55, description = "Test Identifiers Tiles Show_Tile" , groups = {"Regression"})
     public void IdentifiersTilesShowTile() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -159,7 +165,9 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 56, description = "Test Section Is Overlap" )
+
+
+    @Test(priority = 56, description = "Test Section Is Overlap", groups = {"Regression"} )
     public void SectionIsOverlap() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -175,7 +183,8 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 57, description = "Test Section Title" )
+
+    @Test(priority = 57, description = "Test Section Title", groups = {"Regression"} )
     public void SectionTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -190,7 +199,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 58, description = "Test Tile Analytic Name" )
+    @Test(priority = 58, description = "Test Tile Analytic Name", groups = {"Regression"} )
     public void TileAnalyticName() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -210,7 +219,7 @@ public class HomeTest extends B2CBaseTest{
         softAssert.assertAll();
     }
 
-    @Test(priority = 59, description = "Test Section Tile Tile_title" )
+    @Test(priority = 59, description = "Test Section Tile Tile_title" , groups = {"Regression"})
     public void SecTileTiletitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -229,7 +238,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 60, description = "Test Tile Type Analytics" )
+    @Test(priority = 60, description = "Test Tile Type Analytics" , groups = {"Regression"})
     public void TileTypeAnalytics() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -248,7 +257,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 61, description = "Test Location" )
+    @Test(priority = 61, description = "Test Location" , groups = {"Sanity", "Regression"})
     public void Location() {
 
         int showLocationSize = jsonPath.getInt("data.location.size()");
@@ -257,8 +266,11 @@ public class HomeTest extends B2CBaseTest{
         }else {
             log.info("showLocationSize : " + showLocationSize);
             Assert.assertNotEquals(0, showLocationSize);
-        }}
-    @Test(priority = 62, description = "Test Delivery Tab" )
+        }
+    }
+
+
+    @Test(priority = 62, description = "Test Delivery Tab" , groups = {"Sanity", "Regression"})
     public void DeliveryTab() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -269,8 +281,11 @@ public class HomeTest extends B2CBaseTest{
             log.info("deliveryTab : "+deliveryTab);
             softAssert.assertNotNull(deliveryTab,"deliveryTab is null");
             softAssert.assertAll();
-        }}
-    @Test(priority = 63, description = "Test users information" )
+        }
+    }
+
+
+    @Test(priority = 63, description = "Test users information" , groups = {"Smoke", "Sanity", "Regression"})
     public void Users() {
 
         int userSize = jsonPath.getInt("data.user.size()");
@@ -279,6 +294,7 @@ public class HomeTest extends B2CBaseTest{
         }else {
             log.info("userSize : "+ userSize);
             Assert.assertNotEquals(0,userSize);
-        }}
+        }
+    }
 
 }

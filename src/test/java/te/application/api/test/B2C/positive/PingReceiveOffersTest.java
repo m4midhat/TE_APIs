@@ -28,12 +28,12 @@ public class PingReceiveOffersTest extends B2CBaseTest {
 
     public void setUp() throws IOException {
 
-        RestAssured.basePath = AppConstants.BASE_PATE_PINGS_RECEIVE_OFFERS;
+        RestAssured.basePath = endPoints.getProperty("BASE_PATE_PINGS_RECEIVE_OFFERS");
         log.info("\n>>>>>>>>>>>>>>>>>>" + AppConstants.sessionID);
 
         String bodyData = generateAPIBody.pingReceiveOffers(AppConstants.requestLanguage,"74.3528115","31.527362",
-                "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion, "dc57c128bcfc4155","AED",
-                "9120772","dc57c128bcfc4155","1",AppConstants.requestDeviceModel,AppConstants.requestTimeZone,"9120772");
+                "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion, AppConstants.requestDeviceKey,"AED",
+                AppConstants.requestDeviceKey,"1",AppConstants.requestDeviceModel,AppConstants.requestTimeZone,"9120772");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

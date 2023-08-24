@@ -40,16 +40,16 @@ public class ForgetPasswordTest extends B2CBaseTest {
     }
 
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void ValidateForgetPassword() throws IOException {
-        RestAssured.basePath = AppConstants.B2C_FORGOT_PASSWORD;
+        RestAssured.basePath = endPoints.getProperty("B2C_FORGOT_PASSWORD");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
-            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, "AED",
-                    "ios-48195B02-3646-4EDF-A46B-67646935624B", AppConstants.requestAppVersion, "entertainer",
-                    AppConstants.UserID, AppConstants.BASE_URI_B2C+AppConstants.B2C_FORGOT_PASSWORD, "1",
-                    "25.300579", "55.307709", AppConstants.requestLanguage, "ios-48195B02-3646-4EDF-A46B-67646935624B",
+            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
+                    AppConstants.requestDeviceKey, AppConstants.requestAppVersion, "entertainer",
+                    AppConstants.UserID, endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("B2C_FORGOT_PASSWORD"), "1",
+                    "25.300579", "55.307709", AppConstants.requestLanguage, AppConstants.requestDeviceKey,
                     "9143773", AppConstants.requestOSPlatform, AppConstants.requestOSVersion, propUserName,
                     AppConstants.requestOSPlatform, AppConstants.requestTimeZone);
             RequestSpecification httpRequest = RestAssured.given()
@@ -64,7 +64,7 @@ public class ForgetPasswordTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 0, description = "Status code check")
+    @Test(priority = 0, description = "Status code check", groups = {"Smoke", "Sanity", "Regression"})
     public void checkStatus() {
         int expectedStatus = 201;
         int actualStatus = jsonPath.getInt("http_response");
@@ -73,25 +73,25 @@ public class ForgetPasswordTest extends B2CBaseTest {
         log.info("Actual value in response is : " + actualStatus);
     }
 
-    @Test(priority = 1, description = "Status Success Message")
+    @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"})
     public void checkMessage() {
         String message = jsonPath.getString("message");
         Assert.assertEquals("success", message, "Message value should be 'success'");
     }
 
-    @Test(priority = 2, description = "Verify Success Message is true")
+    @Test(priority = 2, description = "Verify Success Message is true", groups = {"Smoke", "Sanity", "Regression"})
     public void successMessage() {
         String message = jsonPath.getString("success");
         Assert.assertEquals("true", message, "Message value should be 'true'");
     }
 
-    @Test(priority = 3, description = "Check Email sent is true")
+    @Test(priority = 3, description = "Check Email sent is true", groups = {"Sanity", "Regression"})
     public void checkSentStatus() {
-        String actualkey = jsonPath.getString("data.is_sent");
-        Assert.assertTrue(Boolean.parseBoolean(actualkey), "Sent Key validated");
+        String actualKey = jsonPath.getString("data.is_sent");
+        Assert.assertTrue(Boolean.parseBoolean(actualKey), "Sent Key validated");
     }
 
-    @Test(priority = 4, description = "Verify ResetPassword Message")
+    @Test(priority = 4, description = "Verify ResetPassword Message", groups = {"Regression"})
     public void checkResetPasswordMessage() {
         String actualMessage = jsonPath.getString("data.message");
         Assert.assertEquals(actualMessage, forgotPassword.msgEnglish, "Link should be sent on registered email");

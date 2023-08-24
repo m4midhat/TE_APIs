@@ -6,6 +6,7 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 
@@ -60,45 +61,19 @@ public class SignInTest extends B2CBaseTest {
         return password.toString();
     }
 
-    public void setUp() throws IOException {
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
-
-        Properties properties = Utils.initProperties("AppAuthentication");
-        if (properties != null) {
-            propUserName = Utils.decodeString(properties.getProperty("username"));
-            propPassword = Utils.decodeString(properties.getProperty("password"));
-
-            String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
-                    "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName,
-                    propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                    AppConstants.SessionURL, authToken.B2CAUTH_TOKEN,"true");
-            RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", authToken.B2CAUTH_TOKEN)
-                    .contentType("application/json")
-                    .body(bodyData)
-                    .log().all();
-            response = httpRequest.post();
-            log.info(response.asString());
-            jsonPath = response.jsonPath();
-            AppConstants.sessionID = jsonPath.getString("data.user.session_token");
-            log.info("Session ID................ : " + AppConstants.sessionID);
-        }
-    }
-    @Test (priority = 0, description = "Sign In with Random EmailId and Valid password")
+    @Test (priority = 0, description = "Sign In with Random EmailId and Valid password", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithRandomEmailAndValidPassword() throws IOException {
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propPassword = Utils.decodeString(properties.getProperty("password"));
             String randomEmail = generateRandomEmail(12);
             String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",randomEmail,
+                    AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                    AppConstants.requestDeviceKey, "1",randomEmail,
                     propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
+                    endPoints.getProperty("SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
@@ -112,18 +87,18 @@ public class SignInTest extends B2CBaseTest {
             Assert.assertEquals(422, statusCode, "Login Validation Failed");
         }
     }
-    @Test (priority = 1, description = "Sign In with valid EmailId and Random password")
+    @Test (priority = 1, description = "Sign In with valid EmailId and Random password", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithValidEmailAndRandomPassword() throws IOException {
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
             String randomPassword = generateRandomPassword(8);
             String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                    "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName, randomPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                    AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
+                    AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                    AppConstants.requestDeviceKey, "1", propUserName, randomPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
+                    endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
@@ -137,15 +112,15 @@ public class SignInTest extends B2CBaseTest {
             Assert.assertEquals(422, statusCode, "Log in failed Please check your email and/or password.");
         }
     }
-    @Test (priority = 2, description = "Sign In with blank credentials.")
+    @Test (priority = 2, description = "Sign In with blank credentials.", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithBlankCredentials(){
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
         String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", "", "", // Both email and password are empty
+                AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                AppConstants.requestDeviceKey, "1", "", "", // Both email and password are empty
                 AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
+                endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -159,15 +134,15 @@ public class SignInTest extends B2CBaseTest {
         Assert.assertEquals(422, statusCode, "Status code should be 422 returned");
     }
 
-    @Test (priority = 3, description = "SignIn with Email Only")
+    @Test (priority = 3, description = "SignIn with Email Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithEmailOnly(){
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
         String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", propUserName,
+                AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                AppConstants.requestDeviceKey, "1", propUserName,
                 "", AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
+                endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -181,15 +156,15 @@ public class SignInTest extends B2CBaseTest {
         Assert.assertEquals(500, statusCode, "Status code should be 500 returned");
     }
 
-    @Test (priority = 4, description = "SignIn with Password Only")
+    @Test (priority = 4, description = "SignIn with Password Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithPasswordOnly(){
-        RestAssured.basePath = AppConstants.B2C_LOGIN;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
         String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", AppConstants.requestCurrency, "0", "55.307709",
-                "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1", "",
+                AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                AppConstants.requestDeviceKey, "1", "",
                 propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                AppConstants.SessionURL, Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
+                endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

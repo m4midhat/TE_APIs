@@ -9,6 +9,11 @@ import org.json.simple.parser.ParseException;
 import te.application.appConstants.AppConstants;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
@@ -93,9 +98,7 @@ public class Utils {
     }
 
     public static String encodeString(String str){
-        String encodedString = Base64.getEncoder().encodeToString(str.getBytes());
-        //System.out.println("Encoded String : "+encodedString);
-        return encodedString;
+        return Base64.getEncoder().encodeToString(str.getBytes());
     }
 
     public static Properties initProperties(String fileName) throws IOException, FileNotFoundException {
@@ -108,6 +111,11 @@ public class Utils {
         if(fileName.compareToIgnoreCase("AppAuthentication")==0){
             inputStream = new FileInputStream("./src/main/resources/AppAuthentication.properties");
         }
+        else
+        if(fileName.compareToIgnoreCase("ProductEndPoints")==0){
+            inputStream = new FileInputStream("./src/main/resources/product.properties");
+        }
+
         properties = new Properties();
         properties.load(inputStream);
 
@@ -246,5 +254,48 @@ public class Utils {
         }
         return appVersion;
     }
+
+    public static String getRandomDeviceKey(JSONObject jsonObject){
+        String deviceKey ="";
+        JSONArray deviceKeys;
+        if(!jsonObject.isEmpty()){
+            if(AppConstants.requestOSPlatform.compareToIgnoreCase("iOS")==0){
+                deviceKeys = (JSONArray) jsonObject.get("iOSDeviceKey");
+                deviceKey = deviceKeys.get(generateRandomNumber(0, deviceKeys.size()-1)).toString();
+            }
+            else if(AppConstants.requestOSPlatform.compareToIgnoreCase("android")==0){
+                deviceKeys = (JSONArray) jsonObject.get("androidDeviceKey");
+                deviceKey = deviceKeys.get(generateRandomNumber(0, deviceKeys.size()-1)).toString();
+            }
+        }
+
+        System.out.println("Random Device key selected from file : " + deviceKey);
+        return deviceKey;
+    }
+
+    /*
+    public static void main(String[] args) throws IOException, InterruptedException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(now.format(dtf));
+
+        String directoryName = "./JMeterReports/"+"Report_"+ now.format(dtf)+"/";
+        System.out.println("O/P directory : "+directoryName);
+        Path path = Paths.get(directoryName);
+
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                // fail to create directory
+                e.printStackTrace();
+            }
+        }
+        //Process process = Runtime.getRuntime().exec("cd /Users/ent20071214/Downloads/apache-jmeter-5.5/bin/ && sh apache-jmeter-5.5/bin/jmeter");
+        Process process = Runtime.getRuntime().exec("sh apache-jmeter-5.5/bin/jmeter -n -t apache-jmeter-5.5/bin/APICorelation.jmx -l "+directoryName+ "index.csv -e -o "+directoryName+ "html");
+        process.waitFor();
+        LocalDateTime after = LocalDateTime.now();
+        System.out.println(after.format(dtf));
+    }*/
 
 }

@@ -42,14 +42,16 @@ public class RedemptionTest  extends B2CBaseTest {
         int offer= Integer.valueOf(dbInfo.get(0));
 
 
-        String bodyData = generateAPIBody.RedemptionsDetails("25.300579","ios","entertainer",AppConstants.requestLanguage,"8.03.01",
-                "ios-277C9450-8B64-4521-9B89-3583B6F788D7", dbInfo.get(0),"USD", "9142525","ios-277C9450-8B64-4521-9B89-3583B6F788D7","ios-277C9450-8B64-4521-9B89-3583B6F788D7",
-                offer,dbInfo.get(2),AppConstants.sessionID ,"1",1,1,product_id,"0","ios","Unknown Device",
-                "Asia/Karachi","55.307709","ios",
-                "AED",outlet_id,"0");
+        String bodyData = generateAPIBody.RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",
+                AppConstants.requestLanguage,AppConstants.requestAppVersion,
+                AppConstants.requestDeviceKey,AppConstants.requestCurrency,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
+                AppConstants.requestDeviceKey, offer,dbInfo.get(2),AppConstants.sessionID ,"1",1,
+                1,product_id,"0",AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
+                AppConstants.requestTimeZone,"55.307709",AppConstants.requestOSPlatform,
+                AppConstants.requestCurrency,outlet_id,"0");
         log.info(bodyData);
 
-        RestAssured.basePath = AppConstants.BASE_PATH_REDEEM;
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_REDEEM");
         RequestSpecification httpRequest = RestAssured.given()
 
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

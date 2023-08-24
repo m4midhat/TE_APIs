@@ -23,18 +23,17 @@ public class FetchLocationsTest extends B2CBaseTest {
     public void setUp() throws IOException {
 
         //Defining api url
-        RestAssured.basePath = AppConstants.B2C_LOCATIONS;
+        RestAssured.basePath = endPoints.getProperty("B2C_LOCATIONS");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             String propPassword = Utils.decodeString(properties.getProperty("password"));
 
             //initializing params
             String bodyData = generateAPIBody.locations(0, AppConstants.requestLanguage, true, "25.300579", "entertainer",
-                    AppConstants.requestOSPlatform, AppConstants.requestAppVersion, "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "0", "AED",
-                    AppConstants.UserID, "1", "55.307709", "ios-0C7C873D-8A9B-4D34-948E-3F5C19A6B439", "1",
+                    AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey, "0", AppConstants.requestCurrency,
+                    "1", "55.307709", AppConstants.requestDeviceKey, "1",
                     propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
-                    "1", AppConstants.sessionID, "55.307709", AppConstants.requestOSPlatform, "25.300579",
-                    AppConstants.SessionURL, authToken.B2CAUTH_TOKEN);
+                    "1", "55.307709", AppConstants.requestOSPlatform, "25.300579");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
@@ -45,6 +44,9 @@ public class FetchLocationsTest extends B2CBaseTest {
             jsonPath = response.jsonPath();
             //AppConstants.sessionID = jsonPath.getString("data.user.session_token");
             log.info("Session ID : " + AppConstants.sessionID);
+        }
+        else {
+            log.error("Unable to read the file");
         }
     }
 

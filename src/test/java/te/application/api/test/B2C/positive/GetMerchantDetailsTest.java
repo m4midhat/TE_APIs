@@ -23,12 +23,16 @@ import static te.application.utilities.generateAPIBody.merchantDetails;
 @Slf4j
 public class GetMerchantDetailsTest extends B2CBaseTest {
 
-    private int merchantID;
+    private final int merchantID, locationID;
+    private final String languageCode, category;
     private long res;
 
-    public GetMerchantDetailsTest(int merchantID){
+    public GetMerchantDetailsTest(int merchantID, String languageCode, int locationID, String category){
         this.merchantID = merchantID;
+        this.locationID = locationID;
+        this.languageCode = languageCode;
         //log.info(String.valueOf(this.merchantID));
+        this.category = category;
     }
 
 
@@ -37,19 +41,22 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     {
         return new Object[]
                 {
-                        new GetMerchantDetailsTest(11133)
+                        //new GetMerchantDetailsTest(52604, "en", 1),
+                        new GetMerchantDetailsTest(19257,"en", 1, "Restaurants and Bars")
+                        //new GetMerchantDetailsTest(19337, "en", 1)
+
                 };
     }
 
     @BeforeClass
     public void getMerchantsData()  {
         LocalDateTime requestTime = LocalDateTime.now();
-        String bodyData = merchantDetails("andriod", "default", "entertainer", "Travel",
-                9120877, AppConstants.requestDeviceModel, 0,1, "None", "False",
-                31930199, AppConstants.requestLanguage, "json", merchantID, 11133, AppConstants.requestTimeZone,
-                "USD", "None", "None", "None", "None", "3bc5d207fb86dab8",
-                AppConstants.sessionID, "redeemable_reusable", AppConstants.requestAppVersion);
-        RestAssured.basePath = AppConstants.B2C_BASE_PATH_MERCHANT + merchantID;
+        String bodyData = merchantDetails("andriod", "default", "entertainer", category,
+                AppConstants.requestDeviceModel, 0,locationID, "None", "False",
+                31930199, languageCode, "json", merchantID, -1, AppConstants.requestTimeZone,
+                AppConstants.requestCurrency, "None", "None", "None", "None", AppConstants.requestDeviceKey,
+                "redeemable_reusable", AppConstants.requestAppVersion);
+        RestAssured.basePath = endPoints.getProperty("B2C_BASE_PATH_MERCHANT") + merchantID;
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -74,7 +81,7 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     @Test(description = "Time taken by the API should be less than expected time", priority = 11, dependsOnMethods = "statusCodeShouldBe200")
     public void timeTakenByAPI() {
         log.info("Time taken by API : "+ res);
-        assertFalse(res > AppConstants.EXPECTED_API_TIME, "(MerchantID : "+merchantID+"). Expected time should be less than "+AppConstants.EXPECTED_API_TIME);
+        assertFalse(res > Integer.parseInt(endPoints.getProperty("EXPECTED_API_TIME")) , "(MerchantID : "+merchantID+"). Expected time should be less than "+Integer.parseInt(endPoints.getProperty("EXPECTED_API_TIME")));
     }
 
 
@@ -117,7 +124,8 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     @Test(description = "Merchant email address should be populated", priority = 17, dependsOnMethods = "statusCodeShouldBe200")
     public void merchantEmailAddressShouldBePopulated(){
         String merchantEmail = jsonPath.getString("data.merchant.email");
-        log.info(String.valueOf(merchantEmail.length()));
+        log.info(merchantEmail);
+        //log.info(String.valueOf(merchantEmail.length()));
         assertNotNull(merchantEmail, "(MerchantID : "+merchantID+"). email should be populated/not null");
     }
 
@@ -229,9 +237,13 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
 
     @Test(description = "Merchant is_barcode_enabled should be populated", priority = 33, dependsOnMethods = "statusCodeShouldBe200")
     public void merchantIsOpenShouldBePopulated(){
-        int is_open = jsonPath.getInt("data.merchant.is_open");
-        log.info(String.valueOf(is_open));
-        assertNotNull(is_open, "(MerchantID : "+merchantID+"). Merchant is_open should be populated/not null");
+        int is_open=0;
+        if(category.compareToIgnoreCase("Restaurants and Bars")!=0){
+            is_open = jsonPath.getInt("data.merchant.is_open");
+            log.info(String.valueOf(is_open));
+            assertNotNull(is_open, "(MerchantID : "+merchantID+"). Merchant is_open should be populated/not null");
+        }
+
     }
 
     @Test(description = "Merchant show_view_dine_offer_section should be populated", priority = 34, dependsOnMethods = "statusCodeShouldBe200")

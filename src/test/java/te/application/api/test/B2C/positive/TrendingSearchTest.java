@@ -24,18 +24,17 @@ public class TrendingSearchTest extends B2CBaseTest {
     String jsonData = "";
     JsonObject dataObject;
     JsonArray resultsArray;
-    boolean exists;
 
     @BeforeClass
     public void setUp() throws IOException {
-        RestAssured.baseURI = AppConstants.PYTHON_BASE_URI;
-        RestAssured.basePath = AppConstants.BASE_PATH_TRENDING_SEARCH;
+        RestAssured.baseURI = endPoints.getProperty("PYTHON_BASE_URI");
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_TRENDING_SEARCH");
         //RestAssured.basePath = AppConstants.BASE_PATE_TRENDING_SEARCH;
 
         String bodyData = generateAPIBody.trendingSearch(true,"1","All",
                 "0",AppConstants.requestLanguage,3,"31.5273517","74.3528161", AppConstants.requestTimeZone,
-                "AED","9120772","9120772","entertainer",AppConstants.requestAppVersion,
-                AppConstants.requestOSPlatform,AppConstants.requestOSVersion,"dc57c128bcfc4155",AppConstants.requestDeviceModel,"dc57c128bcfc4155");
+                AppConstants.requestCurrency,"entertainer",AppConstants.requestAppVersion,
+                AppConstants.requestOSPlatform,AppConstants.requestOSVersion,AppConstants.requestDeviceKey,AppConstants.requestDeviceModel,AppConstants.requestDeviceKey);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -85,7 +84,6 @@ public class TrendingSearchTest extends B2CBaseTest {
 
             for (int j = 0; j < detailArray.size(); j++) {
                 Integer detailSize = jsonPath.getInt("data.results[" + i + "].details[" + j + "].size()");
-
                 log.info("detailSize : " + i + j + " " + detailSize);
                 Assert.assertNotEquals(0, detailSize);
             }

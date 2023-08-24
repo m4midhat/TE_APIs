@@ -22,11 +22,11 @@ public class MyFamilyTest  extends B2CBaseTest {
 
     @BeforeClass
     public void setUp() throws IOException {
-        RestAssured.basePath = AppConstants.B2C_FAMILY;
+        RestAssured.basePath = endPoints.getProperty("B2C_FAMILY");
 
-        String bodyData = generateAPIBody.Family(AppConstants.requestLanguage, "25.300579", "entertainer", AppConstants.requestOSPlatform,
-                AppConstants.requestAppVersion, "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8", "AED", AppConstants.UserID,
-                "55.307709", "ios-EB98EDCF-205F-4023-88E1-78B924B6D3D8",
+        String bodyData = generateAPIBody.Family(AppConstants.requestLanguage, "25.300579", "entertainer",
+                AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey,
+                AppConstants.requestCurrency, "55.307709", AppConstants.requestDeviceKey,
                 "1", "1", AppConstants.requestOSVersion, AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone, "55.307709", "25.300579");
         RequestSpecification httpRequest = RestAssured.given()

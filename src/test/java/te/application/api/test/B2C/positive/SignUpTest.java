@@ -25,7 +25,7 @@ public class SignUpTest extends B2CBaseTest {
     public String pwd;
     private Faker faker = new Faker();
     public String na;
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
 
         String email = faker.internet().emailAddress();
@@ -36,13 +36,13 @@ public class SignUpTest extends B2CBaseTest {
         password+=Utils.get3RequiredCharactersForPassword();
         log.info("Final Password : "+password);
         String nationality = faker.nation().nationality();
-        RestAssured.baseURI = AppConstants.BASE_URI_B2C;
-        RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
+        RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_SIGNUP");
         String bodyData = generateAPIBody.signUp(password, 0, LastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0","USD","0",FirstName,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","USD",FirstName,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("B2C_LOGIN"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "",nationality, email, AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone,password);
@@ -83,11 +83,11 @@ public class SignUpTest extends B2CBaseTest {
 
     }
 
-    @Test(priority = 0, description = "Status code check" )
+    @Test(priority = 0, description = "Status code check", groups = {"Smoke", "Sanity", "Regression"} )
     public void checkStatus(){
         assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
     }
-    @Test(priority = 1, description = "Verify message" )
+    @Test(priority = 1, description = "Verify message" , groups = {"Smoke", "Sanity", "Regression"})
 
     public void checkMessage(){
         String message = jsonPath.getString("message");
@@ -99,7 +99,7 @@ public class SignUpTest extends B2CBaseTest {
                 Assert.assertEquals(422,StatusCode,"try with new email Id" );*/
 
     }
-    @Test(priority = 2, description = "Verify First name" )
+    @Test(priority = 2, description = "Verify First name" , groups = {"Smoke", "Sanity", "Regression"})
     public void  checkFirstName(){
         String FirstName1 = jsonPath.getString("data.user.first_name");
         log.info(FirstName1);
@@ -107,7 +107,7 @@ public class SignUpTest extends B2CBaseTest {
         assertEquals(FirstName1, FN,"name should be like this");
 
     }
-    @Test(priority = 3, description = "Verify last name" )
+    @Test(priority = 3, description = "Verify last name" , groups = {"Smoke", "Sanity", "Regression"})
     public void  checkLastName(){
         String LastName1 = jsonPath.getString("data.user.last_name");
         log.info(LastName1 );
@@ -115,7 +115,7 @@ public class SignUpTest extends B2CBaseTest {
         assertEquals(LastName1,LN, "name should be like this");
 
     }
-    @Test(priority = 4, description = "Verify session token" )
+    @Test(priority = 4, description = "Verify session token" , groups = {"Smoke", "Sanity", "Regression"})
     public void  checkSessionToken(){
         String SessionToken = jsonPath.getString("data.user.session_token");
         log.info(SessionToken);
@@ -123,7 +123,7 @@ public class SignUpTest extends B2CBaseTest {
 
     }
     //data.is_new_registered
-    @Test(priority = 5, description = "Verify newly registers" )
+    @Test(priority = 5, description = "Verify newly registers" , groups = {"Sanity", "Regression"})
     public void  checkNewResister(){
         String is_new_register = jsonPath.getString("data.is_new_registered");
         boolean isVerify=Boolean.valueOf(is_new_register);
@@ -132,7 +132,7 @@ public class SignUpTest extends B2CBaseTest {
         assertEquals(true,isVerify, "it should be true in new user case" );
 
     }
-    @Test(priority = 6, description = "Verify nationality" )
+    @Test(priority = 6, description = "Verify nationality" , groups = {"Regression"})
     public void  checkNationality(){
         String Nationality = jsonPath.getString("data.user.nationality");
         log.info(Nationality);
@@ -140,7 +140,7 @@ public class SignUpTest extends B2CBaseTest {
 
     }
     //data.user.date_of_birth
-    @Test(priority = 7, description = "Verify date of birth" )
+    @Test(priority = 7, description = "Verify date of birth" , groups = {"Regression"})
     public void  checkBirthdate(){
         String Birthdate = jsonPath.getString("data.user.date_of_birth");
         log.info(Birthdate);
@@ -149,14 +149,14 @@ public class SignUpTest extends B2CBaseTest {
 
     }
 
-    @Test(priority = 8, description = "Verify already exist customer with this email" )
+    @Test(priority = 8, description = "Verify already exist customer with this email" , groups = {"Sanity", "Regression"})
     public void  checkAlreadyExistEmail() throws IOException {
 
         String bodyData = generateAPIBody.signUp(pwd, 0, LN,
                 AppConstants.requestLanguage,1,"25.095395","entertainer", AppConstants.requestOSPlatform,"8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","0",AppConstants.requestCurrency,"0",FN,
+                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",AppConstants.requestCurrency,FN,
                 "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
-                AppConstants.BASE_URI_B2C+AppConstants.B2C_LOGIN,
+                endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("B2C_LOGIN"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "",na, em,AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone,pwd);

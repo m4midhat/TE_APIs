@@ -19,13 +19,13 @@ public class SignOutTest extends B2CBaseTest{
 
 @BeforeClass
     public void setupForLogout() {
-        RestAssured.baseURI = AppConstants.BASE_URI_B2C;
-        RestAssured.basePath = AppConstants.BASE_PATH_SIGNOUT;
+        RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_SIGNOUT");
 
         String bodyData = generateAPIBody.SignOutTest("en", "25.300579", "entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1", "9120772", "AED", "9120772", "55.307709",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1", AppConstants.BASE_URI_B2C+AppConstants.BASE_PATH_SIGNOUT,
+                AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
+                AppConstants.requestDeviceKey, endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("BASE_PATH_SIGNOUT"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN), AppConstants.sessionID, "1", AppConstants.requestOSVersion,
                 AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "55.307709", AppConstants.requestOSPlatform,"25.300579");
         log.info(bodyData);

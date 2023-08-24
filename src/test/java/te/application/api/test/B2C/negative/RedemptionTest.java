@@ -42,14 +42,14 @@ public class RedemptionTest extends B2CBaseTest {
         int offer= Integer.parseInt(dbInfo.get(0));
 
         String bodyData = RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",AppConstants.requestLanguage,
-                AppConstants.requestAppVersion, "ios-277C9450-8B64-4521-9B89-3583B6F788D7", dbInfo.get(0),
-                "USD",AppConstants.UserID,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
-                "ios-277C9450-8B64-4521-9B89-3583B6F788D7", offer,"7777",AppConstants.sessionID ,
+                AppConstants.requestAppVersion, AppConstants.requestDeviceKey,
+                AppConstants.requestCurrency,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
+                AppConstants.requestDeviceKey, offer,"7777",AppConstants.sessionID ,
                 "1",1,1,product_id,"0",AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone,"55.307709",AppConstants.requestOSPlatform,
-                "AED",outlet_id,"0");
+                AppConstants.requestCurrency,outlet_id,"0");
 
-        RestAssured.basePath = AppConstants.BASE_PATH_REDEEM;
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_REDEEM");
         RequestSpecification httpRequest = RestAssured.given()
 
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))

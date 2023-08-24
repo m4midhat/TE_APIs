@@ -19,14 +19,13 @@ import java.io.IOException;
 public class SettingsTest extends B2CBaseTest {
     @BeforeClass
     public void setUp() throws IOException {
-        RestAssured.basePath = AppConstants.BASE_PATH_SETTINGS;
+        RestAssured.basePath = endPoints.getProperty("BASE_PATH_SETTINGS");
 
         String bodyData = generateAPIBody.settings(AppConstants.requestLanguage,"25.300579","entertainer",
-                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,"dc57c128bcfc4155","EGP",
-                "9143020","55.307709","dc57c128bcfc4155","1",
+                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,AppConstants.requestDeviceKey,AppConstants.requestCurrency,
+                "55.307709",AppConstants.requestDeviceKey,"1",
                 AppConstants.requestDeviceModel,AppConstants.requestTimeZone,"entertainer",
-                true, true,AppConstants.requestOSPlatform,
-                AppConstants.sessionID,"9143020");
+                true, true,AppConstants.requestOSPlatform);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")

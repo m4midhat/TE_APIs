@@ -20,13 +20,13 @@ import java.io.IOException;
 public class MyAccountTest extends B2CBaseTest {
     @BeforeClass
     public void ValidateMyAccount() throws IOException {
-        RestAssured.basePath = AppConstants.PROFILE_BASE_PATH;
+        RestAssured.basePath = endPoints.getProperty("PROFILE_BASE_PATH");
 
         //Passing bodyData to profile function
         String bodyData = generateAPIBody.Profile(AppConstants.requestLanguage,"25.300579","entertainer",
-                AppConstants.requestOSPlatform, AppConstants.requestAppVersion,"6316ba8cb97be5be","USD","9130899",
-                "55.307709","6316ba8cb97be5be","1",AppConstants.requestDeviceModel,
-                AppConstants.requestTimeZone,AppConstants.sessionID,"9130899",AppConstants.sessionID);
+                AppConstants.requestOSPlatform, AppConstants.requestAppVersion,AppConstants.requestDeviceKey,AppConstants.requestCurrency,
+                "55.307709",AppConstants.requestDeviceKey,"1",AppConstants.requestDeviceModel,
+                AppConstants.requestTimeZone);
 
         //Passing Request specifications
         RequestSpecification httpRequest = RestAssured.given()

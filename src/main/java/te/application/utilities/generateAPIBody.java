@@ -16,15 +16,15 @@ public class generateAPIBody {
         return body;
     }
 
-    public static String merchantDetails(String plateform, String sort, String company, String category, int i, String deviceModel, int offerId, int locationId, String param1,
+    public static String merchantDetails(String plateform, String sort, String company, String category, String deviceModel, int offerId, int locationId, String param1,
                                          String instantBooking, int SID, String langCode, String format, int merchantID, int outletID, String timezone, String currency,
-                                         String searchType, String limit, String query, String offset, String deviceKey, String sessionToken, String redeemability, String appVersion) {
+                                         String searchType, String limit, String query, String offset, String deviceKey, String redeemability, String appVersion) {
         body = "{\"__platform\": \""+plateform+"\"," +
                 "\"sort\":\""+sort+"\", " +
                 "\"company\": \""+company+"\", " +
                 "\"platform\": \""+plateform+"\", " +
                 "\"__category\": \""+category+"\", " +
-                "\"__i\": "+i+", " +
+                "\"__i\": "+AppConstants.UserID+", " +
                 "\"device_model\": \""+deviceModel+"\", " +
                 "\"offer_id\": "+offerId+", " +
                 "\"category\": \""+category+"\"," +
@@ -35,7 +35,7 @@ public class generateAPIBody {
                 "\"language\": \""+langCode+"\", " +
                 "\"_format\": \""+format+"\", " +
                 "\"merchant_id\": "+merchantID+", " +
-                "\"outlet_id\": "+outletID+", " +
+                //"\"outlet_id\": "+outletID+", " + // default outlet id
                 "\"timezone\": \""+timezone+"\", " +
                 "\"currency\": \""+currency+"\", " +
                 "\"search_type\": \""+searchType+"\", " +
@@ -54,8 +54,8 @@ public class generateAPIBody {
 
 
     public static String signUp(int ice, String language, boolean agreementAccepted, String latitude, String company,
-                                String OSPlatform, String appVersion, String deviceKey, String i, String currency,
-                                String userID, String longitude, String deviceID, String locationID, String emailAddress,
+                                String OSPlatform, String appVersion, String deviceKey, String currency,
+                                String longitude, String deviceID, String locationID, String emailAddress,
                                 String password, String OSVersion, String deviceModel, String timeZone,
                                 String configURL, String configAuthToken
                                                ){
@@ -68,7 +68,7 @@ public class generateAPIBody {
                 "  \"__platform\" : \""+OSPlatform+"\",\n" +
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
-                "  \"__i\" : \"0\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
@@ -106,12 +106,12 @@ public class generateAPIBody {
                 "  \"__platform\" : \""+OSPlatform+"\",\n" +
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
-                "  \"__i\" : \""+i+"\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"is_freemium_base_home\" : "+freemiumBaseHome+",\n" +
 
-                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
+                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", \n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"lng\" : \""+longitude+"\",\n" +
                 "  \"__configuration\" : {\n" +
@@ -133,9 +133,9 @@ public class generateAPIBody {
 
     public static String signUp(String ConfirmPassword, int ice, String Lastname, String language,
                                 int agreementAccepted, String latitude , String company, String OSPlatform,
-                                String appVersion, String deviceKey, String i, String currency, String userID, String Firstname,
+                                String appVersion, String deviceKey, String currency, String Firstname,
                                 String deviceID, String Birthdate, String longitude, String configURL, String configAuthToken,
-                                String Sessiontoken, String Nationality, String emailAddress, String OSVersion, String deviceModel,
+                                String sessionToken, String Nationality, String emailAddress, String OSVersion, String deviceModel,
                                 String timeZone, String password) {
         String bodyData = "{\n" +
                 "  \"confirm_password\" : \""+ConfirmPassword+"\",\n" +
@@ -148,7 +148,7 @@ public class generateAPIBody {
                 "  \"__platform\" : \""+OSPlatform+"\",\n" +
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
-                "  \"__i\" : \""+i+"\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"firstname\" : \""+Firstname+"\",\n" +
@@ -159,7 +159,7 @@ public class generateAPIBody {
                 "    \"url\" : \""+configURL+"\",\n" +
                 "    \"Authorization\" : \""+ configAuthToken+"\"\n" +
                 "  },\n" +
-                "  \"session_token\" : \""+Sessiontoken+"\",\n" +
+                "  \"session_token\" : \""+sessionToken+"\",\n" +
                 "  \"nationality\" : \""+Nationality+"\",\n" +
                 //"  \"location_id\" : \""+locationID+"\",\n" +
 
@@ -170,7 +170,7 @@ public class generateAPIBody {
                 "  \"__lng\" : \""+longitude+"\",\n" +
                 "  \"device_os\" : \""+OSPlatform+"\",\n" +
                 "  \"lat\" : \""+latitude+"\",\n" +
-                "  \"password\" : \""+ConfirmPassword+"\"\n" +
+                "  \"password\" : \""+password+"\"\n" +
                 "}";
 
         return bodyData;
@@ -179,10 +179,9 @@ public class generateAPIBody {
 
     public static String locations(int ice, String language, boolean agreementAccepted, String latitude, String company,
                                    String OSPlatform, String appVersion, String deviceKey, String i, String currency,
-                                   String userID, String freemiumBase, String longitude, String deviceID, String locationID,
+                                   String freemiumBase, String longitude, String deviceID, String locationID,
                                    String password, String OSVersion, String deviceModel, String timeZone,
-                                   String epc, String SessionTok, String Longitude, String DevOs, String Lat,
-                                   String sessionURL, String b2cauthToken){
+                                   String epc, String Longitude, String DevOs, String Lat){
         String bodyData = "{\n" +
                 "  \"i_c_e\" : "+ice+",\n" +
                 "  \"language\" : \""+language+"\",\n" +
@@ -192,7 +191,7 @@ public class generateAPIBody {
                 "  \"__platform\" : \""+OSPlatform+"\",\n" +
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
-                "  \"__i\" : \"0\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+latitude+"\",\n" +
@@ -222,10 +221,10 @@ public class generateAPIBody {
 
     public static String settings( String language, String latitude, String company,
                                    String OSPlatform, String appVersion, String deviceKey,  String currency,
-                                   String userID, String longitude, String deviceID, String locationID
-            , String deviceModel, String timeZone,
-                                   String c, boolean promoHistorySection, boolean languageSection
-            ,String DevicePlateform, String t, String customerId ) {
+                                    String longitude, String deviceID, String locationID,
+                                   String deviceModel, String timeZone,
+                                   String c, boolean promoHistorySection, boolean languageSection,
+                                   String DevicePlateform) {
         String body;
         body = "{\n" +
                 "  \"language\" : \"" + language + "\",\n" +
@@ -250,15 +249,15 @@ public class generateAPIBody {
                 "  \"language_section\" : \"" + languageSection + "\",\n" +
                 "  \"platform\" : \"" + DevicePlateform + "\",\n" +
                 "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
-                "  \"customer_id\" : \"" + customerId + "\",\n" +
+                "  \"customer_id\" : \"" + AppConstants.UserID + "\",\n" +
 
                 "}";
         return body;
     }
 
     public static String signIn(int ice, String language, boolean agreementAccepted, String latitude, String company,
-                                String OSPlatform, String appVersion, String deviceKey, String i, String currency,
-                                String userID, String longitude, String deviceID, String locationID, String emailAddress,
+                                String OSPlatform, String appVersion, String deviceKey, String currency,
+                                String longitude, String deviceID, String locationID, String emailAddress,
                                 String password, String OSVersion, String deviceModel, String timeZone,
                                 String configURL, String configAuthToken, String force_login
     ){
@@ -299,8 +298,8 @@ public class generateAPIBody {
 
     public static String Profile(String language, String latitude, String company,
                                  String OSPlatform, String appVersion, String deviceKey, String currency,
-                                 String userID, String longitude, String deviceID, String locationID,
-                                 String deviceModel, String timeZone, String token, String customerId ,String session_token
+                                 String longitude, String deviceID, String locationID,
+                                 String deviceModel, String timeZone
 
     ){
         String bodyData = "{\n" +
@@ -323,7 +322,7 @@ public class generateAPIBody {
                 "  \"lat\" : \""+latitude+"\",\n" +
                 "  \"__c\" : \""+company+"\",\n" +
                 "  \"__t\" : \""+AppConstants.sessionID+"\",\n" +
-                "  \"customer_id\" : \""+customerId+"\",\n" +
+                "  \"customer_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"platform\" : \""+OSPlatform+"\"\n" +
                 "}";
 
@@ -333,8 +332,8 @@ public class generateAPIBody {
     public static String autoMegaSearch(String category,String categoryID, String includeTravelOutlets,
                                         String locationID, String fromSearch, String searchQuery, String language,
                                         String autoRedeemibility ,int CSAOlSize, String latitude,String longitude,
-                                        int outletSize,  String timeZone, String t,String currency,
-                                        String userID, String customerID, String company,
+                                        int outletSize,  String timeZone,String currency,
+                                        String company,
                                         String appVersion,  String platform,String deviceOS,
                                         String deviceID, String deviceModel, String deviceKey){
         String body;
@@ -353,7 +352,7 @@ public class generateAPIBody {
                 "\"__device_id\" : \""+deviceID+"\",\n" +
                 "\"category\" : \""+category+"\",\n" +
                 "  \"lng\" : \""+longitude+"\",\n" +
-                "\"customer_id\" : \""+customerID+"\",\n" +
+                "\"customer_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"device_os\" : \""+deviceOS+"\",\n" +
                 "  \"session_token\" : \""+AppConstants.sessionID+"\",\n" +
                 "  \"location_id\" : \""+locationID+"\",\n" +
@@ -372,7 +371,7 @@ public class generateAPIBody {
 
     public static String trendingSearch(Boolean includeTravelOutlets, String locationID, String category,String categoryID,
                                         String language,int CSAOlSize, String latitude,String longitude,
-                                        String timeZone,String currency, String userID, String customerID, String company,
+                                        String timeZone,String currency, String company,
                                         String appVersion,  String platform,String deviceOS, String deviceID, String deviceModel, String deviceKey)
     {
         String body;
@@ -386,10 +385,10 @@ public class generateAPIBody {
                 "  \"__l\" : \""+language+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
-                "\"__device_id\" : \""+deviceID+"\",\n" +
-                "\"category\" : \""+category+"\",\n" +
+                "  \"__device_id\" : \""+deviceID+"\",\n" +
+                "  \"category\" : \""+category+"\",\n" +
                 "  \"lng\" : \""+longitude+"\",\n" +
-                "\"customer_id\" : \""+customerID+"\",\n" +
+                "  \"customer_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"device_os\" : \""+deviceOS+"\",\n" +
                 "  \"session_token\" : \""+AppConstants.sessionID+"\",\n" +
                 "  \"location_id\" : \""+locationID+"\",\n" +
@@ -405,10 +404,10 @@ public class generateAPIBody {
     }
 
     public static String filter (String language, String __lat, String company, String __platform, String app_version, String device_Key,
-                                 String __i, String currency, String user_id, int coming_from_normal_outlet_listing, String __device_id,
+                                 String currency, int coming_from_normal_outlet_listing, String __device_id,
                                  String category, String lng, String session_token, String location_id, int include_travel_outlets,
                                  String os_version, String device_model, String time_zone, String __lng, String device_os,
-                                 String lat, String sessionURL, String b2cauthToken) {
+                                 String lat) {
         {
             String bodyData = "{\n" +
                     "  \"language\" : \""+language+"\",\n" +
@@ -417,7 +416,7 @@ public class generateAPIBody {
                     "  \"__platform\" : \""+__platform+"\",\n" +
                     "  \"app_version\" : \""+app_version+"\",\n" +
                     "  \"device_key\" : \""+device_Key+"\",\n" +
-                    "  \"__i\" : \""+__i+"\",\n" +
+                    "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                     "  \"currency\" : \""+currency+"\",\n" +
                     "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                     "  \"coming_from_normal_outlet_listing\" : "+coming_from_normal_outlet_listing+",\n" +
@@ -443,7 +442,7 @@ public class generateAPIBody {
 
     public static String pingSendOffers( String language, String longitude,  String latitude, String company,
                                          String platform, String appVersion, String deviceKey,  String currency,
-                                         String userID, String deviceID, String locationID
+                                         String deviceID, String locationID
             , String deviceModel, String timeZone,String customerId
     ) {
         String body;
@@ -468,7 +467,7 @@ public class generateAPIBody {
                 "  \"__c\" : \"" + company + "\",\n" +
                 "  \"platform\" : \"" + platform + "\",\n" +
                 "  \"__t\" : \"" + AppConstants.sessionID + "\",\n" +
-                "\"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
+                "  \"encryption_disable_key\": \""+AppConstants.ENCRYPTION_DISABLE_KEY+"\", " +
                 "  \"customer_id\" : \"" + customerId + "\"\n" +
 
                 "}";
@@ -493,7 +492,7 @@ public class generateAPIBody {
                 "  \"__lat\" : \""+latitude+"\",\n" +
                 "  \"__lng\" : \""+longitude+"\",\n" +
                 "  \"language\" : \""+language+"\",\n" +
-                "  \"__i\" : \""+i+"\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"__device_id\" : \""+deviceID+"\",\n" +
                 "  \"device_os\" : \""+deviceOs+"\",\n" +
                 "  \"os_version\" : \""+OSVersion+"\",\n" +
@@ -508,7 +507,7 @@ public class generateAPIBody {
 
 
     public static String SignOutTest(String language, String _latitude, String company, String OSPlatform, String appVersion,
-                                     String deviceKey, String __i, String currency, String userID, String longitude1,
+                                     String deviceKey, String currency, String longitude1,
                                      String deviceID, String configURL,
                                      String configAuthToken,String sessionID, String locationID, String OSVersion, String deviceModel, String timeZone,
                                      String longitude, String deviceOS,String __lat)
@@ -520,7 +519,7 @@ public class generateAPIBody {
                 "  \"__platform\" : \""+OSPlatform+"\",\n" +
                 "  \"app_version\" : \""+appVersion+"\",\n" +
                 "  \"device_key\" : \""+deviceKey+"\",\n" +
-                "  \"__i\" : \""+__i+"\",\n" +
+                "  \"__i\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"currency\" : \""+currency+"\",\n" +
                 "  \"user_id\" : \""+AppConstants.UserID+"\",\n" +
                 "  \"lng\" : \""+longitude1+"\",\n" +
@@ -546,7 +545,7 @@ public class generateAPIBody {
 
     public static String pingReceiveOffers( String language, String longitude,  String latitude, String company,
                                             String platform, String appVersion, String deviceKey,  String currency,
-                                            String userID, String deviceID, String locationID
+                                            String deviceID, String locationID
             , String deviceModel, String timeZone,String customerId) {
         String body;
         body = "{\n" +
@@ -579,7 +578,7 @@ public class generateAPIBody {
 
 
     public static String RedemptionsDetails(String lat,String platform,String company,String language,String app_version,
-                                            String device_key,String __i,String currency,String user_id,String transaction_id,
+                                            String device_key,String currency,String transaction_id,
                                             String __device_id,int offer_id,String merchant_pin,String session_token,String location_id,
                                             int quantity,int is_reattempt,int product_id,String is_shared,String os_version,
                                             String device_model,String time_zone,String __lng,String device_os,String outlet_currency,
@@ -590,7 +589,7 @@ public class generateAPIBody {
                 "\"language\": \""+language+"\", " +
                 "\"app_version\": \""+app_version+"\", " +
                 "\"device_key\":\" "+device_key+"\", " +
-                "\"__i\": \""+__i+"\", " +
+                "\"__i\": \""+AppConstants.UserID+"\",\n" +
                 "\"currency\": \""+currency+"\", " +
                 "\"user_id\": \""+AppConstants.UserID+"\"," +
                 "\"transaction_id\": \""+transaction_id+"\", " +
@@ -617,7 +616,7 @@ public class generateAPIBody {
     }
 
     public static String Family(String language, String __lat, String Company, String OsPlatform, String appVersion,
-                                String deviceKey, String Currency, String userID, String lng, String deviceID,
+                                String deviceKey, String Currency, String lng, String deviceID,
                                 String LocationId, String FamilyLimit,
                                 String OsVer, String DeviceModel, String TimeZone, String __lng,
                                 String lat){

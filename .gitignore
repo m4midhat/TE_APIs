@@ -2,3 +2,9 @@ target
 .idea
 TestReport
 *.html
+jmeter.log
+JMeterReports
+apache-jmeter-5.5
+apache-jmeter-5.5/*.*
+*.png
+*.jmx

@@ -9,6 +9,7 @@
     "android"
   ],
   "iOS" : [
+    "Unknown",
     "iPhone OS 1",
     "iPhone OS 2",
     "iPhone OS 3",
@@ -28,6 +29,7 @@
     "iOS 17"
   ],
   "android" : [
+    "Unknown",
     "Android 4",
     "Android 5",
     "Android 6",
@@ -42,18 +44,6 @@
     "Android 15",
     "Android 16",
     "Android 17"
-  ],
-  "appVersion" : [
-    "1.0.0",
-    "1.0.1",
-    "1.0.13",
-    "1.0.15",
-    "1.0.16",
-    "1.0.2",
-    "1.0.3",
-    "1.0.4",
-    "1.0.5",
-    "1.0.7"
   ],
   "iOS Device" : [
     "Unknown",
@@ -403,5 +393,11 @@
     "8.4",
     "8.7",
     "8.8"
+  ],
+  "iOSDeviceKey" : [
+    "ios-48195B02-3646-4EDF-A46B-67646935624B"
+  ],
+  "androidDeviceKey" : [
+    "AB-89736-U6LK"
   ]
 }

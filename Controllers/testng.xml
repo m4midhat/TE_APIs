@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="API Test Suite">
+    <groups>
+        <run>
+            <include name="Smoke" />
+        </run>
+    </groups>
+    <test name="Sign In">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.SignInTest" />
+        </classes>
+    </test>
+    <test name="Home">
+        <classes>
+            <class name="te.application.api.test.B2C.positive.HomeTest" />
+        </classes>
+    </test>
+
     <listeners>
         <listener class-name="te.application.listener.extentReportListener" />
+        <listener class-name="te.application.Analyzer.AnnotationTransformer" />
     </listeners>
-    <test verbose="10" preserve-order="true" name="B2B API Negative Suite" parallel="classes">
-        <classes>
-            <class name="te.application.api.test.B2B.fnb.negative.SignUpTest" />
-            <class name="te.application.api.test.B2B.fnb.negative.GetMerchantDetailsTest" />
-        </classes>
-    </test>
-    <test name="B2B API Positive Suite" verbose="10" preserve-order="true">
-        <classes>
-            <class name="te.application.api.test.B2C.positive.GetMerchantDetailsTest" />
-        </classes>
-    </test>
 </suite>
