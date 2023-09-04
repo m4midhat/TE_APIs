@@ -10,7 +10,6 @@ import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import te.application.api.baseTest.B2CBaseTest;
-import te.application.api.test.B2C.negative.SignInTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
@@ -108,7 +107,7 @@ public class HomeTest extends B2CBaseTest{
         log.info(String.valueOf(homeSectionsArray));
     }
     @Test(priority = 50, description = "Status code check" , groups = {"Smoke", "Sanity", "Regression"})
-    public void CheckStatus(){
+    public void checkStatus(){
 
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
         log.info(String.valueOf(response.getStatusCode()));
@@ -118,7 +117,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 51, description = "Test Section Identifiers" , groups = {"Sanity", "Regression"})
+    @Test(priority = 51, description = "Test Section Identifiers" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void SectionIdentifiers() {
 
         for (int i = 0; i < homeSectionsArray.size(); i++) {
@@ -130,7 +129,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 52, description = "Test Identifiers Tiles_Messages" , groups = {"Sanity", "Regression"})
+    @Test(priority = 52, description = "Test Identifiers Tiles_Messages" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void IdentifiersTilesMessages() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -148,7 +147,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 53, description = "Test Identifiers Tiles Button_Title" , groups = {"Sanity", "Regression"})
+    @Test(priority = 53, description = "Test Identifiers Tiles Button_Title" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void IdentifiersTilesButtonTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -166,7 +165,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 54, description = "Test Identifiers Tiles Sub_Title" , groups = {"Regression"})
+    @Test(priority = 54, description = "Test Identifiers Tiles Sub_Title" , groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void IdentifiersTilesSubTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -186,7 +185,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 55, description = "Test Identifiers Tiles Show_Tile" , groups = {"Regression"})
+    @Test(priority = 55, description = "Test Identifiers Tiles Show_Tile" , groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void IdentifiersTilesShowTile() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -207,7 +206,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 56, description = "Test Section Is Overlap", groups = {"Regression"} )
+    @Test(priority = 56, description = "Test Section Is Overlap", groups = {"Regression"} , dependsOnMethods = "checkStatus")
     public void SectionIsOverlap() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -222,7 +221,7 @@ public class HomeTest extends B2CBaseTest{
         softAssert.assertAll();
     }
 
-    @Test(priority = 57, description = "Test Section Title", groups = {"Regression"} )
+    @Test(priority = 57, description = "Test Section Title", groups = {"Regression"} , dependsOnMethods = "checkStatus")
     public void SectionTitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -235,7 +234,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 58, description = "Test Tile Analytic Name", groups = {"Regression"} )
+    @Test(priority = 58, description = "Test Tile Analytic Name", groups = {"Regression"} , dependsOnMethods = "checkStatus")
     public void TileAnalyticName() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -253,7 +252,7 @@ public class HomeTest extends B2CBaseTest{
         softAssert.assertAll();
     }
 
-    @Test(priority = 59, description = "Test Section Tile Tile_title" , groups = {"Regression"})
+    @Test(priority = 59, description = "Test Section Tile Tile_title" , groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void SecTileTiletitle() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -270,7 +269,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 60, description = "Test Tile Type Analytics" , groups = {"Regression"})
+    @Test(priority = 60, description = "Test Tile Type Analytics" , groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void TileTypeAnalytics() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -287,7 +286,7 @@ public class HomeTest extends B2CBaseTest{
         }
         softAssert.assertAll();
     }
-    @Test(priority = 61, description = "Test Location" , groups = {"Sanity", "Regression"})
+    @Test(priority = 61, description = "Test Location" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void Location() {
 
         int showLocationSize = jsonPath.getInt("data.location.size()");
@@ -298,7 +297,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 62, description = "Test Delivery Tab" , groups = {"Sanity", "Regression"})
+    @Test(priority = 62, description = "Test Delivery Tab" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void DeliveryTab() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -310,7 +309,7 @@ public class HomeTest extends B2CBaseTest{
     }
 
 
-    @Test(priority = 63, description = "Test users information" , groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 63, description = "Test users information" , groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void Users() {
         int userSize = jsonPath.getInt("data.user.size()");
         if (response.path("data.user.size()")!=null){

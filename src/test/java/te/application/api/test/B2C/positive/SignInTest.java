@@ -92,7 +92,7 @@ public class SignInTest extends B2CBaseTest {
             String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                    AppConstants.requestDeviceKey, "1", propUserName,
+                    AppConstants.requestDeviceKey, locationID, propUserName,
                     propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                     endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
@@ -129,20 +129,20 @@ public class SignInTest extends B2CBaseTest {
         Assert.assertEquals(response.getStatusCode(), 200, "Incorrect status code returned, expected value 200");
     }
 
-    @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void checkMessage() {
         String message = jsonPath.getString("message");
         Assert.assertEquals("success", message, "Message value should be 'success'");
     }
 
-    @Test(priority = 2, description = "email Validate", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 2, description = "email Validate", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void checkEmail() {
         String responseEmail = jsonPath.getString("data.user.email");
         Assert.assertEquals(propUserName, responseEmail);
         log.info("Actual: " + propUserName + " " + "Expected: " + responseEmail);
     }
 
-    @Test(priority = 3, description = "check New user Value should be false", groups = {"Regression"})
+    @Test(priority = 3, description = "check New user Value should be false", groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void verifyNewUser() {
         boolean newUserVal = jsonPath.getBoolean("data.user.new_user");
         //log.info(String.valueOf(newUserVal));
@@ -153,7 +153,7 @@ public class SignInTest extends B2CBaseTest {
 
 
 
-    @Test(priority = 4, description = "Check Session Token is not null", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 4, description = "Check Session Token is not null", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void verifySessionToken() {
         String sessionToken = jsonPath.getString("data.validation_params.session_token");
         log.info(">>>>>>>>>>>>>>>>>"+sessionToken);
@@ -163,7 +163,7 @@ public class SignInTest extends B2CBaseTest {
     }
 
 
-    @Test(priority = 5, description = "Check UserID is not null after successful Sign In", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 5, description = "Check UserID is not null after successful Sign In", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void VerifyUserID() {
         int statusCode = response.statusCode();
         log.info(String.valueOf(statusCode));
@@ -173,7 +173,7 @@ public class SignInTest extends B2CBaseTest {
     }
 
 
-    @Test(priority = 6, description = "Verify Default currency", groups = {"Sanity", "Regression"})
+    @Test(priority = 6, description = "Verify Default currency", groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void verifyDefaultCurrency(){
         String defaultCurrency = jsonPath.getString("data.user.currency");
         String expectedDefaultCurrency = AppConstants.requestCurrency;
@@ -183,7 +183,7 @@ public class SignInTest extends B2CBaseTest {
 
     }
 
-    @Test(priority = 7, description = "onboarding status check", groups = {"Regression"})
+    @Test(priority = 7, description = "onboarding status check", groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void checkOnBoardingStatus() {
         String expectedOnboardingStatus = "2";
         String actualOnboardingStatus = jsonPath.getString("data.user.onboarding_status");
@@ -192,19 +192,19 @@ public class SignInTest extends B2CBaseTest {
         log.info("actual value in response is : " + actualOnboardingStatus);
     }
 
-    @Test(priority = 8, description = "Verify user Active status " , groups = {"Regression"})
+    @Test(priority = 8, description = "Verify user Active status " , groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void CheckUserActiveStatus(){
         int userActiveStatus = jsonPath.getInt("data.user.is_active");
         log.info(String.valueOf(userActiveStatus));
         Assert.assertEquals(1,userActiveStatus,"Status validated");
     }
-    @Test(priority = 9, description = "Sign In with valid Email Id and password on multiple devices.", groups = {"Sanity", "Regression"})
+    @Test(priority = 9, description = "Sign In with valid Email Id and password on multiple devices.", groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void signInWithValidEmailAndPasswordOnMultipleDevices() {
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");;
         String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                AppConstants.requestDeviceKey, "1", propUserName, propPassword,
+                AppConstants.requestDeviceKey, locationID, propUserName, propPassword,
                 AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                 endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"");
         RequestSpecification httpRequest = RestAssured.given()

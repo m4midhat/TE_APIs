@@ -105,7 +105,7 @@ public class MyAccountTest extends B2CBaseTest {
     }
 
 
-    @Test(priority = 1, description = "email check")
+    @Test(priority = 1, description = "email check", dependsOnMethods = "checkStatus")
     public void checkEmail(){
         String responseEmail = jsonPath.getString("data.user.email");
         Assert.assertEquals(SignInTest.propUserName,responseEmail,"email validated");
@@ -122,7 +122,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.profileImage);
     }*/
 
-    @Test(priority = 3, description = "first name check")
+    @Test(priority = 3, description = "first name check", dependsOnMethods = "checkStatus")
     public void checkFirstName(){
         String firstName = jsonPath.getString("data.user.first_name");
         Assert.assertEquals(SignInTest.firstName,firstName,"First Name validated");
@@ -130,7 +130,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.firstName);
     }
 
-    @Test(priority = 4, description = "last name check")
+    @Test(priority = 4, description = "last name check", dependsOnMethods = "checkStatus")
     public void checkLastName(){
         String lastName = jsonPath.getString("data.user.last_name");
         Assert.assertEquals(SignInTest.lastName,lastName,"Last Name validated");
@@ -138,7 +138,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.lastName);
     }
 
-    @Test(priority = 5, description = "date of birth check")
+    @Test(priority = 5, description = "date of birth check", dependsOnMethods = "checkStatus")
     public void checkDob(){
         String Dob = jsonPath.getString("data.user.date_of_birth");
         Assert.assertEquals(SignInTest.dob,Dob,"Date of Birth validated");
@@ -146,7 +146,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.dob);
     }
 
-    @Test(priority = 6, description = "nationality check")
+    @Test(priority = 6, description = "nationality check", dependsOnMethods = "checkStatus")
     public void nationality(){
         String nationality = jsonPath.getString("data.user.nationality");
         Assert.assertEquals(SignInTest.nationality,nationality,  "Nationality validated");
@@ -154,7 +154,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.nationality);
     }
 
-    @Test(priority = 7, description = "country of residence check")
+    @Test(priority = 7, description = "country of residence check", dependsOnMethods = "checkStatus")
     public void checkCountryOfResidence() throws IOException, ParseException {
         String country = jsonPath.getString("data.user.country");
         Assert.assertEquals(Utils.countryCode(country),SignInTest.country,"Country validated");
@@ -162,7 +162,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.country);
     }
 
-    @Test(priority = 8, description = "gender check")
+    @Test(priority = 8, description = "gender check", dependsOnMethods = "checkStatus")
     public void checkGender(){
         String gender = jsonPath.getString("data.user.gender");
         Assert.assertEquals(SignInTest.gender,gender,"Gender validated");
@@ -170,7 +170,7 @@ public class MyAccountTest extends B2CBaseTest {
         log.info(SignInTest.gender);
     }
 
-    @Test(priority = 9, description = "default currency check")
+    @Test(priority = 9, description = "default currency check", dependsOnMethods = "checkStatus")
     public void checkDefaultCurrency(){
         String defaultCurrency = jsonPath.getString("data.user.default_currency");
         Assert.assertEquals(SignInTest.currency,defaultCurrency, "Default Currency validated");

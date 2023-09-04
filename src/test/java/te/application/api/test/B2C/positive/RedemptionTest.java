@@ -6,6 +6,7 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
@@ -21,6 +22,52 @@ import static te.application.utilities.dbDriver.getRandomOfferFromDB;
 
 @Slf4j
 public class RedemptionTest  extends B2CBaseTest {
+    String locationID, languageCode;
+
+    public RedemptionTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new RedemptionTest("1", "en"),
+                        new RedemptionTest("1", "ar"),
+                        new RedemptionTest("1", "ru"),
+                        new RedemptionTest("2", "en"),
+                        new RedemptionTest("2", "ar"),
+                        new RedemptionTest("2", "ru"),
+                        new RedemptionTest("3", "en"),
+                        new RedemptionTest("3", "ar"),
+                        new RedemptionTest("3", "ru"),
+                        new RedemptionTest("6", "en"),
+                        new RedemptionTest("6", "ar"),
+                        new RedemptionTest("6", "ru"),
+                        new RedemptionTest("7", "en"),
+                        new RedemptionTest("7", "ar"),
+                        new RedemptionTest("7", "ru"),
+                        new RedemptionTest("8", "en"),
+                        new RedemptionTest("8", "ar"),
+                        new RedemptionTest("8", "ru"),
+                        new RedemptionTest("9", "en"),
+                        new RedemptionTest("9", "ar"),
+                        new RedemptionTest("9", "ru"),
+                        new RedemptionTest("10", "en"),
+                        new RedemptionTest("10", "ar"),
+                        new RedemptionTest("10", "ru"),
+                        new RedemptionTest("11", "en"),
+                        new RedemptionTest("11", "ar"),
+                        new RedemptionTest("11", "ru"),
+                        new RedemptionTest("18", "en"),
+                        new RedemptionTest("18", "ar"),
+                        new RedemptionTest("18", "ru"),
+                        new RedemptionTest("49", "en"),
+                        new RedemptionTest("49", "ar"),
+                        new RedemptionTest("49", "ru")
+                };
+    }
 
     @BeforeClass
     public void testRedemptionsData() throws IOException {
@@ -45,7 +92,7 @@ public class RedemptionTest  extends B2CBaseTest {
         String bodyData = generateAPIBody.RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",
                 AppConstants.requestLanguage,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
-                AppConstants.requestDeviceKey, offer,dbInfo.get(2),AppConstants.sessionID ,"1",1,
+                AppConstants.requestDeviceKey, offer,dbInfo.get(2),AppConstants.sessionID ,locationID,1,
                 1,product_id,"0",AppConstants.requestOSVersion,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone,"55.307709",AppConstants.requestOSPlatform,
                 AppConstants.requestCurrency,outlet_id,"0");

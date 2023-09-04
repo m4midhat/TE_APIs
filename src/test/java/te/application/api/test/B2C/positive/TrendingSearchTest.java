@@ -107,13 +107,13 @@ public class TrendingSearchTest extends B2CBaseTest {
         log.info(String.valueOf(resultsArray));
     }
     @Test(priority = 250, description = "Status code check" )
-    public void CheckStatus(){
+    public void checkStatus(){
 
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
         log.info(String.valueOf(response.getStatusCode()));
     }
 
-    @Test(priority = 251, description = "Test Section Identifiers" )
+    @Test(priority = 251, description = "Test Section Identifiers" , dependsOnMethods = "checkStatus")
     public void SectionIdentifiers() {
         for (int i = 0; i < resultsArray.size(); i++) {
 
@@ -123,7 +123,7 @@ public class TrendingSearchTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 252, description = "Test Result Details" )
+    @Test(priority = 252, description = "Test Result Details" , dependsOnMethods = "checkStatus")
     public void resultDetails() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -139,7 +139,7 @@ public class TrendingSearchTest extends B2CBaseTest {
             }
         }
     }
-    @Test(priority = 253, description = "Test Trending Search Query params" )
+    @Test(priority = 253, description = "Test Trending Search Query params" , dependsOnMethods = "checkStatus")
     public void resultDetailsQueryTitle() {
 
         SoftAssert softAssert = new SoftAssert();

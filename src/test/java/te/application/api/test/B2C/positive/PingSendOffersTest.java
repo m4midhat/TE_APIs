@@ -82,7 +82,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         String bodyData = generateAPIBody.pingSendOffers(languageCode, "74.3528115",
                 "31.527362", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, AppConstants.requestDeviceKey, locationID,
-                AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "9120772");
+                AppConstants.requestDeviceModel, AppConstants.requestTimeZone, AppConstants.UserID);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
@@ -107,13 +107,13 @@ public class PingSendOffersTest extends B2CBaseTest {
     }
 
     @Test(priority = 300, description = "Status code check")
-    public void CheckStatus() {
+    public void checkStatus() {
         log.info("status code: " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
         log.info(String.valueOf(response.getStatusCode()));
     }
 
-    @Test(priority = 301, description = "Test offerMerchantName")
+    @Test(priority = 301, description = "Test offerMerchantName", dependsOnMethods = "checkStatus")
     public void merchantName() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -127,7 +127,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 302, description = "Test offerName")
+    @Test(priority = 302, description = "Test offerName", dependsOnMethods = "checkStatus")
     public void offerName() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -141,7 +141,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 303, description = "Test offerImageURL")
+    @Test(priority = 303, description = "Test offerImageURL", dependsOnMethods = "checkStatus")
     public void offerImageURL() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -155,7 +155,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 304, description = "Test offerisSent")
+    @Test(priority = 304, description = "Test offerIsSent", dependsOnMethods = "checkStatus")
     public void offerisSent() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -169,7 +169,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 305, description = "Test offer Ping Is Accepted")
+    @Test(priority = 305, description = "Test offer Ping Is Accepted", dependsOnMethods = "checkStatus")
 
     public void offerPingIsAccepted() {
         if (shareOffersArray.size() == 0) {
@@ -192,7 +192,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 306, description = "Test offerPingStatus")
+    @Test(priority = 306, description = "Test offerPingStatus", dependsOnMethods = "checkStatus")
     public void offerPingStatus() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -224,7 +224,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 305, description = "Test recall_button_text")
+    @Test(priority = 305, description = "Test recall_button_text", dependsOnMethods = "checkStatus")
     public void offerPingRecallButton() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -245,7 +245,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 306, description = "Test recall_message")
+    @Test(priority = 306, description = "Test recall_message", dependsOnMethods = "checkStatus")
     public void offerPingRecallMessage() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -267,7 +267,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 306, description = "Test recall_title")
+    @Test(priority = 306, description = "Test recall_title", dependsOnMethods = "checkStatus")
     public void offerPingRecallTitle() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -288,14 +288,14 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 307, description = "Test message")
+    @Test(priority = 307, description = "Test message", dependsOnMethods = "checkStatus")
     public void offerMessage() {
         String messageTest = jsonPath.getString("data.ping_section.message");
         log.info("messageTest :  " + messageTest);
         Assert.assertNotNull(messageTest, "messageTest is null");
     }
 
-    @Test(priority = 311, description = "Test offerPingInfo")
+    @Test(priority = 311, description = "Test offerPingInfo", dependsOnMethods = "checkStatus")
     public void offerPingInfo() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
@@ -309,7 +309,7 @@ public class PingSendOffersTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 312, description = "Test offerPingIsCancellable")
+    @Test(priority = 312, description = "Test offerPingIsCancellable", dependsOnMethods = "checkStatus")
     public void offerPingIsCancellable() {
         if (shareOffersArray.size() == 0) {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");

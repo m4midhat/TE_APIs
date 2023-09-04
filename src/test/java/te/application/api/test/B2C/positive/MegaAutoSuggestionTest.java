@@ -85,7 +85,8 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
         String bodyData = generateAPIBody.autoMegaSearch("All","0","true",
                 locationID,"true",generatedString, languageCode,"true",3,
                 "25.300579","55.307709",10,AppConstants.requestTimeZone,
-                AppConstants.requestCurrency, "entertainer",AppConstants.requestAppVersion,AppConstants.requestOSPlatform,AppConstants.requestOSVersion,
+                AppConstants.requestCurrency, "entertainer",AppConstants.requestAppVersion,AppConstants.
+                        requestOSPlatform,AppConstants.requestOSVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestDeviceModel,AppConstants.requestDeviceKey);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
@@ -114,12 +115,12 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
 
     }
     @Test(priority = 200, description = "Status code check" )
-    public void CheckStatus(){
+    public void checkStatus(){
         log.info("status code: " + response.getStatusCode());
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
         log.info(String.valueOf(response.getStatusCode()));
     }
-    @Test(priority = 201, description = "Test Section Identifiers" )
+    @Test(priority = 201, description = "Test Section Identifiers" , dependsOnMethods = "checkStatus")
     public void SectionIdentifiers() {
 
         for (int i = 0; i < resultsArray.size(); i++) {
@@ -130,7 +131,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 202, description = "Test Result Details" )
+    @Test(priority = 202, description = "Test Result Details" , dependsOnMethods = "checkStatus")
     public void resultDetails() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -147,7 +148,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
             }
         }
     }
-    @Test(priority = 203, description = "Test Result Details title" )
+    @Test(priority = 203, description = "Test Result Details title" , dependsOnMethods = "checkStatus")
     public void resultDetailsTitle() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -166,7 +167,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
                 } }
         }
     }
-    @Test(priority = 204, description = "Test Result Details sub_title" )
+    @Test(priority = 204, description = "Test Result Details sub_title" , dependsOnMethods = "checkStatus")
     public void resultDetailsSubTitle() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -185,7 +186,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
                 } }
         }
     }
-    @Test(priority = 205, description = "Test Result Details Image URL" )
+    @Test(priority = 205, description = "Test Result Details Image URL" , dependsOnMethods = "checkStatus")
     public void resultDetailsImageURL() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -205,7 +206,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
         }
     }
 
-    @Test(priority = 206, description = "Test Result Details Merchant Tags abbreviated_text" )
+    @Test(priority = 206, description = "Test Result Details Merchant Tags abbreviated_text" , dependsOnMethods = "checkStatus")
     public void resultDetailMerchantTagsAbbreviatedText() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -233,7 +234,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
 
         }
     }
-    @Test(priority = 206, description = "Test Result Details Merchant Tags distance" )
+    @Test(priority = 206, description = "Test Result Details Merchant Tags distance" , dependsOnMethods = "checkStatus")
     public void resultDetailMerchantTagsDistance() {
 
         SoftAssert softAssert = new SoftAssert();

@@ -105,28 +105,28 @@ public class ForgetPasswordTest extends B2CBaseTest {
         Assert.assertEquals(expectedStatus, actualStatus, "Status validated");
     }
 
-    @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void checkMessage() {
         log.info(this.locationID+ " "+ this.languageCode);
         String message = jsonPath.getString("message");
         Assert.assertEquals("success", message, "Message value should be 'success'");
     }
 
-    @Test(priority = 2, description = "Verify Success Message is true", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(priority = 2, description = "Verify Success Message is true", groups = {"Smoke", "Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void successMessage() {
         log.info(this.locationID+ " "+ this.languageCode);
         String message = jsonPath.getString("success");
         Assert.assertEquals("true", message, "Message value should be 'true'");
     }
 
-    @Test(priority = 3, description = "Check Email sent is true", groups = {"Sanity", "Regression"})
+    @Test(priority = 3, description = "Check Email sent is true", groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void checkSentStatus() {
         log.info(this.locationID+ " "+ this.languageCode);
         String actualKey = jsonPath.getString("data.is_sent");
         Assert.assertTrue(Boolean.parseBoolean(actualKey), "Sent Key validated");
     }
 
-    @Test(priority = 4, description = "Verify ResetPassword Message", groups = {"Regression"})
+    @Test(priority = 4, description = "Verify ResetPassword Message", groups = {"Regression"}, dependsOnMethods = "checkStatus")
     public void checkResetPasswordMessage() {
         log.info(this.locationID+ " "+ this.languageCode);
         String actualMessage = jsonPath.getString("data.message");

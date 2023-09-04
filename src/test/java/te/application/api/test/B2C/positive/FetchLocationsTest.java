@@ -105,13 +105,13 @@ public class FetchLocationsTest extends B2CBaseTest {
         Assert.assertEquals(200, response.getStatusCode(), "Incorrect status code returned, expected value 200");
     }
 
-    @Test(priority = 1, description = "Verify locations array size")
+    @Test(priority = 1, description = "Verify locations array size", dependsOnMethods = "checkStatus")
     public void verifyLocationArraySize() {
         int size = jsonPath.getInt("data.locations.size()");
         Assert.assertNotEquals(size,0);
     }
 
-    @Test(priority = 2, description = "asserting all locations at each index")
+    @Test(priority = 2, description = "asserting all locations at each index", dependsOnMethods = "checkStatus")
     public void verifyLocationsList(){
 
         int size = jsonPath.getInt("data.locations.size()");

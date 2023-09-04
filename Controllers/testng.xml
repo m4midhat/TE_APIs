@@ -13,7 +13,7 @@
     </test>
     <test name="Home">
         <classes>
-            <class name="te.application.api.test.B2C.positive.HomeTest" />
+            <class name="te.application.api.test.B2C.positive.FilterCategoriesTest" />
         </classes>
     </test>
 
