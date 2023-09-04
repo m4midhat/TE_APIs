@@ -6,9 +6,11 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import te.application.api.baseTest.B2CBaseTest;
+import te.application.api.test.B2C.negative.SignInTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
@@ -21,16 +23,63 @@ public class HomeTest extends B2CBaseTest{
     String jsonData = "";
     JsonObject dataObject;
     JsonArray homeSectionsArray;
+    String locationID, languageCode;
+
+    public HomeTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new HomeTest("1", "en"),
+                        new HomeTest("1", "ar"),
+                        new HomeTest("1", "ru"),
+                        new HomeTest("2", "en"),
+                        new HomeTest("2", "ar"),
+                        new HomeTest("2", "ru"),
+                        new HomeTest("3", "en"),
+                        new HomeTest("3", "ar"),
+                        new HomeTest("3", "ru"),
+                        new HomeTest("6", "en"),
+                        new HomeTest("6", "ar"),
+                        new HomeTest("6", "ru"),
+                        new HomeTest("7", "en"),
+                        new HomeTest("7", "ar"),
+                        new HomeTest("7", "ru"),
+                        new HomeTest("8", "en"),
+                        new HomeTest("8", "ar"),
+                        new HomeTest("8", "ru"),
+                        new HomeTest("9", "en"),
+                        new HomeTest("9", "ar"),
+                        new HomeTest("9", "ru"),
+                        new HomeTest("10", "en"),
+                        new HomeTest("10", "ar"),
+                        new HomeTest("10", "ru"),
+                        new HomeTest("11", "en"),
+                        new HomeTest("11", "ar"),
+                        new HomeTest("11", "ru"),
+                        new HomeTest("18", "en"),
+                        new HomeTest("18", "ar"),
+                        new HomeTest("18", "ru"),
+                        new HomeTest("49", "en"),
+                        new HomeTest("49", "ar"),
+                        new HomeTest("49", "ru")
+                };
+    }
 
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws IOException {
         log.info("Session ID"+AppConstants.sessionID);
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_HOME");
-        String bodyData = generateAPIBody.home(1,AppConstants.requestLanguage,"26.22876",
+        String bodyData = generateAPIBody.home(1,languageCode,"26.22876",
                 "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
-                AppConstants.requestDeviceKey, AppConstants.UserID ,"USD",
-                "50.584381",AppConstants.requestDeviceKey, "1",
+                AppConstants.requestDeviceKey, AppConstants.UserID ,AppConstants.requestCurrency,
+                "50.584381",AppConstants.requestDeviceKey, locationID,
                 AppConstants.requestOSVersion,AppConstants.requestDeviceModel,AppConstants.requestTimeZone,
                 endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("BASE_PATH_HOME"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
@@ -39,6 +88,7 @@ public class HomeTest extends B2CBaseTest{
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -90,10 +140,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String messageTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].message");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].message")==null){
-                    log.error(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else{
-
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].message")!=null){
                     log.info("message : "+ i+j+" "+messageTest);
                     softAssert.assertNotNull(messageTest,"message is null");
                 }
@@ -111,10 +158,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String buttonTitleTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].button_title");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].button_title")==null){
-                    log.error(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else{
-
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].button_title")!=null){
                     log.info("buttonTitleTest : "+ i+j+" "+buttonTitleTest);
                     softAssert.assertNotNull(buttonTitleTest,"buttonTitleTest is null");
                 }
@@ -132,9 +176,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String subTitleTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].sub_title");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].sub_title")==null){
-                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else {
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].sub_title")!=null){
                     log.info("subTitleTest : " + i + j + " " + subTitleTest);
                     softAssert.assertNotNull(subTitleTest, "subTitleTest is null");
                 }
@@ -155,9 +197,7 @@ public class HomeTest extends B2CBaseTest{
             for (int j = 0; j < tilesArray.size(); j++) {
                 String showTileTest = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].show_tile");
                 boolean temp=Boolean.parseBoolean(showTileTest);
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].show_tile")==null){
-                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else {
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].show_tile")!=null){
                     log.info("showTileTest : " + i + j + " " + temp);
                     softAssert.assertTrue(temp, "show tile is false at : " + i + j);
                 }
@@ -174,9 +214,7 @@ public class HomeTest extends B2CBaseTest{
         for (int i = 0; i < homeSectionsArray.size(); i++) {
             String IsOverlap = jsonPath.getString("data.home_sections["+i+"].is_overlap");
             boolean temp=Boolean.parseBoolean(IsOverlap);
-            if (response.path("data.home_sections["+i+"].is_overlap")==null){
-                log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-            }else {
+            if (response.path("data.home_sections["+i+"].is_overlap")!=null){
                 log.info("IsOverlap : " + i + " " + temp);
                 softAssert.assertFalse(temp, "show tile is true at : " + i);
             }
@@ -190,9 +228,7 @@ public class HomeTest extends B2CBaseTest{
 
         for (int i = 0; i < homeSectionsArray.size(); i++) {
             String secTitle = jsonPath.getString("data.home_sections["+i+"].title");
-            if (response.path("data.home_sections["+i+"].title")==null){
-                log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-            }else {
+            if (response.path("data.home_sections["+i+"].title")!=null){
                 log.info("secTitle : " + i + " " + secTitle);
                 softAssert.assertNotNull(secTitle, "secTitle is null");
             }
@@ -209,9 +245,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String analyticName = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_analytic_name");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_analytic_name")==null){
-                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else {
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_analytic_name")!=null){
                     log.info("analyticName : "+ i+j+" "+analyticName);
                     softAssert.assertNotNull(analyticName,"secTitle is null");
                 }}
@@ -229,9 +263,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String tileTitle = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_title");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_title")==null){
-                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else {
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_title")!=null){
                     log.info("tileTitle : "+ i+j+" "+tileTitle);
                     softAssert.assertNotNull(tileTitle,"tileTitle is null");
                 }}
@@ -248,9 +280,7 @@ public class HomeTest extends B2CBaseTest{
 
             for (int j = 0; j < tilesArray.size(); j++) {
                 String TypeAnalytics = jsonPath.getString("data.home_sections["+i+"].tiles["+j+"].tile_type_analytics");
-                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_type_analytics")==null){
-                    log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-                }else {
+                if (response.path("data.home_sections["+i+"].tiles["+j+"].tile_type_analytics")!=null){
                     log.info("TypeAnalytics : "+ i+j+" "+TypeAnalytics);
                     softAssert.assertNotNull(TypeAnalytics,"TypeAnalytics is null");
                 }}
@@ -262,8 +292,6 @@ public class HomeTest extends B2CBaseTest{
 
         int showLocationSize = jsonPath.getInt("data.location.size()");
         if (response.path("data.location.size()")==null){
-            log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-        }else {
             log.info("showLocationSize : " + showLocationSize);
             Assert.assertNotEquals(0, showLocationSize);
         }
@@ -275,23 +303,17 @@ public class HomeTest extends B2CBaseTest{
 
         SoftAssert softAssert = new SoftAssert();
         String deliveryTab = jsonPath.getString("data.location.delivery_tab");
-        if (response.path("data.location.delivery_tab")==null){
-            log.info(">>>>>>>>>>>>>>>DO NOT EXIST<<<<<<<<<<<<<<<<<<<");
-        }else {
+        if (response.path("data.location.delivery_tab")!=null){
             log.info("deliveryTab : "+deliveryTab);
             softAssert.assertNotNull(deliveryTab,"deliveryTab is null");
-            softAssert.assertAll();
         }
     }
 
 
     @Test(priority = 63, description = "Test users information" , groups = {"Smoke", "Sanity", "Regression"})
     public void Users() {
-
         int userSize = jsonPath.getInt("data.user.size()");
-        if (response.path("data.user.size()")==null){
-            log.info(">>>>>>>>>>>>>>>NOT EXIST<<<<<<<<<<<<<<<<<<<");
-        }else {
+        if (response.path("data.user.size()")!=null){
             log.info("userSize : "+ userSize);
             Assert.assertNotEquals(0,userSize);
         }

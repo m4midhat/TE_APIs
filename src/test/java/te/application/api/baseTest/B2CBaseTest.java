@@ -32,6 +32,7 @@ public class B2CBaseTest {
         endPoints = Utils.initProperties("ProductEndPoints");
         loadLocations();
         testData = Utils.readTestData();
+        AppConstants.requestUserAgent = "Apache-HttpClient-QA";
         //AppConstants.testDataLanguage = Utils.getRandomSupportedLanguage(testData);
         AppConstants.requestOSPlatform = Utils.getRandomOS(testData);
         AppConstants.requestOSVersion = Utils.getRandomDeviceOS(testData);

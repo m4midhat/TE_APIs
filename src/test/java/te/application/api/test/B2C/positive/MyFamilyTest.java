@@ -6,6 +6,7 @@ import io.restassured.specification.RequestSpecification;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 
@@ -20,18 +21,67 @@ import java.io.IOException;
 @Slf4j
 public class MyFamilyTest  extends B2CBaseTest {
 
+    String locationID, languageCode;
+
+    public MyFamilyTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new MyFamilyTest("1", "en"),
+                        new MyFamilyTest("1", "ar"),
+                        new MyFamilyTest("1", "ru"),
+                        new MyFamilyTest("2", "en"),
+                        new MyFamilyTest("2", "ar"),
+                        new MyFamilyTest("2", "ru"),
+                        new MyFamilyTest("3", "en"),
+                        new MyFamilyTest("3", "ar"),
+                        new MyFamilyTest("3", "ru"),
+                        new MyFamilyTest("6", "en"),
+                        new MyFamilyTest("6", "ar"),
+                        new MyFamilyTest("6", "ru"),
+                        new MyFamilyTest("7", "en"),
+                        new MyFamilyTest("7", "ar"),
+                        new MyFamilyTest("7", "ru"),
+                        new MyFamilyTest("8", "en"),
+                        new MyFamilyTest("8", "ar"),
+                        new MyFamilyTest("8", "ru"),
+                        new MyFamilyTest("9", "en"),
+                        new MyFamilyTest("9", "ar"),
+                        new MyFamilyTest("9", "ru"),
+                        new MyFamilyTest("10", "en"),
+                        new MyFamilyTest("10", "ar"),
+                        new MyFamilyTest("10", "ru"),
+                        new MyFamilyTest("11", "en"),
+                        new MyFamilyTest("11", "ar"),
+                        new MyFamilyTest("11", "ru"),
+                        new MyFamilyTest("18", "en"),
+                        new MyFamilyTest("18", "ar"),
+                        new MyFamilyTest("18", "ru"),
+                        new MyFamilyTest("49", "en"),
+                        new MyFamilyTest("49", "ar"),
+                        new MyFamilyTest("49", "ru")
+                };
+    }
+
     @BeforeClass
     public void setUp() throws IOException {
         RestAssured.basePath = endPoints.getProperty("B2C_FAMILY");
 
-        String bodyData = generateAPIBody.Family(AppConstants.requestLanguage, "25.300579", "entertainer",
+        String bodyData = generateAPIBody.Family(languageCode, "25.300579", "entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey,
                 AppConstants.requestCurrency, "55.307709", AppConstants.requestDeviceKey,
-                "1", "1", AppConstants.requestOSVersion, AppConstants.requestDeviceModel,
+                locationID, "1", AppConstants.requestOSVersion, AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone, "55.307709", "25.300579");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

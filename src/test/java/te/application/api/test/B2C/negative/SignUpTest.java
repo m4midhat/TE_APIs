@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
@@ -25,11 +26,13 @@ public class SignUpTest  extends B2CBaseTest {
     private Faker faker = new Faker();
     public  String firstName, lastName, emailAddress, password, nationality, dob;
 
+
     @Test(description = "Signup with blank credentials body" , groups = {"Smoke", "Sanity", "Regression"})
     public void  signUpWithBlankCredentials() throws IOException {
 
         String bodyData = generateAPIBody.signUp("", 0, "",
-                AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
+                AppConstants.requestLanguage,1,"25.095395","entertainer",
+                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
                 endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("BASE_PATH_SIGNUP"),
@@ -40,6 +43,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -55,7 +59,7 @@ public class SignUpTest  extends B2CBaseTest {
 
         //Faker faker = new Faker();
         String FirstName = faker.name().firstName();
-        firstName =FirstName;
+        firstName = FirstName;
         String bodyData = generateAPIBody.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,FirstName,
@@ -68,6 +72,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -99,6 +104,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -131,6 +137,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -173,6 +180,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -201,6 +209,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -229,6 +238,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -268,6 +278,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -298,6 +309,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -340,6 +352,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -373,6 +386,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -416,6 +430,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -460,6 +475,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -505,6 +521,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -549,6 +566,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -582,6 +600,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -616,6 +635,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -650,6 +670,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -685,6 +706,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -722,6 +744,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -770,6 +793,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -816,6 +840,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -856,6 +881,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -887,6 +913,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -918,6 +945,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -950,6 +978,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -994,6 +1023,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1027,6 +1057,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1060,6 +1091,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1099,6 +1131,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1149,6 +1182,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1188,6 +1222,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1238,6 +1273,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1277,6 +1313,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1326,6 +1363,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1365,6 +1403,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1415,6 +1454,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1465,6 +1505,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1513,6 +1554,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -1564,6 +1606,7 @@ public class SignUpTest  extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

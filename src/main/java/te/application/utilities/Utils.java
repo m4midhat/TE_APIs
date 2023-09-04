@@ -202,7 +202,7 @@ public class Utils {
                 deviceOS = (JSONArray) jsonObject.get("android");
                 operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
             }
-            System.out.println("Random device OS selected from file : "+operatingSystem);
+            System.out.println("Random device selected from file : "+operatingSystem);
         }
         return operatingSystem;
     }

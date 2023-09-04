@@ -9,6 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
@@ -23,7 +24,54 @@ public class PingReceiveOffersTest extends B2CBaseTest {
     JsonArray shareOffersArray;
     String jsonData = "";
     JsonObject dataObject;
-    boolean exists;
+    String locationID, languageCode;
+
+    public PingReceiveOffersTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new PingReceiveOffersTest("1", "en"),
+                        new PingReceiveOffersTest("1", "ar"),
+                        new PingReceiveOffersTest("1", "ru"),
+                        new PingReceiveOffersTest("2", "en"),
+                        new PingReceiveOffersTest("2", "ar"),
+                        new PingReceiveOffersTest("2", "ru"),
+                        new PingReceiveOffersTest("3", "en"),
+                        new PingReceiveOffersTest("3", "ar"),
+                        new PingReceiveOffersTest("3", "ru"),
+                        new PingReceiveOffersTest("6", "en"),
+                        new PingReceiveOffersTest("6", "ar"),
+                        new PingReceiveOffersTest("6", "ru"),
+                        new PingReceiveOffersTest("7", "en"),
+                        new PingReceiveOffersTest("7", "ar"),
+                        new PingReceiveOffersTest("7", "ru"),
+                        new PingReceiveOffersTest("8", "en"),
+                        new PingReceiveOffersTest("8", "ar"),
+                        new PingReceiveOffersTest("8", "ru"),
+                        new PingReceiveOffersTest("9", "en"),
+                        new PingReceiveOffersTest("9", "ar"),
+                        new PingReceiveOffersTest("9", "ru"),
+                        new PingReceiveOffersTest("10", "en"),
+                        new PingReceiveOffersTest("10", "ar"),
+                        new PingReceiveOffersTest("10", "ru"),
+                        new PingReceiveOffersTest("11", "en"),
+                        new PingReceiveOffersTest("11", "ar"),
+                        new PingReceiveOffersTest("11", "ru"),
+                        new PingReceiveOffersTest("18", "en"),
+                        new PingReceiveOffersTest("18", "ar"),
+                        new PingReceiveOffersTest("18", "ru"),
+                        new PingReceiveOffersTest("49", "en"),
+                        new PingReceiveOffersTest("49", "ar"),
+                        new PingReceiveOffersTest("49", "ru")
+                };
+    }
+
     @BeforeClass
 
     public void setUp() throws IOException {
@@ -37,6 +85,7 @@ public class PingReceiveOffersTest extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

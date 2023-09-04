@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import te.application.api.baseTest.B2CBaseTest;
@@ -22,8 +23,56 @@ import java.io.IOException;
 
 @Slf4j
 public class MegaAutoSuggestionTest extends B2CBaseTest {
-    //String searchQuary = generateRandomString(2)
+    String locationID, languageCode;
     JsonArray resultsArray;
+
+    public MegaAutoSuggestionTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new MegaAutoSuggestionTest("1", "en"),
+                        new MegaAutoSuggestionTest("1", "ar"),
+                        new MegaAutoSuggestionTest("1", "ru"),
+                        new MegaAutoSuggestionTest("2", "en"),
+                        new MegaAutoSuggestionTest("2", "ar"),
+                        new MegaAutoSuggestionTest("2", "ru"),
+                        new MegaAutoSuggestionTest("3", "en"),
+                        new MegaAutoSuggestionTest("3", "ar"),
+                        new MegaAutoSuggestionTest("3", "ru"),
+                        new MegaAutoSuggestionTest("6", "en"),
+                        new MegaAutoSuggestionTest("6", "ar"),
+                        new MegaAutoSuggestionTest("6", "ru"),
+                        new MegaAutoSuggestionTest("7", "en"),
+                        new MegaAutoSuggestionTest("7", "ar"),
+                        new MegaAutoSuggestionTest("7", "ru"),
+                        new MegaAutoSuggestionTest("8", "en"),
+                        new MegaAutoSuggestionTest("8", "ar"),
+                        new MegaAutoSuggestionTest("8", "ru"),
+                        new MegaAutoSuggestionTest("9", "en"),
+                        new MegaAutoSuggestionTest("9", "ar"),
+                        new MegaAutoSuggestionTest("9", "ru"),
+                        new MegaAutoSuggestionTest("10", "en"),
+                        new MegaAutoSuggestionTest("10", "ar"),
+                        new MegaAutoSuggestionTest("10", "ru"),
+                        new MegaAutoSuggestionTest("11", "en"),
+                        new MegaAutoSuggestionTest("11", "ar"),
+                        new MegaAutoSuggestionTest("11", "ru"),
+                        new MegaAutoSuggestionTest("18", "en"),
+                        new MegaAutoSuggestionTest("18", "ar"),
+                        new MegaAutoSuggestionTest("18", "ru"),
+                        new MegaAutoSuggestionTest("49", "en"),
+                        new MegaAutoSuggestionTest("49", "ar"),
+                        new MegaAutoSuggestionTest("49", "ru")
+                };
+    }
+
+
     @BeforeClass
 
     public void setUp() throws IOException {
@@ -34,13 +83,14 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
 
 
         String bodyData = generateAPIBody.autoMegaSearch("All","0","true",
-                "1","true",generatedString,AppConstants.requestLanguage,"true",3,
+                locationID,"true",generatedString, languageCode,"true",3,
                 "25.300579","55.307709",10,AppConstants.requestTimeZone,
                 AppConstants.requestCurrency, "entertainer",AppConstants.requestAppVersion,AppConstants.requestOSPlatform,AppConstants.requestOSVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestDeviceModel,AppConstants.requestDeviceKey);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

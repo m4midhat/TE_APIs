@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 
@@ -17,6 +18,55 @@ import java.io.IOException;
 
 @Slf4j
 public class SettingsTest extends B2CBaseTest {
+
+    String locationID, languageCode;
+
+    public SettingsTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new SettingsTest("1", "en"),
+                        new SettingsTest("1", "ar"),
+                        new SettingsTest("1", "ru"),
+                        new SettingsTest("2", "en"),
+                        new SettingsTest("2", "ar"),
+                        new SettingsTest("2", "ru"),
+                        new SettingsTest("3", "en"),
+                        new SettingsTest("3", "ar"),
+                        new SettingsTest("3", "ru"),
+                        new SettingsTest("6", "en"),
+                        new SettingsTest("6", "ar"),
+                        new SettingsTest("6", "ru"),
+                        new SettingsTest("7", "en"),
+                        new SettingsTest("7", "ar"),
+                        new SettingsTest("7", "ru"),
+                        new SettingsTest("8", "en"),
+                        new SettingsTest("8", "ar"),
+                        new SettingsTest("8", "ru"),
+                        new SettingsTest("9", "en"),
+                        new SettingsTest("9", "ar"),
+                        new SettingsTest("9", "ru"),
+                        new SettingsTest("10", "en"),
+                        new SettingsTest("10", "ar"),
+                        new SettingsTest("10", "ru"),
+                        new SettingsTest("11", "en"),
+                        new SettingsTest("11", "ar"),
+                        new SettingsTest("11", "ru"),
+                        new SettingsTest("18", "en"),
+                        new SettingsTest("18", "ar"),
+                        new SettingsTest("18", "ru"),
+                        new SettingsTest("49", "en"),
+                        new SettingsTest("49", "ar"),
+                        new SettingsTest("49", "ru")
+                };
+    }
+
+
     @BeforeClass
     public void setUp() throws IOException {
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_SETTINGS");
@@ -29,6 +79,7 @@ public class SettingsTest extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

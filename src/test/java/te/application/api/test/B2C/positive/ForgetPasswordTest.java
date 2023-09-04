@@ -5,6 +5,7 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
@@ -20,25 +21,54 @@ import java.util.Random;
 @Slf4j
 public class ForgetPasswordTest extends B2CBaseTest {
     String propUserName;
-    private static final String ALLOWED_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private static final String DOMAIN = "example.com"; // Replace with your desired domain name
-
-    public static String generateRandomEmail(int length) {
+    String locationID, languageCode;
 
 
-        StringBuilder email = new StringBuilder(length);
-        Random random = new Random();
-
-        // Generate random characters for the local part of the email
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(ALLOWED_CHARACTERS.length());
-            email.append(ALLOWED_CHARACTERS.charAt(randomIndex));
-        }
-
-        email.append('@').append(DOMAIN);
-        return email.toString();
+    public ForgetPasswordTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
     }
 
+    @Factory
+    public static Object[] factoryMethod()
+    {
+        return new Object[]
+                {
+                        new ForgetPasswordTest("1", "en"),
+                        new ForgetPasswordTest("1", "ar"),
+                        new ForgetPasswordTest("1", "ru"),
+                        new ForgetPasswordTest("2", "en"),
+                        new ForgetPasswordTest("2", "ar"),
+                        new ForgetPasswordTest("2", "ru"),
+                        new ForgetPasswordTest("3", "en"),
+                        new ForgetPasswordTest("3", "ar"),
+                        new ForgetPasswordTest("3", "ru"),
+                        new ForgetPasswordTest("6", "en"),
+                        new ForgetPasswordTest("6", "ar"),
+                        new ForgetPasswordTest("6", "ru"),
+                        new ForgetPasswordTest("7", "en"),
+                        new ForgetPasswordTest("7", "ar"),
+                        new ForgetPasswordTest("7", "ru"),
+                        new ForgetPasswordTest("8", "en"),
+                        new ForgetPasswordTest("8", "ar"),
+                        new ForgetPasswordTest("8", "ru"),
+                        new ForgetPasswordTest("9", "en"),
+                        new ForgetPasswordTest("9", "ar"),
+                        new ForgetPasswordTest("9", "ru"),
+                        new ForgetPasswordTest("10", "en"),
+                        new ForgetPasswordTest("10", "ar"),
+                        new ForgetPasswordTest("10", "ru"),
+                        new ForgetPasswordTest("11", "en"),
+                        new ForgetPasswordTest("11", "ar"),
+                        new ForgetPasswordTest("11", "ru"),
+                        new ForgetPasswordTest("18", "en"),
+                        new ForgetPasswordTest("18", "ar"),
+                        new ForgetPasswordTest("18", "ru"),
+                        new ForgetPasswordTest("49", "en"),
+                        new ForgetPasswordTest("49", "ar"),
+                        new ForgetPasswordTest("49", "ru"),
+                };
+    }
 
     @BeforeClass(alwaysRun = true)
     public void ValidateForgetPassword() throws IOException {
@@ -48,12 +78,13 @@ public class ForgetPasswordTest extends B2CBaseTest {
             propUserName = Utils.decodeString(properties.getProperty("username"));
             String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
                     AppConstants.requestDeviceKey, AppConstants.requestAppVersion, "entertainer",
-                    AppConstants.UserID, endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("B2C_FORGOT_PASSWORD"), "1",
-                    "25.300579", "55.307709", AppConstants.requestLanguage, AppConstants.requestDeviceKey,
+                    AppConstants.UserID, endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("B2C_FORGOT_PASSWORD"), locationID,
+                    "25.300579", "55.307709", languageCode, AppConstants.requestDeviceKey,
                     "9143773", AppConstants.requestOSPlatform, AppConstants.requestOSVersion, propUserName,
                     AppConstants.requestOSPlatform, AppConstants.requestTimeZone);
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
+                    .header("User-Agent", AppConstants.requestUserAgent)
                     .contentType("application/json")
                     .body(bodyData)
                     .log().all();
@@ -62,39 +93,52 @@ public class ForgetPasswordTest extends B2CBaseTest {
             //Extracting Json path from response
             jsonPath = response.jsonPath();
         }
+        else
+            log.error("Incorrect file name!!!");
     }
 
-    @Test(priority = 0, description = "Status code check", groups = {"Smoke", "Sanity", "Regression"})
+    @Test(description = "Status code check", groups = {"Smoke", "Sanity", "Regression"})
     public void checkStatus() {
+        log.info(this.locationID+ " "+ this.languageCode);
         int expectedStatus = 201;
         int actualStatus = jsonPath.getInt("http_response");
         Assert.assertEquals(expectedStatus, actualStatus, "Status validated");
-        log.info("Expected value is : " + expectedStatus);
-        log.info("Actual value in response is : " + actualStatus);
     }
 
     @Test(priority = 1, description = "Status Success Message", groups = {"Smoke", "Sanity", "Regression"})
     public void checkMessage() {
+        log.info(this.locationID+ " "+ this.languageCode);
         String message = jsonPath.getString("message");
         Assert.assertEquals("success", message, "Message value should be 'success'");
     }
 
     @Test(priority = 2, description = "Verify Success Message is true", groups = {"Smoke", "Sanity", "Regression"})
     public void successMessage() {
+        log.info(this.locationID+ " "+ this.languageCode);
         String message = jsonPath.getString("success");
         Assert.assertEquals("true", message, "Message value should be 'true'");
     }
 
     @Test(priority = 3, description = "Check Email sent is true", groups = {"Sanity", "Regression"})
     public void checkSentStatus() {
+        log.info(this.locationID+ " "+ this.languageCode);
         String actualKey = jsonPath.getString("data.is_sent");
         Assert.assertTrue(Boolean.parseBoolean(actualKey), "Sent Key validated");
     }
 
     @Test(priority = 4, description = "Verify ResetPassword Message", groups = {"Regression"})
     public void checkResetPasswordMessage() {
+        log.info(this.locationID+ " "+ this.languageCode);
         String actualMessage = jsonPath.getString("data.message");
-        Assert.assertEquals(actualMessage, forgotPassword.msgEnglish, "Link should be sent on registered email");
+        if(this.languageCode.compareToIgnoreCase("en")==0) {
+            Assert.assertEquals(actualMessage, forgotPassword.msgEnglish, "Link should be sent on registered email");
+        }
+        else if(this.languageCode.compareToIgnoreCase("ar")==0) {
+            Assert.assertEquals(actualMessage, forgotPassword.msgArabic, "Link should be sent on registered email");
+        }
+        else if(this.languageCode.compareToIgnoreCase("ru")==0) {
+            Assert.assertEquals(actualMessage, forgotPassword.msgRussian, "Link should be sent on registered email");
+        }
     }
 
 }

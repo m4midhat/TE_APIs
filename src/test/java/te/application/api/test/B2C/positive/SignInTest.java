@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 
@@ -32,10 +33,56 @@ public class SignInTest extends B2CBaseTest {
     String propPassword;
     public static String userid = null;
 
+    String locationID, languageCode;
+
+    public SignInTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new SignInTest("1", "en"),
+                        new SignInTest("1", "ar"),
+                        new SignInTest("1", "ru"),
+                        new SignInTest("2", "en"),
+                        new SignInTest("2", "ar"),
+                        new SignInTest("2", "ru"),
+                        new SignInTest("3", "en"),
+                        new SignInTest("3", "ar"),
+                        new SignInTest("3", "ru"),
+                        new SignInTest("6", "en"),
+                        new SignInTest("6", "ar"),
+                        new SignInTest("6", "ru"),
+                        new SignInTest("7", "en"),
+                        new SignInTest("7", "ar"),
+                        new SignInTest("7", "ru"),
+                        new SignInTest("8", "en"),
+                        new SignInTest("8", "ar"),
+                        new SignInTest("8", "ru"),
+                        new SignInTest("9", "en"),
+                        new SignInTest("9", "ar"),
+                        new SignInTest("9", "ru"),
+                        new SignInTest("10", "en"),
+                        new SignInTest("10", "ar"),
+                        new SignInTest("10", "ru"),
+                        new SignInTest("11", "en"),
+                        new SignInTest("11", "ar"),
+                        new SignInTest("11", "ru"),
+                        new SignInTest("18", "en"),
+                        new SignInTest("18", "ar"),
+                        new SignInTest("18", "ru"),
+                        new SignInTest("49", "en"),
+                        new SignInTest("49", "ar"),
+                        new SignInTest("49", "ru")
+                };
+    }
 
 
     @BeforeClass(alwaysRun = true)
-    public void setUp() throws IOException {
+    public void setUp() throws IOException, InterruptedException {
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");;
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
@@ -51,8 +98,10 @@ public class SignInTest extends B2CBaseTest {
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
+                    .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)
                     .log().all();
+            Thread.sleep(250);
             response = httpRequest.post();
             log.info(response.asString());
             jsonPath = response.jsonPath();
@@ -69,6 +118,9 @@ public class SignInTest extends B2CBaseTest {
             country = jsonPath.getString("data.user.country");
             dob = jsonPath.getString("data.user.date_of_birth");
             userid = jsonPath.getString("data.user.user_id");
+        }
+        else {
+            log.error("Unable to read the properties file!!!");
         }
     }
 
@@ -158,6 +210,7 @@ public class SignInTest extends B2CBaseTest {
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 
@@ -28,6 +29,52 @@ public class SignInTest extends B2CBaseTest {
     String randomEmail = null;
     private static final String ALLOWED_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final String DOMAIN = "example.com"; // Replace with your desired domain name
+    String locationID, languageCode;
+
+    public SignInTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new SignInTest("1", "en"),
+                        new SignInTest("1", "ar"),
+                        new SignInTest("1", "ru"),
+                        new SignInTest("2", "en"),
+                        new SignInTest("2", "ar"),
+                        new SignInTest("2", "ru"),
+                        new SignInTest("3", "en"),
+                        new SignInTest("3", "ar"),
+                        new SignInTest("3", "ru"),
+                        new SignInTest("6", "en"),
+                        new SignInTest("6", "ar"),
+                        new SignInTest("6", "ru"),
+                        new SignInTest("7", "en"),
+                        new SignInTest("7", "ar"),
+                        new SignInTest("7", "ru"),
+                        new SignInTest("8", "en"),
+                        new SignInTest("8", "ar"),
+                        new SignInTest("8", "ru"),
+                        new SignInTest("9", "en"),
+                        new SignInTest("9", "ar"),
+                        new SignInTest("9", "ru"),
+                        new SignInTest("10", "en"),
+                        new SignInTest("10", "ar"),
+                        new SignInTest("10", "ru"),
+                        new SignInTest("11", "en"),
+                        new SignInTest("11", "ar"),
+                        new SignInTest("11", "ru"),
+                        new SignInTest("18", "en"),
+                        new SignInTest("18", "ar"),
+                        new SignInTest("18", "ru"),
+                        new SignInTest("49", "en"),
+                        new SignInTest("49", "ar"),
+                        new SignInTest("49", "ru")
+                };
+    }
 
     public static String generateRandomEmail(int length) {
 
@@ -68,15 +115,16 @@ public class SignInTest extends B2CBaseTest {
         if (properties != null) {
             propPassword = Utils.decodeString(properties.getProperty("password"));
             String randomEmail = generateRandomEmail(12);
-            String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+            String bodyData = generateAPIBody.signIn(0, languageCode, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                    AppConstants.requestDeviceKey, "1",randomEmail,
+                    AppConstants.requestDeviceKey, locationID,randomEmail,
                     propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                     endPoints.getProperty("SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
+                    .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)
                     .log().all();
             response = httpRequest.post();
@@ -94,14 +142,15 @@ public class SignInTest extends B2CBaseTest {
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
             String randomPassword = generateRandomPassword(8);
-            String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+            String bodyData = generateAPIBody.signIn(0, languageCode, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                    AppConstants.requestDeviceKey, "1", propUserName, randomPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
+                    AppConstants.requestDeviceKey, locationID, propUserName, randomPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                     endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
             RequestSpecification httpRequest = RestAssured.given()
                     .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                     .contentType("application/json")
+                    .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)
                     .log().all();
             response = httpRequest.post();
@@ -115,15 +164,16 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 2, description = "Sign In with blank credentials.", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithBlankCredentials(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+        String bodyData = generateAPIBody.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                AppConstants.requestDeviceKey, "1", "", "", // Both email and password are empty
+                AppConstants.requestDeviceKey, locationID, "", "", // Both email and password are empty
                 AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                 endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -137,15 +187,16 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 3, description = "SignIn with Email Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithEmailOnly(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+        String bodyData = generateAPIBody.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                AppConstants.requestDeviceKey, "1", propUserName,
+                AppConstants.requestDeviceKey, locationID, propUserName,
                 "", AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                 endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -159,15 +210,16 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 4, description = "SignIn with Password Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithPasswordOnly(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+        String bodyData = generateAPIBody.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
-                AppConstants.requestDeviceKey, "1", "",
+                AppConstants.requestDeviceKey, locationID, "",
                 propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
                 endPoints.getProperty("AppConstants.SessionURL"), Utils.decodeString(authToken.B2CAUTH_TOKEN),"true");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

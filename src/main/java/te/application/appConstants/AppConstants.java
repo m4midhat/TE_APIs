@@ -23,7 +23,8 @@ public class AppConstants {
             requestTimeZone,
             requestCurrency,
             requestAppVersion,
-            requestDeviceKey;
+            requestDeviceKey,
+            requestUserAgent;
 
     public static String UserID;
 }

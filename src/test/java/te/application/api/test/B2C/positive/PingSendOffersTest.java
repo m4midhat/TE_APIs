@@ -9,10 +9,12 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
+import te.application.data.response.pingSendOffers;
 import te.application.utilities.Utils;
 import te.application.utilities.generateAPIBody;
 
@@ -23,7 +25,53 @@ public class PingSendOffersTest extends B2CBaseTest {
     JsonArray shareOffersArray;
     String jsonData = "";
     JsonObject dataObject;
-    boolean exists;
+    String locationID, languageCode;
+
+    public PingSendOffersTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new PingSendOffersTest("1", "en"),
+                        new PingSendOffersTest("1", "ar"),
+                        new PingSendOffersTest("1", "ru"),
+                        new PingSendOffersTest("2", "en"),
+                        new PingSendOffersTest("2", "ar"),
+                        new PingSendOffersTest("2", "ru"),
+                        new PingSendOffersTest("3", "en"),
+                        new PingSendOffersTest("3", "ar"),
+                        new PingSendOffersTest("3", "ru"),
+                        new PingSendOffersTest("6", "en"),
+                        new PingSendOffersTest("6", "ar"),
+                        new PingSendOffersTest("6", "ru"),
+                        new PingSendOffersTest("7", "en"),
+                        new PingSendOffersTest("7", "ar"),
+                        new PingSendOffersTest("7", "ru"),
+                        new PingSendOffersTest("8", "en"),
+                        new PingSendOffersTest("8", "ar"),
+                        new PingSendOffersTest("8", "ru"),
+                        new PingSendOffersTest("9", "en"),
+                        new PingSendOffersTest("9", "ar"),
+                        new PingSendOffersTest("9", "ru"),
+                        new PingSendOffersTest("10", "en"),
+                        new PingSendOffersTest("10", "ar"),
+                        new PingSendOffersTest("10", "ru"),
+                        new PingSendOffersTest("11", "en"),
+                        new PingSendOffersTest("11", "ar"),
+                        new PingSendOffersTest("11", "ru"),
+                        new PingSendOffersTest("18", "en"),
+                        new PingSendOffersTest("18", "ar"),
+                        new PingSendOffersTest("18", "ru"),
+                        new PingSendOffersTest("49", "en"),
+                        new PingSendOffersTest("49", "ar"),
+                        new PingSendOffersTest("49", "ru")
+                };
+    }
 
     @BeforeClass
 
@@ -31,13 +79,14 @@ public class PingSendOffersTest extends B2CBaseTest {
 
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_PINGS_SEND_OFFERS");
 
-        String bodyData = generateAPIBody.pingSendOffers(AppConstants.requestLanguage, "74.3528115",
+        String bodyData = generateAPIBody.pingSendOffers(languageCode, "74.3528115",
                 "31.527362", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
-                AppConstants.requestDeviceKey, AppConstants.requestCurrency, AppConstants.requestDeviceKey, "1",
+                AppConstants.requestDeviceKey, AppConstants.requestCurrency, AppConstants.requestDeviceKey, locationID,
                 AppConstants.requestDeviceModel, AppConstants.requestTimeZone, "9120772");
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();
@@ -156,7 +205,16 @@ public class PingSendOffersTest extends B2CBaseTest {
                 if (status == 0) {
                     Assert.assertEquals("Sent", pingStatus);
                 } else if (status == 1) {
-                    Assert.assertEquals("Accepted", pingStatus);
+                    if(languageCode.compareToIgnoreCase("en")==0){
+                        Assert.assertEquals(pingSendOffers.PING_ACCEPTED_EN, pingStatus);
+                    }
+                    else if(languageCode.compareToIgnoreCase("ar")==0){
+                        Assert.assertEquals(pingSendOffers.PING_ACCEPTED_AR, pingStatus);
+                    }
+                    else if(languageCode.compareToIgnoreCase("ru")==0){
+                        Assert.assertEquals(pingSendOffers.PING_ACCEPTED_RU, pingStatus);
+                    }
+
                 } else if (status == 3) {
                     Assert.assertEquals("Recalled", pingStatus);
                 } else {
@@ -172,10 +230,17 @@ public class PingSendOffersTest extends B2CBaseTest {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
-
                 String recallButtonText = jsonPath.getString("data.shareOffers[" + i + "].recall_button_text");
                 log.info("recallButtonText : " + i + " " + recallButtonText);
-                Assert.assertEquals("Recall", recallButtonText);
+                if(languageCode.compareToIgnoreCase("en")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_EN, recallButtonText);
+                }
+                else if(languageCode.compareToIgnoreCase("ar")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_AR, recallButtonText);
+                }
+                else if(languageCode.compareToIgnoreCase("ru")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_RU, recallButtonText);
+                }
             }
         }
     }
@@ -189,7 +254,15 @@ public class PingSendOffersTest extends B2CBaseTest {
 
                 String recallMessage = jsonPath.getString("data.shareOffers[" + i + "].recall_message");
                 log.info("recallMessage : " + i + " " + recallMessage);
-                Assert.assertEquals("Are you sure want to recall this ping?", recallMessage);
+                if(languageCode.compareToIgnoreCase("en")==0){
+                    Assert.assertEquals(pingSendOffers.PING_RECALL_MSG_ENG, recallMessage);
+                }
+                else if(languageCode.compareToIgnoreCase("ar")==0){
+                    Assert.assertEquals(pingSendOffers.PING_RECALL_MSG_AR, recallMessage);
+                }
+                else if(languageCode.compareToIgnoreCase("ru")==0){
+                    Assert.assertEquals(pingSendOffers.PING_RECALL_MSG_RU, recallMessage);
+                }
             }
         }
     }
@@ -200,10 +273,17 @@ public class PingSendOffersTest extends B2CBaseTest {
             log.info(">>>>>>>>>>>>>>> Array is null <<<<<<<<<<<<<<<<<<\n");
         } else {
             for (int i = 0; i < shareOffersArray.size(); i++) {
-
                 String recallTitle = jsonPath.getString("data.shareOffers[" + i + "].recall_title");
                 log.info("recallTitle : " + i + " " + recallTitle);
-                Assert.assertEquals("Recall Ping", recallTitle);
+                if(languageCode.compareToIgnoreCase("en")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_PING_EN, recallTitle);
+                }
+                else if(languageCode.compareToIgnoreCase("ar")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_PING_AR, recallTitle);
+                }
+                else if(languageCode.compareToIgnoreCase("ru")==0) {
+                    Assert.assertEquals(pingSendOffers.RECALL_PING_RU, recallTitle);
+                }
             }
         }
     }

@@ -9,6 +9,7 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import te.application.api.baseTest.B2CBaseTest;
@@ -25,19 +26,68 @@ public class TrendingSearchTest extends B2CBaseTest {
     JsonObject dataObject;
     JsonArray resultsArray;
 
+    String locationID, languageCode;
+
+    public TrendingSearchTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new TrendingSearchTest("1", "en"),
+                        new TrendingSearchTest("1", "ar"),
+                        new TrendingSearchTest("1", "ru"),
+                        new TrendingSearchTest("2", "en"),
+                        new TrendingSearchTest("2", "ar"),
+                        new TrendingSearchTest("2", "ru"),
+                        new TrendingSearchTest("3", "en"),
+                        new TrendingSearchTest("3", "ar"),
+                        new TrendingSearchTest("3", "ru"),
+                        new TrendingSearchTest("6", "en"),
+                        new TrendingSearchTest("6", "ar"),
+                        new TrendingSearchTest("6", "ru"),
+                        new TrendingSearchTest("7", "en"),
+                        new TrendingSearchTest("7", "ar"),
+                        new TrendingSearchTest("7", "ru"),
+                        new TrendingSearchTest("8", "en"),
+                        new TrendingSearchTest("8", "ar"),
+                        new TrendingSearchTest("8", "ru"),
+                        new TrendingSearchTest("9", "en"),
+                        new TrendingSearchTest("9", "ar"),
+                        new TrendingSearchTest("9", "ru"),
+                        new TrendingSearchTest("10", "en"),
+                        new TrendingSearchTest("10", "ar"),
+                        new TrendingSearchTest("10", "ru"),
+                        new TrendingSearchTest("11", "en"),
+                        new TrendingSearchTest("11", "ar"),
+                        new TrendingSearchTest("11", "ru"),
+                        new TrendingSearchTest("18", "en"),
+                        new TrendingSearchTest("18", "ar"),
+                        new TrendingSearchTest("18", "ru"),
+                        new TrendingSearchTest("49", "en"),
+                        new TrendingSearchTest("49", "ar"),
+                        new TrendingSearchTest("49", "ru")
+                };
+    }
+
     @BeforeClass
     public void setUp() throws IOException {
         RestAssured.baseURI = endPoints.getProperty("PYTHON_BASE_URI");
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_TRENDING_SEARCH");
         //RestAssured.basePath = AppConstants.BASE_PATE_TRENDING_SEARCH;
 
-        String bodyData = generateAPIBody.trendingSearch(true,"1","All",
-                "0",AppConstants.requestLanguage,3,"31.5273517","74.3528161", AppConstants.requestTimeZone,
+        String bodyData = generateAPIBody.trendingSearch(true,locationID,"All",
+                "0",languageCode,3,"31.5273517","74.3528161", AppConstants.requestTimeZone,
                 AppConstants.requestCurrency,"entertainer",AppConstants.requestAppVersion,
                 AppConstants.requestOSPlatform,AppConstants.requestOSVersion,AppConstants.requestDeviceKey,AppConstants.requestDeviceModel,AppConstants.requestDeviceKey);
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
         response = httpRequest.post();

@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
@@ -18,20 +19,69 @@ import java.io.IOException;
 
 @Slf4j
 public class MyAccountTest extends B2CBaseTest {
+
+    String locationID, languageCode;
+
+    public MyAccountTest(String loc, String lang){
+        this.languageCode = lang;
+        this.locationID = loc;
+    }
+
+    @Factory
+    public static Object[] factoryMethod() {
+        return new Object[]
+                {
+                        new MyAccountTest("1", "en"),
+                        new MyAccountTest("1", "ar"),
+                        new MyAccountTest("1", "ru"),
+                        new MyAccountTest("2", "en"),
+                        new MyAccountTest("2", "ar"),
+                        new MyAccountTest("2", "ru"),
+                        new MyAccountTest("3", "en"),
+                        new MyAccountTest("3", "ar"),
+                        new MyAccountTest("3", "ru"),
+                        new MyAccountTest("6", "en"),
+                        new MyAccountTest("6", "ar"),
+                        new MyAccountTest("6", "ru"),
+                        new MyAccountTest("7", "en"),
+                        new MyAccountTest("7", "ar"),
+                        new MyAccountTest("7", "ru"),
+                        new MyAccountTest("8", "en"),
+                        new MyAccountTest("8", "ar"),
+                        new MyAccountTest("8", "ru"),
+                        new MyAccountTest("9", "en"),
+                        new MyAccountTest("9", "ar"),
+                        new MyAccountTest("9", "ru"),
+                        new MyAccountTest("10", "en"),
+                        new MyAccountTest("10", "ar"),
+                        new MyAccountTest("10", "ru"),
+                        new MyAccountTest("11", "en"),
+                        new MyAccountTest("11", "ar"),
+                        new MyAccountTest("11", "ru"),
+                        new MyAccountTest("18", "en"),
+                        new MyAccountTest("18", "ar"),
+                        new MyAccountTest("18", "ru"),
+                        new MyAccountTest("49", "en"),
+                        new MyAccountTest("49", "ar"),
+                        new MyAccountTest("49", "ru")
+                };
+    }
+
     @BeforeClass
     public void ValidateMyAccount() throws IOException {
         RestAssured.basePath = endPoints.getProperty("PROFILE_BASE_PATH");
 
         //Passing bodyData to profile function
-        String bodyData = generateAPIBody.Profile(AppConstants.requestLanguage,"25.300579","entertainer",
+        String bodyData = generateAPIBody.Profile(languageCode,"25.300579","entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion,AppConstants.requestDeviceKey,AppConstants.requestCurrency,
-                "55.307709",AppConstants.requestDeviceKey,"1",AppConstants.requestDeviceModel,
+                "55.307709",AppConstants.requestDeviceKey,locationID,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone);
 
         //Passing Request specifications
         RequestSpecification httpRequest = RestAssured.given()
                 .header("Authorization", Utils.decodeString(authToken.B2CAUTH_TOKEN))
                 .contentType("application/json")
+                .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
                 .log().all();
 
