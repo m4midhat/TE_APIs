@@ -16,6 +16,7 @@ import te.application.utilities.generateAPIBody;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @Slf4j
 public class SignUpTest extends B2CBaseTest {
@@ -39,7 +40,8 @@ public class SignUpTest extends B2CBaseTest {
         RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_SIGNUP");
         String bodyData = generateAPIBody.signUp(password, 0, LastName,
-                AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
+                AppConstants.requestLanguage,1,"25.095395","entertainer",
+                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,FirstName,
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
                 endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("B2C_LOGIN"),
@@ -127,10 +129,9 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 5, description = "Verify newly registers" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void  checkNewResister(){
         String is_new_register = jsonPath.getString("data.is_new_registered");
-        boolean isVerify=Boolean.valueOf(is_new_register);
+        boolean isVerify=Boolean.parseBoolean(is_new_register);
         log.info(String.valueOf(isVerify));
-        Assert.assertNotNull(isVerify);
-        assertEquals(true,isVerify, "it should be true in new user case" );
+        assertTrue(isVerify, "it should be true in new user case");
 
     }
     @Test(priority = 6, description = "Verify nationality" , groups = {"Regression"}, dependsOnMethods = "checkStatus")
@@ -154,9 +155,10 @@ public class SignUpTest extends B2CBaseTest {
     public void  checkAlreadyExistEmail() throws IOException {
 
         String bodyData = generateAPIBody.signUp(pwd, 0, LN,
-                AppConstants.requestLanguage,1,"25.095395","entertainer", AppConstants.requestOSPlatform,"8.18.06",
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1",AppConstants.requestCurrency,FN,
-                "ios-79C8F176-8478-4AD7-9261-B838FBD269B1","1989/07/18","55.154117",
+                AppConstants.requestLanguage,1,"25.095395","entertainer",
+                AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
+                AppConstants.requestDeviceKey,AppConstants.requestCurrency,FN,
+                AppConstants.requestDeviceKey,"1989/07/18","55.154117",
                 endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("B2C_LOGIN"),
                 Utils.decodeString(authToken.B2CAUTH_TOKEN),
                 "",na, em,AppConstants.requestOSVersion,AppConstants.requestDeviceModel,

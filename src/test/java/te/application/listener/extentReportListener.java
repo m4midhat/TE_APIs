@@ -87,6 +87,7 @@ public class extentReportListener  implements ITestListener {
         System.out.println(("Test Suite is ending!"));
         extent.flush();
         test.remove();
+        System.out.println("Review the test report : "+ OUTPUT_FOLDER + FILE_NAME+ ".html");
     }
 
     @Override
