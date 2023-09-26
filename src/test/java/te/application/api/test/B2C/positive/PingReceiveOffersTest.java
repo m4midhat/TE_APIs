@@ -15,7 +15,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -79,7 +79,7 @@ public class PingReceiveOffersTest extends B2CBaseTest {
         RestAssured.basePath = endPoints.getProperty("BASE_PATE_PINGS_RECEIVE_OFFERS");
         log.info("\n>>>>>>>>>>>>>>>>>>" + AppConstants.sessionID);
 
-        String bodyData = generateAPIBody.pingReceiveOffers(AppConstants.requestLanguage,"74.3528115","31.527362",
+        String bodyData = generateAPIBodyB2C.pingReceiveOffers(AppConstants.requestLanguage,"74.3528115","31.527362",
                 "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion, AppConstants.requestDeviceKey,AppConstants.requestCurrency,
                 AppConstants.requestDeviceKey,locationID,AppConstants.requestDeviceModel,AppConstants.requestTimeZone, AppConstants.UserID);
         RequestSpecification httpRequest = RestAssured.given()

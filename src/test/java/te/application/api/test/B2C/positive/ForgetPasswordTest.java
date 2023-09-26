@@ -12,11 +12,10 @@ import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.data.response.forgotPassword;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.Random;
 
 @Slf4j
 public class ForgetPasswordTest extends B2CBaseTest {
@@ -76,7 +75,7 @@ public class ForgetPasswordTest extends B2CBaseTest {
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
-            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
+            String bodyData = generateAPIBodyB2C.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
                     AppConstants.requestDeviceKey, AppConstants.requestAppVersion, "entertainer",
                     AppConstants.UserID, endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("B2C_FORGOT_PASSWORD"), locationID,
                     "25.300579", "55.307709", languageCode, AppConstants.requestDeviceKey,

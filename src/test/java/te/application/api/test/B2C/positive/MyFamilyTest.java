@@ -14,7 +14,7 @@ import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.data.response.myFamily;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -73,7 +73,7 @@ public class MyFamilyTest  extends B2CBaseTest {
     public void setUp() throws IOException {
         RestAssured.basePath = endPoints.getProperty("B2C_FAMILY");
 
-        String bodyData = generateAPIBody.Family(languageCode, "25.300579", "entertainer",
+        String bodyData = generateAPIBodyB2C.Family(languageCode, "25.300579", "entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey,
                 AppConstants.requestCurrency, "55.307709", AppConstants.requestDeviceKey,
                 locationID, "1", AppConstants.requestOSVersion, AppConstants.requestDeviceModel,

@@ -10,7 +10,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -78,7 +78,7 @@ public class FetchLocationsTest extends B2CBaseTest {
             String propPassword = Utils.decodeString(properties.getProperty("password"));
 
             //initializing params
-            String bodyData = generateAPIBody.locations(0, languageCode, true, "25.300579", "entertainer",
+            String bodyData = generateAPIBodyB2C.locations(0, languageCode, true, "25.300579", "entertainer",
                     AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey, "0", AppConstants.requestCurrency,
                     "1", "55.307709", AppConstants.requestDeviceKey, locationID,
                     propPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,

@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 import static te.application.utilities.dbDriver.getRandomOfferFromDB;
-import static te.application.utilities.generateAPIBody.RedemptionsDetails;
+import static te.application.utilities.generateAPIBodyB2C.RedemptionsDetails;
 
 @Slf4j
 public class RedemptionTest extends B2CBaseTest {

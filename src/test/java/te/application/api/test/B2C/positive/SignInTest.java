@@ -15,7 +15,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -89,7 +89,7 @@ public class SignInTest extends B2CBaseTest {
             propUserName = Utils.decodeString(properties.getProperty("username"));
             propPassword = Utils.decodeString(properties.getProperty("password"));
 
-            String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+            String bodyData = generateAPIBodyB2C.signIn(0, AppConstants.requestLanguage, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                     AppConstants.requestDeviceKey, locationID, propUserName,
@@ -201,7 +201,7 @@ public class SignInTest extends B2CBaseTest {
     @Test(priority = 9, description = "Sign In with valid Email Id and password on multiple devices.", groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void signInWithValidEmailAndPasswordOnMultipleDevices() {
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");;
-        String bodyData = generateAPIBody.signIn(0, AppConstants.requestLanguage, true,
+        String bodyData = generateAPIBodyB2C.signIn(0, AppConstants.requestLanguage, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                 AppConstants.requestDeviceKey, locationID, propUserName, propPassword,

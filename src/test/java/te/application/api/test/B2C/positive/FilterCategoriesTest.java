@@ -12,9 +12,8 @@ import te.application.api.baseTest.B2CBaseTest;
 
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
-import te.application.data.response.filterCategory;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -76,7 +75,7 @@ public class FilterCategoriesTest extends B2CBaseTest {
         RestAssured.basePath = endPoints.getProperty("B2C_FILTERS");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
-            String bodyData = generateAPIBody.filter(languageCode,"31.527539", "entertainer",
+            String bodyData = generateAPIBodyB2C.filter(languageCode,"31.527539", "entertainer",
                     AppConstants.requestOSPlatform, AppConstants.requestAppVersion, AppConstants.requestDeviceKey,
                     AppConstants.requestCurrency, 1,
                     AppConstants.requestDeviceKey, "Restaurants and Bars",

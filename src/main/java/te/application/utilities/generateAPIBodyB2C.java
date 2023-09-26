@@ -2,7 +2,7 @@ package te.application.utilities;
 
 import te.application.appConstants.AppConstants;
 
-public class generateAPIBody {
+public class generateAPIBodyB2C {
 
     static String body;
     public static String signUp(String email, String firstName, String lastName, String password, String confirmPassword){

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 import static java.time.temporal.ChronoUnit.MILLIS;
 import static org.testng.Assert.*;
-import static te.application.utilities.generateAPIBody.merchantDetails;
+import static te.application.utilities.generateAPIBodyB2C.merchantDetails;
 
 @Slf4j
 public class GetMerchantDetailsTest extends B2CBaseTest {

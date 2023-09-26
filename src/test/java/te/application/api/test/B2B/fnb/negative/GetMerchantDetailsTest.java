@@ -6,12 +6,11 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import te.application.api.baseTest.B2BbaseTest;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 
 import static te.application.utilities.Utils.generateInvalidAuthToken;
-import static te.application.utilities.generateAPIBody.merchantDetails;
+import static te.application.utilities.generateAPIBodyB2C.merchantDetails;
 
 @Slf4j
 public class GetMerchantDetailsTest extends B2CBaseTest {

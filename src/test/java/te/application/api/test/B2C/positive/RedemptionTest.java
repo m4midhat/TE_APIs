@@ -12,7 +12,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.List;
@@ -89,7 +89,7 @@ public class RedemptionTest  extends B2CBaseTest {
         int offer= Integer.valueOf(dbInfo.get(0));
 
 
-        String bodyData = generateAPIBody.RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",
+        String bodyData = generateAPIBodyB2C.RedemptionsDetails("25.300579",AppConstants.requestOSPlatform,"entertainer",
                 AppConstants.requestLanguage,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"ios-277C9450-8B64-4521-9B89-3583B6F788D7",
                 AppConstants.requestDeviceKey, offer,dbInfo.get(2),AppConstants.sessionID ,locationID,1,

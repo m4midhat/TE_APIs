@@ -16,7 +16,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -80,7 +80,7 @@ public class TrendingSearchTest extends B2CBaseTest {
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_TRENDING_SEARCH");
         //RestAssured.basePath = AppConstants.BASE_PATE_TRENDING_SEARCH;
 
-        String bodyData = generateAPIBody.trendingSearch(true,locationID,"All",
+        String bodyData = generateAPIBodyB2C.trendingSearch(true,locationID,"All",
                 "0",languageCode,3,"31.5273517","74.3528161", AppConstants.requestTimeZone,
                 AppConstants.requestCurrency,"entertainer",AppConstants.requestAppVersion,
                 AppConstants.requestOSPlatform,AppConstants.requestOSVersion,AppConstants.requestDeviceKey,AppConstants.requestDeviceModel,AppConstants.requestDeviceKey);

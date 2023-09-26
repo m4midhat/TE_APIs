@@ -13,7 +13,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -75,7 +75,7 @@ public class HomeTest extends B2CBaseTest{
     public void setUp() throws IOException {
         log.info("Session ID"+AppConstants.sessionID);
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_HOME");
-        String bodyData = generateAPIBody.home(1,languageCode,"26.22876",
+        String bodyData = generateAPIBodyB2C.home(1,languageCode,"26.22876",
                 "entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.UserID ,AppConstants.requestCurrency,
                 "50.584381",AppConstants.requestDeviceKey, locationID,

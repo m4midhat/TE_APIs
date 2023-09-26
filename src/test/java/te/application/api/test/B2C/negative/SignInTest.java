@@ -6,7 +6,6 @@ import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
@@ -14,7 +13,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -115,7 +114,7 @@ public class SignInTest extends B2CBaseTest {
         if (properties != null) {
             propPassword = Utils.decodeString(properties.getProperty("password"));
             String randomEmail = generateRandomEmail(12);
-            String bodyData = generateAPIBody.signIn(0, languageCode, true,
+            String bodyData = generateAPIBodyB2C.signIn(0, languageCode, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                     AppConstants.requestDeviceKey, locationID,randomEmail,
@@ -142,7 +141,7 @@ public class SignInTest extends B2CBaseTest {
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("username"));
             String randomPassword = generateRandomPassword(8);
-            String bodyData = generateAPIBody.signIn(0, languageCode, true,
+            String bodyData = generateAPIBodyB2C.signIn(0, languageCode, true,
                     "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                     AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                     AppConstants.requestDeviceKey, locationID, propUserName, randomPassword, AppConstants.requestOSVersion, AppConstants.requestDeviceModel, AppConstants.requestTimeZone,
@@ -164,7 +163,7 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 2, description = "Sign In with blank credentials.", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithBlankCredentials(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, languageCode, true,
+        String bodyData = generateAPIBodyB2C.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                 AppConstants.requestDeviceKey, locationID, "", "", // Both email and password are empty
@@ -187,7 +186,7 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 3, description = "SignIn with Email Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithEmailOnly(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, languageCode, true,
+        String bodyData = generateAPIBodyB2C.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                 AppConstants.requestDeviceKey, locationID, propUserName,
@@ -210,7 +209,7 @@ public class SignInTest extends B2CBaseTest {
     @Test (priority = 4, description = "SignIn with Password Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithPasswordOnly(){
         RestAssured.basePath = endPoints.getProperty("B2C_LOGIN");
-        String bodyData = generateAPIBody.signIn(0, languageCode, true,
+        String bodyData = generateAPIBodyB2C.signIn(0, languageCode, true,
                 "25.300579", "entertainer", AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                 AppConstants.requestDeviceKey, locationID, "",

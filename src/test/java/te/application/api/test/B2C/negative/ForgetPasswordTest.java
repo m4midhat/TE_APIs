@@ -11,7 +11,7 @@ import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.data.b2cDataProvider;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -24,7 +24,7 @@ public class ForgetPasswordTest extends B2CBaseTest {
     @Test(priority = 5, description = "Reset password with blank Email Id", dataProviderClass = b2cDataProvider.class, dataProvider = "dataForB2C")
     public void  resetPasswordWithBlankEmail(String locationId, String languageCode){
         RestAssured.basePath = endPoints.getProperty("B2C_FORGOT_PASSWORD");
-        String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
+        String bodyData = generateAPIBodyB2C.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
                 AppConstants.requestDeviceKey, AppConstants.requestAppVersion, "entertainer",
                 "9143773", endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("B2C_FORGOT_PASSWORD"), locationId,
                 "25.300579", "55.307709", languageCode, AppConstants.requestDeviceKey,
@@ -48,7 +48,7 @@ public class ForgetPasswordTest extends B2CBaseTest {
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             String randomEmail = generateRandomEmail(12);
-            String bodyData = generateAPIBody.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
+            String bodyData = generateAPIBodyB2C.forgotPassword(AppConstants.requestDeviceModel, AppConstants.requestCurrency,
                     AppConstants.requestDeviceKey, AppConstants.requestAppVersion,
                     "entertainer", "9143773", endPoints.getProperty("BASE_URI_B2C") + endPoints.getProperty("B2C_FORGOT_PASSWORD"),
                     locationId, "25.300579", "55.307709", languageCode,

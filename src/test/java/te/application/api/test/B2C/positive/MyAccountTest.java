@@ -12,7 +12,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -72,7 +72,7 @@ public class MyAccountTest extends B2CBaseTest {
         RestAssured.basePath = endPoints.getProperty("PROFILE_BASE_PATH");
 
         //Passing bodyData to profile function
-        String bodyData = generateAPIBody.Profile(languageCode,"25.300579","entertainer",
+        String bodyData = generateAPIBodyB2C.Profile(languageCode,"25.300579","entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion,AppConstants.requestDeviceKey,AppConstants.requestCurrency,
                 "55.307709",AppConstants.requestDeviceKey,locationID,AppConstants.requestDeviceModel,
                 AppConstants.requestTimeZone);

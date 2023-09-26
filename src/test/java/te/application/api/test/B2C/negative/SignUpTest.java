@@ -5,14 +5,13 @@ import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
-import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.data.response.signUp;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,7 +29,7 @@ public class SignUpTest  extends B2CBaseTest {
     @Test(description = "Signup with blank credentials body" , groups = {"Smoke", "Sanity", "Regression"})
     public void  signUpWithBlankCredentials() throws IOException {
 
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",
                 AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
@@ -60,7 +59,7 @@ public class SignUpTest  extends B2CBaseTest {
         //Faker faker = new Faker();
         String FirstName = faker.name().firstName();
         firstName = FirstName;
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,FirstName,
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -92,7 +91,7 @@ public class SignUpTest  extends B2CBaseTest {
         //Faker faker = new Faker();
         String LastName = faker.name().lastName();
         lastName =LastName;
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,LastName,
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -125,7 +124,7 @@ public class SignUpTest  extends B2CBaseTest {
         //Faker faker = new Faker();
         String password1 = faker.internet().password(8,16, true,true,true);
         password = password1+Utils.get3RequiredCharactersForPassword();
-        String bodyData = generateAPIBody.signUp(password1, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password1, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -168,7 +167,7 @@ public class SignUpTest  extends B2CBaseTest {
         String email = faker.internet().emailAddress();
 
 
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency, firstName,
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -197,7 +196,7 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithEmailAndLastName() throws IOException {
 
         String email = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -226,7 +225,7 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithEmailAndPassword() throws IOException {
 
         String email = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp(password, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"1989/07/18","55.154117",
@@ -266,7 +265,7 @@ public class SignUpTest  extends B2CBaseTest {
     @Test(priority = 7, description = "Signup with only FirstName & LastName" , groups = {"Smoke", "Sanity", "Regression"})
     public void signupWithFirstNameAndLastName() throws IOException {
 
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency, firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -297,7 +296,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         firstName = faker.name().firstName();
         password += Utils.get3RequiredCharactersForPassword();
-        String bodyData = generateAPIBody.signUp(password, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency, firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -340,7 +339,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency, firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -374,7 +373,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         //LN = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(password, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -418,7 +417,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         //em = faker.internet().emailAddress();
         lastName = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -463,7 +462,7 @@ public class SignUpTest  extends B2CBaseTest {
         password += Utils.get3RequiredCharactersForPassword();
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -509,7 +508,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         lastName = faker.name().lastName();
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency, firstName,
                 AppConstants.requestDeviceKey,"","55.154117",
@@ -554,7 +553,7 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,28));
 
 
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -588,7 +587,7 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
         firstName = faker.name().firstName();
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -623,7 +622,7 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,28));
         lastName = faker.name().lastName();
         firstName = faker.name().firstName();
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -658,7 +657,7 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,28));
         lastName = faker.name().lastName();
 
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -694,7 +693,7 @@ public class SignUpTest  extends B2CBaseTest {
         lastName = faker.name().lastName();
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -732,7 +731,7 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -781,7 +780,7 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
-        String bodyData = generateAPIBody.signUp(password, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -828,7 +827,7 @@ public class SignUpTest  extends B2CBaseTest {
         //FN = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         // pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -869,7 +868,7 @@ public class SignUpTest  extends B2CBaseTest {
     @Test(priority = 22, description = "Signup with only Nationality" , groups = {"Smoke", "Sanity", "Regression"})
     public void signupWithOnlyNationality() throws IOException {
         nationality =faker.nation().nationality();
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -901,7 +900,7 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithOnlyNationalityFirstName() throws IOException {
         nationality =faker.nation().nationality();
         firstName =faker.name().firstName();
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -933,7 +932,7 @@ public class SignUpTest  extends B2CBaseTest {
     public void signupWithOnlyNationalityEmail() throws IOException {
         emailAddress =faker.internet().emailAddress();
         nationality =faker.nation().nationality();
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -966,7 +965,7 @@ public class SignUpTest  extends B2CBaseTest {
         password =faker.internet().password(8,16,true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
         nationality =faker.nation().nationality();
-        String bodyData = generateAPIBody.signUp(password, 0, "",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -1011,7 +1010,7 @@ public class SignUpTest  extends B2CBaseTest {
                 String.valueOf(Utils.generateRandomNumber(1,12))+"/"+
                 String.valueOf(Utils.generateRandomNumber(1,28));
 
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1045,7 +1044,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName =faker.name().firstName();
         emailAddress =faker.internet().emailAddress();
 
-        String bodyData = generateAPIBody.signUp("", 0, "",
+        String bodyData = generateAPIBodyB2C.signUp("", 0, "",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -1079,7 +1078,7 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress =faker.internet().emailAddress();
         lastName =faker.name().lastName();
 
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -1119,7 +1118,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0,"",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0,"",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -1170,7 +1169,7 @@ public class SignUpTest  extends B2CBaseTest {
         //pwd= faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp("", 0,"",
+        String bodyData = generateAPIBodyB2C.signUp("", 0,"",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1210,7 +1209,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,"", "55.154117",
@@ -1261,7 +1260,7 @@ public class SignUpTest  extends B2CBaseTest {
         //pwd= faker.internet().password(8,16, true,true,true);
 
 
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1301,7 +1300,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0,"",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0,"",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1351,7 +1350,7 @@ public class SignUpTest  extends B2CBaseTest {
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
         //pwd= faker.internet().password(8,16, true,true,true);
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1391,7 +1390,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1442,7 +1441,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1493,7 +1492,7 @@ public class SignUpTest  extends B2CBaseTest {
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
 
-        String bodyData = generateAPIBody.signUp(password, 0,"",
+        String bodyData = generateAPIBodyB2C.signUp(password, 0,"",
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1542,7 +1541,7 @@ public class SignUpTest  extends B2CBaseTest {
         emailAddress = faker.internet().emailAddress();
         password = faker.internet().password(8,16, true,true,true);
         password += Utils.get3RequiredCharactersForPassword();
-        String bodyData = generateAPIBody.signUp(password, 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,"",
                 AppConstants.requestDeviceKey,dob, "55.154117",
@@ -1594,7 +1593,7 @@ public class SignUpTest  extends B2CBaseTest {
         lastName = faker.name().lastName();
         firstName = faker.name().firstName();
         emailAddress = faker.internet().emailAddress();
-        String bodyData = generateAPIBody.signUp("", 0, lastName,
+        String bodyData = generateAPIBodyB2C.signUp("", 0, lastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,firstName,
                 AppConstants.requestDeviceKey,dob, "55.154117",

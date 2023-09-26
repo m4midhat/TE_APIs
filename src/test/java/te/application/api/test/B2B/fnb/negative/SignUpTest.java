@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import te.application.api.baseTest.B2BbaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 @Slf4j
 public class SignUpTest extends B2BbaseTest {
@@ -19,7 +19,7 @@ public class SignUpTest extends B2BbaseTest {
 
     @Test(description = "Signup with blank credentials body")
     public void signUpWithoutCredentials(){
-            String bodyData = generateAPIBody.signUp("","","","","");
+            String bodyData = generateAPIBodyB2C.signUp("","","","","");
             RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
             String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -39,7 +39,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithEmailOnly(){
         String randomEmail = faker.internet().emailAddress().toString();// Utils.generateRandomEmail();
         log.info("Random email generated : "+randomEmail);
-        String bodyData = generateAPIBody.signUp(randomEmail,"","","","");
+        String bodyData = generateAPIBodyB2C.signUp(randomEmail,"","","","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -59,7 +59,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithFirstNameOnly(){
         String randomName = faker.name().firstName(); //Utils.getAlphaNumericString(Utils.generateRandomNumber(3, 15));
         log.info("Random first name : "+randomName);
-        String bodyData = generateAPIBody.signUp("",randomName,"","","");
+        String bodyData = generateAPIBodyB2C.signUp("",randomName,"","","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -80,7 +80,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithLastNameOnly(){
         String randomName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(3, 15));
         log.info("Random last name : "+randomName);
-        String bodyData = generateAPIBody.signUp("","",randomName,"","");
+        String bodyData = generateAPIBodyB2C.signUp("","",randomName,"","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -100,7 +100,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithPasswordOnly(){
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         log.info("Random Password : "+randomPassword);
-        String bodyData = generateAPIBody.signUp("","","",randomPassword,"");
+        String bodyData = generateAPIBodyB2C.signUp("","","",randomPassword,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -120,7 +120,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithConfirmedPasswordOnly(){
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         log.info("Random Password : "+randomPassword);
-        String bodyData = generateAPIBody.signUp("","","","",randomPassword);
+        String bodyData = generateAPIBodyB2C.signUp("","","","",randomPassword);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -141,7 +141,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithEmailAndFirstNameOnly(){
         String randomEmail = faker.internet().emailAddress();// Utils.generateRandomEmail();
         String randomFirstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(3, 15));
-        String bodyData = generateAPIBody.signUp(randomEmail,randomFirstName,"","","");
+        String bodyData = generateAPIBodyB2C.signUp(randomEmail,randomFirstName,"","","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -162,7 +162,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithEmailAndLastNameOnly(){
         String randomEmail = faker.internet().emailAddress();// Utils.generateRandomEmail();
         String randomLastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(3, 15));
-        String bodyData = generateAPIBody.signUp(randomEmail,"",randomLastName,"","");
+        String bodyData = generateAPIBodyB2C.signUp(randomEmail,"",randomLastName,"","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -183,7 +183,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithEmailAndPasswordOnly(){
         String randomEmail = faker.internet().emailAddress();// Utils.generateRandomEmail();
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp(randomEmail,"","",randomPassword,"");
+        String bodyData = generateAPIBodyB2C.signUp(randomEmail,"","",randomPassword,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -204,7 +204,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithEmailAndConfirmedPasswordOnly(){
         String randomEmail = faker.internet().emailAddress();// Utils.generateRandomEmail();
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp(randomEmail,"","","",randomPassword);
+        String bodyData = generateAPIBodyB2C.signUp(randomEmail,"","","",randomPassword);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -225,7 +225,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithFirstAndLastNameOnly(){
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(4, 10));
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(4, 10));
-        String bodyData = generateAPIBody.signUp("",firstName,lastName,"","");
+        String bodyData = generateAPIBodyB2C.signUp("",firstName,lastName,"","");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -245,7 +245,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithFirstAndPasswordOnly(){
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(4, 10));
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("",firstName,"",randomPassword,"");
+        String bodyData = generateAPIBodyB2C.signUp("",firstName,"",randomPassword,"");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -266,7 +266,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithFirstAndConfirmedPasswordOnly(){
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(4, 10));
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("",firstName,"","",randomPassword);
+        String bodyData = generateAPIBodyB2C.signUp("",firstName,"","",randomPassword);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -286,7 +286,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithLastNameAndConfirmedPasswordOnly(){
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(4, 10));
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("","",lastName,"",randomPassword);
+        String bodyData = generateAPIBodyB2C.signUp("","",lastName,"",randomPassword);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -306,7 +306,7 @@ public class SignUpTest extends B2BbaseTest {
     @Test(description = "Signup with only password & confirmed password", priority = 13)
     public void signUpWithPasswordAndConfirmedPasswordOnly(){
         String randomPassword = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("","","",randomPassword, randomPassword);
+        String bodyData = generateAPIBodyB2C.signUp("","","",randomPassword, randomPassword);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -328,7 +328,7 @@ public class SignUpTest extends B2BbaseTest {
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String email = faker.internet().emailAddress();// Utils.generateRandomEmail();
-        String bodyData = generateAPIBody.signUp(email,firstName,lastName,"", "");
+        String bodyData = generateAPIBodyB2C.signUp(email,firstName,lastName,"", "");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -350,7 +350,7 @@ public class SignUpTest extends B2BbaseTest {
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         String email = faker.internet().emailAddress();// Utils.generateRandomEmail();
-        String bodyData = generateAPIBody.signUp(email,firstName,"",password, "");
+        String bodyData = generateAPIBodyB2C.signUp(email,firstName,"",password, "");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -372,7 +372,7 @@ public class SignUpTest extends B2BbaseTest {
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         String email = faker.internet().emailAddress();// Utils.generateRandomEmail();
-        String bodyData = generateAPIBody.signUp(email,firstName,"","", password);
+        String bodyData = generateAPIBodyB2C.signUp(email,firstName,"","", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -393,7 +393,7 @@ public class SignUpTest extends B2BbaseTest {
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         String email = faker.internet().emailAddress();// Utils.generateRandomEmail();
-        String bodyData = generateAPIBody.signUp(email,"",lastName,password, "");
+        String bodyData = generateAPIBodyB2C.signUp(email,"",lastName,password, "");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -415,7 +415,7 @@ public class SignUpTest extends B2BbaseTest {
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
         String email = faker.internet().emailAddress();// Utils.generateRandomEmail();
-        String bodyData = generateAPIBody.signUp(email,"",lastName,"", password);
+        String bodyData = generateAPIBodyB2C.signUp(email,"",lastName,"", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -437,7 +437,7 @@ public class SignUpTest extends B2BbaseTest {
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("",firstName,lastName,password, "");
+        String bodyData = generateAPIBodyB2C.signUp("",firstName,lastName,password, "");
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -459,7 +459,7 @@ public class SignUpTest extends B2BbaseTest {
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String firstName = faker.name().firstName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("",firstName,lastName,"", password);
+        String bodyData = generateAPIBodyB2C.signUp("",firstName,lastName,"", password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -480,7 +480,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithLastNamePasswordAndConfirmedPassword(){
         String lastName = faker.name().lastName(); //Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("","",lastName,password, password);
+        String bodyData = generateAPIBodyB2C.signUp("","",lastName,password, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()
@@ -501,7 +501,7 @@ public class SignUpTest extends B2BbaseTest {
     public void signUpWithoutConfirmedPassword(){
         String lastName = faker.name().lastName();// Utils.getAlphaNumericString(Utils.generateRandomNumber(5, 15));
         String password = Utils.getAlphaNumericString(Utils.generateRandomNumber(8, 15));
-        String bodyData = generateAPIBody.signUp("","",lastName,password, password);
+        String bodyData = generateAPIBodyB2C.signUp("","",lastName,password, password);
         RestAssured.basePath = AppConstants.BASE_PATH_SIGNUP;
         String authToken = AppConstants.BEARER_TOKEN;
         RequestSpecification httpRequest = RestAssured.given()

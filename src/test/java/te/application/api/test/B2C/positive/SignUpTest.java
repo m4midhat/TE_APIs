@@ -11,7 +11,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -39,7 +39,7 @@ public class SignUpTest extends B2CBaseTest {
         String nationality = faker.nation().nationality();
         RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_SIGNUP");
-        String bodyData = generateAPIBody.signUp(password, 0, LastName,
+        String bodyData = generateAPIBodyB2C.signUp(password, 0, LastName,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",
                 AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,FirstName,
@@ -154,7 +154,7 @@ public class SignUpTest extends B2CBaseTest {
     @Test(priority = 8, description = "Verify already exist customer with this email" , groups = {"Sanity", "Regression"}, dependsOnMethods = "checkStatus")
     public void  checkAlreadyExistEmail() throws IOException {
 
-        String bodyData = generateAPIBody.signUp(pwd, 0, LN,
+        String bodyData = generateAPIBodyB2C.signUp(pwd, 0, LN,
                 AppConstants.requestLanguage,1,"25.095395","entertainer",
                 AppConstants.requestOSPlatform,AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey,AppConstants.requestCurrency,FN,

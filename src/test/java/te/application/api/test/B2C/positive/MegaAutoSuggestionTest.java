@@ -17,7 +17,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import java.io.IOException;
 
@@ -82,7 +82,7 @@ public class MegaAutoSuggestionTest extends B2CBaseTest {
         log.info(generatedString);
 
 
-        String bodyData = generateAPIBody.autoMegaSearch("All","0","true",
+        String bodyData = generateAPIBodyB2C.autoMegaSearch("All","0","true",
                 locationID,"true",generatedString, languageCode,"true",3,
                 "25.300579","55.307709",10,AppConstants.requestTimeZone,
                 AppConstants.requestCurrency, "entertainer",AppConstants.requestAppVersion,AppConstants.

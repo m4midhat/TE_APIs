@@ -10,7 +10,7 @@ import te.application.api.baseTest.B2CBaseTest;
 import te.application.appConstants.AppConstants;
 import te.application.appConstants.authToken;
 import te.application.utilities.Utils;
-import te.application.utilities.generateAPIBody;
+import te.application.utilities.generateAPIBodyB2C;
 
 import static org.testng.Assert.assertEquals;
 
@@ -22,7 +22,7 @@ public class SignOutTest extends B2CBaseTest{
         RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_SIGNOUT");
 
-        String bodyData = generateAPIBody.SignOutTest("en", "25.300579", "entertainer",
+        String bodyData = generateAPIBodyB2C.SignOutTest("en", "25.300579", "entertainer",
                 AppConstants.requestOSPlatform, AppConstants.requestAppVersion,
                 AppConstants.requestDeviceKey, AppConstants.requestCurrency, "55.307709",
                 AppConstants.requestDeviceKey, endPoints.getProperty("BASE_URI_B2C")+endPoints.getProperty("BASE_PATH_SIGNOUT"),
