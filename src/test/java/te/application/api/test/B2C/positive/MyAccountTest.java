@@ -157,7 +157,7 @@ public class MyAccountTest extends B2CBaseTest {
     @Test(priority = 7, description = "country of residence check", dependsOnMethods = "checkStatus")
     public void checkCountryOfResidence() throws IOException, ParseException {
         String country = jsonPath.getString("data.user.country");
-        Assert.assertEquals(Utils.countryCode(country),SignInTest.country,"Country validated");
+        Assert.assertEquals(Utils.countryCode(country).toLowerCase(),SignInTest.country.toLowerCase(),"Country validated");
         log.info(country);
         log.info(SignInTest.country);
     }
