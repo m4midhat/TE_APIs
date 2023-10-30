@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class AppConstants {
 
-    public static final String BASE_PATH_SIGNUP = "et_rs_prd/web/v801/users"; //B2B
+    public static final String BASE_PATH_SIGNUP = "api_ets/v1/user/sign_up"; //B2B
     public static final String BEARER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55IjoiZW50ZXJ0YWluZXIiLCJhcGlfdG9rZW4iOiIyNGZlOThiNC05ZjFjLTRjYjgtOGFhNC0zMWY1YWMwNmMyNmIiLCJzZXNzaW9uX3Rva2VuIjoiNzFjZDczNjgtNmYxMy00YzVlLThjZGQtYjkzMjIxMzdlY2ExIn0.qdinslzvXb79GBZObPSH8rG4cL8utB_jsMFMsQhkSio";
 
     public static LocalDateTime START_DATE, END_DATE;
@@ -27,4 +27,8 @@ public class AppConstants {
             requestUserAgent;
 
     public static String UserID;
+    public static String requestKey;
+    public static int requestLocation;
+    public static final String BASE_PATH_SIGNIN = "api_ets/v1/user/sign_in";
+
 }

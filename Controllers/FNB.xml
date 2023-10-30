@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FNB API Test Suite" parallel="false">
+    <listeners>
+        <listener class-name="te.application.listener.extentReportListener" />
+        <listener class-name="te.application.Analyzer.AnnotationTransformer" />
+    </listeners>
+
+
+    <test name="Sign Up">
+        <classes>
+            <class name="te.application.api.test.B2B.fnb.positive.Signup" />
+        </classes>
+    </test>
+
+    <test name="Sign In">
+        <classes>
+            <class name="te.application.api.test.B2B.fnb.positive.SignIn" />
+        </classes>
+    </test>
+
+</suite>

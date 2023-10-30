@@ -43,7 +43,7 @@ public class dbDriver {
         }
     }
 
-    public void merchantCategories() throws SQLException, IOException {
+    public static void merchantCategories() throws SQLException, IOException {
         String env = AppConstants.ENV;
         if(env==null){
             env = "uat";
@@ -133,6 +133,10 @@ public class dbDriver {
             System.err.println(e.getMessage());
         }
         return Results;
+    }
+
+    public static void main(String[] args) throws SQLException, IOException {
+        merchantCategories();
     }
 
 

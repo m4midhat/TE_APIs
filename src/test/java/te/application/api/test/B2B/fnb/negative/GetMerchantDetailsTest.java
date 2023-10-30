@@ -18,16 +18,15 @@ public class GetMerchantDetailsTest extends B2CBaseTest {
     private int merchantID;
 
 
-
     @Test(description = "Testing with invalid authentication token")
-    public void invalidAuthToken(){
-        String bodyData = merchantDetails(AppConstants.requestOSPlatform, "default", "entertainer", "Travel", "none", 0,1, "None",
+    public void invalidAuthToken() {
+        String bodyData = merchantDetails(AppConstants.requestOSPlatform, "default", "entertainer", "Travel", "none", 0, 1, "None",
                 "False", 31930199, "en", "json", merchantID, 87237, "None", "USD", "None", "None", "None",
                 "None", AppConstants.requestDeviceKey, "redeemable_reusable", AppConstants.requestAppVersion);
         RestAssured.basePath = endPoints.getProperty("BASE_PATH_MERCHANT") + merchantID;
         String invalidToken = generateInvalidAuthToken();
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", "Bearer "+ invalidToken)
+                .header("Authorization", "Bearer " + invalidToken)
                 .contentType("application/json")
                 .body(bodyData)
                 .log().all();
