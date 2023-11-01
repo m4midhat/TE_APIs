@@ -21,8 +21,6 @@ public class SignInTestSck extends B2BBaseTest {
     String propPassword;
     private static final Logger log = Logger.getLogger(SignInTestSck.class);
 
-    public static String userid = null;
-
     String locationID, languageCode;
 
     public SignInTestSck(String loc, String lang) {
@@ -47,11 +45,12 @@ public class SignInTestSck extends B2BBaseTest {
         if (properties != null) {
             propUserName = Utils.decodeString(properties.getProperty("usernameSCK"));
             propPassword = Utils.decodeString(properties.getProperty("passwordSCK"));
+            String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
 
             String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE",
                     propUserName, propPassword,propPassword,"female" ,"true", AppConstants.requestDeviceModel, "true");
             RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", authToken.B2BAUTH_TOKEN)
+                    .header("Authorization", headerToken)
                     .contentType("application/json")
                     .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)

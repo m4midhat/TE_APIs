@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
 
-@Slf4j
 public class SignInSckNegativeTest extends B2BBaseTest {
     String propUserName;
     String propPassword;
@@ -72,18 +71,19 @@ public class SignInSckNegativeTest extends B2BBaseTest {
         return password.toString();
     }
 
-    @Test (priority = 0, description = "Sign In with Random EmailId and Valid password", groups = {"Smoke", "Sanity", "Regression"})
+    @Test (description = "Sign In with Random EmailId and Valid password", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithRandomEmailAndValidPassword() throws IOException, InterruptedException {
         RestAssured.basePath = endPoints.getProperty("B2B_LOGIN");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
             propPassword = Utils.decodeString(properties.getProperty("passwordSCK"));
+            String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
 
             String randomEmail = generateRandomEmail(12);
             String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE", randomEmail,
                     propPassword,propPassword,"female" ,"true",  "galaxy", "true");
             RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", authToken.B2BAUTH_TOKEN)
+                    .header("Authorization", headerToken)
                     .contentType("application/json")
                     .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)
@@ -102,12 +102,14 @@ public class SignInSckNegativeTest extends B2BBaseTest {
         RestAssured.basePath = endPoints.getProperty("B2B_LOGIN");
         Properties properties = Utils.initProperties("AppAuthentication");
         if (properties != null) {
+            String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
+
             propUserName = Utils.decodeString(properties.getProperty("usernameSCK"));
             String randomPassword = generateRandomPassword(8);
             String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE",
                     propUserName, randomPassword,randomPassword,"female" ,"true",  "galaxy", "true");
             RequestSpecification httpRequest = RestAssured.given()
-                    .header("Authorization", authToken.B2BAUTH_TOKEN)
+                    .header("Authorization", headerToken)
                     .contentType("application/json")
                     .header("User-Agent", AppConstants.requestUserAgent)
                     .body(bodyData)
@@ -122,11 +124,13 @@ public class SignInSckNegativeTest extends B2BBaseTest {
     }
     @Test (priority = 2, description = "Sign In with blank credentials.", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithBlankCredentials() throws InterruptedException {
+        String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
+
         RestAssured.basePath = endPoints.getProperty("B2B_LOGIN");
         String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE", "",
                 "","","female" ,"true",  "galaxy", "true");
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", authToken.B2BAUTH_TOKEN)
+                .header("Authorization", headerToken)
                 .contentType("application/json")
                 .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
@@ -141,11 +145,13 @@ public class SignInSckNegativeTest extends B2BBaseTest {
 
     @Test (priority = 3, description = "SignIn with Email Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithEmailOnly() throws InterruptedException {
+        String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
+
         RestAssured.basePath = endPoints.getProperty("B2B_LOGIN");
         String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE",
                 propUserName,"","","female" ,"true",  "galaxy", "true");
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", authToken.B2BAUTH_TOKEN)
+                .header("Authorization", headerToken)
                 .contentType("application/json")
                 .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)
@@ -160,11 +166,13 @@ public class SignInSckNegativeTest extends B2BBaseTest {
 
     @Test (priority = 4, description = "SignIn with Password Only", groups = {"Smoke", "Sanity", "Regression"})
     public void  signInWithPasswordOnly() throws InterruptedException {
+        String headerToken = "Basic " + Utils.decodeString(authToken.B2BAUTH_TOKEN_ENC);
+
         RestAssured.basePath = endPoints.getProperty("B2B_LOGIN");
         String bodyData = generateAPIBodyB2B.signIn("en", "SCK", AppConstants.requestOSPlatform, AppConstants.requestOSVersion,"zufi","zufishan","AE",
                 "", propPassword,propPassword,"female" ,"true", "galaxy", "true");
         RequestSpecification httpRequest = RestAssured.given()
-                .header("Authorization", authToken.B2BAUTH_TOKEN)
+                .header("Authorization", headerToken)
                 .contentType("application/json")
                 .header("User-Agent", AppConstants.requestUserAgent)
                 .body(bodyData)

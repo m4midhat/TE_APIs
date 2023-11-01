@@ -2,6 +2,7 @@ package te.application.utilities;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,8 +11,12 @@ import te.application.appConstants.AppConstants;
 import java.io.*;
 import java.util.*;
 
+
 @Slf4j
 public class Utils {
+
+    protected static Logger logger = Logger.getLogger(Utils.class);
+
 
     public static Date getTime(long millis) {
         Calendar calendar = Calendar.getInstance();
@@ -45,7 +50,7 @@ public class Utils {
         char i = integers.charAt(Utils.generateRandomNumber(0, integers.length()-1));
 
         String pwd = new StringBuilder().append(c).append(s).append(sp).append(i).toString();
-        System.out.println(pwd);
+        logger.info(pwd);
         return pwd;
     }
 
@@ -158,7 +163,7 @@ public class Utils {
         JSONObject jsonObject = (JSONObject) parser.parse(new FileReader(file));
         //if(!jsonObject.isEmpty()){
             //JSONArray lang = (JSONArray) jsonObject.get("language");
-            //System.out.println(lang.get(generateRandomNumber(0, lang.size() - 1)).toString());
+            //logger.info(lang.get(generateRandomNumber(0, lang.size() - 1)).toString());
         //}
 
         return jsonObject;
@@ -169,7 +174,7 @@ public class Utils {
         if(!jsonObject.isEmpty()){
             JSONArray lang = (JSONArray) jsonObject.get("language");
             randomLanguage = lang.get(generateRandomNumber(0, lang.size() - 1)).toString();
-            System.out.println("Random language selected from file : "+randomLanguage);
+            logger.info("Random language selected from file : "+randomLanguage);
         }
         return randomLanguage;
     }
@@ -179,7 +184,7 @@ public class Utils {
         if(!jsonObject.isEmpty()){
             JSONArray os = (JSONArray) jsonObject.get("OS");
             operatingSystem = os.get(generateRandomNumber(0, os.size() - 1)).toString();
-            System.out.println("Random operating system selected from file : "+operatingSystem);
+            logger.info("Random operating system selected from file : "+operatingSystem);
         }
         return operatingSystem;
     }
@@ -196,7 +201,7 @@ public class Utils {
                 deviceOS = (JSONArray) jsonObject.get("android");
                 operatingSystem = deviceOS.get(generateRandomNumber(0, deviceOS.size() - 1)).toString();
             }
-            System.out.println("Random device selected from file : "+operatingSystem);
+            logger.info("Random device selected from file : "+operatingSystem);
         }
         return operatingSystem;
     }
@@ -213,7 +218,7 @@ public class Utils {
                 devices = (JSONArray) jsonObject.get("Android Device");
                 device = devices.get(generateRandomNumber(0, devices.size() - 1)).toString();
             }
-            System.out.println("Random device OS selected from file : "+device);
+            logger.info("Random device OS selected from file : "+device);
         }
 
         return device;
@@ -224,7 +229,7 @@ public class Utils {
         if(!jsonObject.isEmpty()){
             JSONArray timeZone = (JSONArray) jsonObject.get("Time Zone");
             timeZoneSelected = timeZone.get(generateRandomNumber(0, timeZone.size() - 1)).toString();
-            System.out.println("Random time zone selected from file : "+timeZoneSelected);
+            logger.info("Random time zone selected from file : "+timeZoneSelected);
         }
         return timeZoneSelected;
     }
@@ -234,7 +239,7 @@ public class Utils {
         if(!jsonObject.isEmpty()){
             JSONArray Currency = (JSONArray) jsonObject.get("Currency");
             currencySelected = Currency.get(generateRandomNumber(0, Currency.size() - 1)).toString();
-            System.out.println("Random Currency selected from file : "+currencySelected);
+            logger.info("Random Currency selected from file : "+currencySelected);
         }
         return currencySelected;
     }
@@ -244,7 +249,7 @@ public class Utils {
         if(!jsonObject.isEmpty()){
             JSONArray versions = (JSONArray) jsonObject.get("AppVersion");
             appVersion = versions.get(generateRandomNumber(0, versions.size() - 1)).toString();
-            System.out.println("Random appVersion selected from file : "+appVersion);
+            logger.info("Random appVersion selected from file : "+appVersion);
         }
         return appVersion;
     }
@@ -263,7 +268,7 @@ public class Utils {
             }
         }
 
-        System.out.println("Random Device key selected from file : " + deviceKey);
+        logger.info("Random Device key selected from file : " + deviceKey);
         return deviceKey;
     }
 
@@ -271,10 +276,10 @@ public class Utils {
     public static void main(String[] args) throws IOException, InterruptedException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
         LocalDateTime now = LocalDateTime.now();
-        System.out.println(now.format(dtf));
+        logger.info(now.format(dtf));
 
         String directoryName = "./JMeterReports/"+"Report_"+ now.format(dtf)+"/";
-        System.out.println("O/P directory : "+directoryName);
+        logger.info("O/P directory : "+directoryName);
         Path path = Paths.get(directoryName);
 
         if (!Files.exists(path)) {
@@ -289,7 +294,7 @@ public class Utils {
         Process process = Runtime.getRuntime().exec("sh apache-jmeter-5.5/bin/jmeter -n -t apache-jmeter-5.5/bin/APICorelation.jmx -l "+directoryName+ "index.csv -e -o "+directoryName+ "html");
         process.waitFor();
         LocalDateTime after = LocalDateTime.now();
-        System.out.println(after.format(dtf));
+        logger.info(after.format(dtf));
     }*/
 
 

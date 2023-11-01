@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.log4testng.Logger;
 import te.application.appConstants.AppConstants;
 import te.application.utilities.Utils;
 

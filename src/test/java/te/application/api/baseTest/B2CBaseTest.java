@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.log4testng.Logger;
 import te.application.appConstants.AppConstants;
 import te.application.utilities.Utils;
 
@@ -24,6 +25,7 @@ public class B2CBaseTest {
     protected JsonPath jsonPath;
     static JSONObject testData;
     protected static Properties endPoints;
+    private static Logger logger = Logger.getLogger(B2BBaseTest.class);
 
     @BeforeSuite(alwaysRun = true)
     public static void setUpSuite() throws IOException, ParseException {
@@ -44,18 +46,18 @@ public class B2CBaseTest {
         RestAssured.baseURI = endPoints.getProperty("BASE_URI_B2C");
         if(AppConstants.LANG != null) {
             if (AppConstants.LANG.compareToIgnoreCase("en") == 0) {
-                log.info("Selected Language : 'English'");
+                logger.info("Selected Language : 'English'");
                 AppConstants.requestLanguage = "en";
             } else if (AppConstants.LANG.compareToIgnoreCase("ru") == 0) {
-                log.info("Selected Language : 'Russian'");
+                logger.info("Selected Language : 'Russian'");
                 AppConstants.requestLanguage = "ru";
             } else if (AppConstants.LANG.compareToIgnoreCase("ar") == 0) {
-                log.info("Selected Language : 'Arabic'");
+                logger.info("Selected Language : 'Arabic'");
                 AppConstants.requestLanguage = "ar";
             } else if (AppConstants.LANG.compareToIgnoreCase("all") == 0) {
-                log.info("Suite will be executed for all languages");
+                logger.info("Suite will be executed for all languages");
             } else {
-                log.error("Invalid Language Selected");
+                logger.error("Invalid Language Selected");
                 AppConstants.requestLanguage = Utils.getRandomSupportedLanguage(testData);
             }
         }
@@ -70,7 +72,7 @@ public class B2CBaseTest {
     public void tearDownSuite(){
         AppConstants.END_DATE = LocalDateTime.now();
         long res = MILLIS.between(AppConstants.START_DATE, AppConstants.END_DATE);
-        log.info("Total time taken by the suite : "+ Math.round(res/1000) +"seconds " + res%1000 + "ms" );
+        logger.info("Total time taken by the suite : "+ Math.round(res/1000) +"seconds " + res%1000 + "ms" );
     }
 
 }

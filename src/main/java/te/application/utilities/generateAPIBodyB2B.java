@@ -4,7 +4,7 @@ import te.application.appConstants.AppConstants;
 
 public class generateAPIBodyB2B {
     public static String signIn( String language, String company,
-                                String OSPlatform, String appVersion,String firstName, String lastName,String countryOfResidence,String emailAddress,
+                                 String OSPlatform, String appVersion,String firstName, String lastName,String countryOfResidence,String emailAddress,
                                  String password, String confirmPassword, String gender,String benc, String deviceModel,  String force_login
     ){
         String bodyData = "{\n" +

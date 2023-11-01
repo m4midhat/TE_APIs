@@ -2,16 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Samsung API Test Suite">
 
+
+
     <test name="Sign In">
         <classes>
             <class name="te.application.api.test.B2B.sck.positive.SignInTestSck" />
         </classes>
     </test>
-    <test name="Home">
-        <classes>
-            <class name="te.application.api.test.B2B.sck.negative.SignInSckNegativeTest" />
-        </classes>
-    </test>
+
+
 
     <listeners>
         <listener class-name="te.application.listener.extentReportListener" />
