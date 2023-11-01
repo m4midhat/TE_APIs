@@ -1,9 +1,15 @@
 package te.application.listener;
 
-import java.awt.*;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+import lombok.extern.slf4j.Slf4j;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
+
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,18 +17,9 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.aventstack.extentreports.reporter.configuration.Theme;
-import lombok.extern.slf4j.Slf4j;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
 
 @Slf4j
-public class extentReportListener  implements ITestListener {
+public class extentReportListenerSamsung implements ITestListener {
 
     private static final String OUTPUT_FOLDER = "./TestReport/";
     private static String FILE_NAME = "TestExecutionReport";
@@ -62,16 +59,17 @@ public class extentReportListener  implements ITestListener {
 
         extentReports = new ExtentReports();
         ExtentSparkReporter reporter = new ExtentSparkReporter(OUTPUT_FOLDER + FILE_NAME+ ".html");
-        reporter.config().setDocumentTitle("theEntertainer API Suite");
+        reporter.config().setDocumentTitle("Samsung API Suite");
 
-        reporter.config().setReportName("theEntertainer API Automation Test Results");
+        reporter.config().setReportName("Samsung API Automation Test Results");
         reporter.config().setTheme(Theme.STANDARD);
         extentReports.attachReporter(reporter);
         extentReports.setSystemInfo("System", "Windows / Mac");
         extentReports.setSystemInfo("Architect", "Midhat Rosull Chughtai");
+        extentReports.setSystemInfo("Team Member", "Zufishan Hameed");
         extentReports.setSystemInfo("Build#", "1.0");
         extentReports.setSystemInfo("Team", "theEntertainer QA");
-        extentReports.setSystemInfo("Project", "B2C APIs");
+        extentReports.setSystemInfo("Project", "B2B APIs");
 
         return extentReports;
     }

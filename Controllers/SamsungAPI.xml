@@ -13,7 +13,7 @@
 
 
     <listeners>
-        <listener class-name="te.application.listener.extentReportListener" />
+        <listener class-name="te.application.listener.extentReportListenerSamsung" />
         <listener class-name="te.application.Analyzer.AnnotationTransformer" />
     </listeners>
 </suite>

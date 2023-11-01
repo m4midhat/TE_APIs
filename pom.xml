@@ -187,7 +187,7 @@
                             </property>
                             <property>
                                 <name>listener</name>
-                                <value>te.application.listener.extentReportListener</value>
+                                <value>te.application.listener.extentReportListenerB2C</value>
                             </property>
                             <property>
                                 <name>reporter</name>

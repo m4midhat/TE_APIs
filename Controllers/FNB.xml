@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="FNB API Test Suite" parallel="false">
     <listeners>
-        <listener class-name="te.application.listener.extentReportListener" />
+        <listener class-name="te.application.listener.extentReportListenerB2C" />
         <listener class-name="te.application.Analyzer.AnnotationTransformer" />
     </listeners>
 
